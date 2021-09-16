@@ -1,13 +1,13 @@
-package com.back.boot.backbootsetting;
+package com.back;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BackBootSettingApplication {
+public class BackEndSettingApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BackBootSettingApplication.class, args);
+		SpringApplication.run(BackEndSettingApplication.class, args);
 	}
 
 }
