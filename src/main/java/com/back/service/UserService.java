@@ -45,7 +45,7 @@ public class UserService {
 	* 사용자를 생성 합니다.
 	*/
     public int create(HashMap<String, Object> params) {
-	    int result = 0;
+	    int result = 1;
         System.out.println("create가 실행되었습니다");
         return result;
 	}
@@ -54,7 +54,7 @@ public class UserService {
 	* 사용자를 생성 합니다.
 	*/
     public int update(HashMap<String, Object> params) {
-	    int result = 0;
+	    int result = 1;
         System.out.println("update가 실행되었습니다");
         return result;
 	}
@@ -63,7 +63,7 @@ public class UserService {
 	* 사용자를 생성 합니다.
 	*/
     public int delete(String id) {
-	    int result = 0;
+	    int result = 1;
         System.out.println("delete가 실행되었습니다");
         return result;
 	}
