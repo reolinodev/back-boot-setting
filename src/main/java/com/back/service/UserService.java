@@ -15,7 +15,20 @@ public class UserService {
 	*/
 	public ArrayList<User> findAll(HashMap<String, Object> params) {
 		ArrayList<User> result = new ArrayList<User>();
-        System.out.println("findAll이 실행되었습니다");
+        User user1 = new User();
+        user1.setId("1");
+        user1.setEmail("aaa@gmail.com");
+        user1.setName("aaa");
+        user1.setBirth("19000101");
+        user1.setPhoneNumber("01010002000");
+        result.add(user1);
+        User user2 = new User();
+        user2.setId("2");
+        user2.setEmail("bbb@gmail.com");
+        user2.setName("bbb");
+        user2.setBirth("20001231");
+        user2.setPhoneNumber("01020003000");
+        result.add(user2);
         return result;
 	}
 
