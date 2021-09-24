@@ -3,7 +3,9 @@ package com.back.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.back.domain.User;
+import javax.validation.Valid;
+
+import com.back.dto.User;
 import com.back.service.UserService;
 import com.back.util.ReturnValue;
 
@@ -42,16 +44,13 @@ public class UserController {
 
     //사용자 입력
     @PutMapping("/user")
-	public ResponseEntity<HashMap<String, Object>> createUser(@RequestBody HashMap<String, Object> params) {
+    public ResponseEntity<?> user(@Valid @RequestBody User user){
         
-        HashMap<String, Object> resultMap = ReturnValue.getResultStatus(
-            userService.create(params), 
-            "등록에 성공했습니다.", 
-            "등록에 실패했습니다."
-        );
-        
-        return new ResponseEntity<HashMap<String, Object>> (resultMap, HttpStatus.CREATED);
-	}
+        userService.create(user);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    }
+
 
     //사용자 수정
     @PutMapping("/user/{id}")
@@ -78,4 +77,6 @@ public class UserController {
 
         return new ResponseEntity<HashMap<String, Object>> (resultMap, HttpStatus.OK);
 	}
+
+
 }

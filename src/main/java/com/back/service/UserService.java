@@ -3,7 +3,7 @@ package com.back.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.back.domain.User;
+import com.back.dto.User;
 
 import org.springframework.stereotype.Service;
 
@@ -20,14 +20,14 @@ public class UserService {
         user1.setEmail("aaa@gmail.com");
         user1.setName("aaa");
         user1.setBirth("19000101");
-        user1.setPhoneNumber("01010002000");
+        user1.setPhone("01010002000");
         result.add(user1);
         User user2 = new User();
         user2.setId("2");
         user2.setEmail("bbb@gmail.com");
         user2.setName("bbb");
         user2.setBirth("20001231");
-        user2.setPhoneNumber("01020003000");
+        user2.setPhone("01020003000");
         result.add(user2);
         return result;
 	}
@@ -44,7 +44,7 @@ public class UserService {
     /**
 	* 사용자를 생성 합니다.
 	*/
-    public int create(HashMap<String, Object> params) {
+    public int create(User user) {
 	    int result = 1;
         System.out.println("create가 실행되었습니다");
         return result;

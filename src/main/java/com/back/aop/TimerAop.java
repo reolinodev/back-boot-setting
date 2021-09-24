@@ -1,24 +1,28 @@
-package com.back.config;
+package com.back.aop;
 
 import org.springframework.stereotype.Component;
+import org.springframework.util.StopWatch;
+
+import lombok.extern.slf4j.Slf4j;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 
 @Component
 @Aspect
-public class TimeTraceAop {
+@Slf4j
+public class TimerAop {
 	@Around("execution(* com.back.service..*(..))")
 	public Object execute(ProceedingJoinPoint joinPoint) throws Throwable {
-		long start = System.currentTimeMillis();
-		System.out.println("START: " + joinPoint.toString());
+		StopWatch stopWatch = new StopWatch();
 
 		try {
+			stopWatch.start();
 			return joinPoint.proceed();
 		} finally {
-			long finish = System.currentTimeMillis();
-			long timeMs = finish - start;
-			System.out.println("END: " + joinPoint.toString() + " " + timeMs + "ms");
+			stopWatch.stop();
+			log.info("\n[Excute Time] : " + stopWatch.getTotalTimeSeconds());
 		}
 	}
 }
