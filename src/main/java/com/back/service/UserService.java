@@ -36,9 +36,13 @@ public class UserService {
 	* 사용자를 상세 조회 합니다.
 	*/
     public User findById(String id) {
-	    User result = new User();
-        System.out.println("findById가 실행되었습니다");
-        return result;
+        User user = new User();
+        user.setId("1");
+        user.setEmail("aaa@gmail.com");
+        user.setName("aaa");
+        user.setBirth("19000101");
+        user.setPhone("01010002000");
+        return user;
 	}
 
     /**
@@ -51,16 +55,16 @@ public class UserService {
 	}
     
     /**
-	* 사용자를 생성 합니다.
+	* 사용자 정보를 수정합니다.
 	*/
-    public int update(HashMap<String, Object> params) {
+    public int update(User user) {
 	    int result = 1;
         System.out.println("update가 실행되었습니다");
         return result;
 	}
 
     /**
-	* 사용자를 생성 합니다.
+	* 사용자를 삭제 합니다.
 	*/
     public int delete(String id) {
 	    int result = 1;

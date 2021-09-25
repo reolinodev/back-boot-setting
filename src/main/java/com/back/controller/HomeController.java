@@ -1,13 +1,16 @@
 package com.back.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-@RestController
+@Controller
 public class HomeController {
     
-	@RequestMapping("/home")
-	public String home() {
-		return "Hello, Spring boot";
+
+	@RequestMapping(value = "/")
+	public String index() {
+		String url = "/swagger-ui/";
+		return "redirect:" + url;
 	}
+
+
 }

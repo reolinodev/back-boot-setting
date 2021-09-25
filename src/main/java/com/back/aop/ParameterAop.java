@@ -16,6 +16,9 @@ public class ParameterAop {
     @Pointcut("execution(* com.back.service..*(..))")
     private void cut(){}
 
+    /**
+     * 전달받은 파라미터를 반환한다.
+     */
     @Before("cut()")
     public void before(JoinPoint joinPoint){
         Object[] args = joinPoint.getArgs();
@@ -27,6 +30,9 @@ public class ParameterAop {
         }
     }
 
+    /**
+     * 결과값을 반환한다.
+     */
     @AfterReturning(value = "cut()", returning = "returnObj")
     public void afterReturn(JoinPoint joinPoint, Object returnObj){
         log.info("\n[Return Obj] : " + returnObj);

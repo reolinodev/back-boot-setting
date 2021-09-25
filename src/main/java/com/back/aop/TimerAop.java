@@ -13,6 +13,10 @@ import org.aspectj.lang.annotation.Aspect;
 @Aspect
 @Slf4j
 public class TimerAop {
+
+	/**
+	 * 서비스의 실행시간을 로그로 반환한다.
+	 */
 	@Around("execution(* com.back.service..*(..))")
 	public Object execute(ProceedingJoinPoint joinPoint) throws Throwable {
 		StopWatch stopWatch = new StopWatch();
