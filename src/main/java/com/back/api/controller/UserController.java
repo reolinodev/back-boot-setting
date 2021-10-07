@@ -1,13 +1,11 @@
 package com.back.api.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
 import javax.validation.Valid;
 
-import com.back.dto.User;
-import com.back.service.UserService;
-import com.back.util.ReturnValue;
+import com.back.api.dto.UserDto;
+import com.back.api.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,29 +35,29 @@ public class UserController {
 
     @ApiOperation(value = "사용자를 전체 조회한다.")
     @PostMapping("/user")
-    public ResponseEntity <ArrayList<User>> findAllUser(
+    public ResponseEntity<List<UserDto>> findAll(
         @ApiParam(
             value = "name : 이름 , 널허용 \n" 
                 +   "email : 이메일 ,널허용",    
             example = "{\n  name:이름,\n  email:이메일\n}")
-        @RequestBody HashMap<String, Object> params){
-        return new ResponseEntity <ArrayList<User>>(userService.findAll(params), HttpStatus.OK);
+        @RequestBody UserDto userDto){
+        return new ResponseEntity<List<UserDto>> (userService.findAll(userDto), HttpStatus.OK);
     }
 
 
     @ApiOperation(value = "사용자를 상세 조회한다.")
     @ApiImplicitParams({
-        @ApiImplicitParam(name = "id", value = "사용자 고유키", required = true, dataType = "string", paramType = "path", defaultValue = ""),
+        @ApiImplicitParam(name = "id", value = "사용자 고유키", required = true, dataType = "Integer", paramType = "path", defaultValue = ""),
     })
     @GetMapping("/user/{id}")
-	public ResponseEntity <User> findUser(@PathVariable String id) {
-        return new ResponseEntity <User>(userService.findById(id), HttpStatus.OK);
+	public ResponseEntity <UserDto> findById(@PathVariable Integer id) {
+        return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
 	}
 
 
     @ApiOperation(value = "사용자를 입력한다.")
     @PutMapping("/user")
-    public ResponseEntity<?> user(
+    public ResponseEntity<Integer> save(
         @ApiParam(
             value = "name : 이름, 필수값, 2~10자 \n"
                 +"email : 이메일, 필수값, 이메일형식 제한 \n" 
@@ -67,45 +65,31 @@ public class UserController {
                 +"password : 비밀번호, 필수값, 최대 20자, 비밀번호형식(영문 대,소문자와 숫자, 특수기호가 적어도 1개 이상씩 포함된 8자 ~ 20자) \n" 
                 +"phone : 휴대폰, 필수값, 휴대폰번호형식 제한" 
         )
-        @Valid @RequestBody User user){
-        userService.create(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+        @Valid @RequestBody UserDto userDto){
+        return new ResponseEntity<Integer>(userService.save(userDto), HttpStatus.CREATED);
     }
 
 
     @ApiOperation(value = "사용자를 수정한다.")
     @ApiImplicitParams({
-        @ApiImplicitParam(name = "id", value = "사용자 고유키", required = true, dataType = "string", paramType = "path", defaultValue = ""),
+        @ApiImplicitParam(name = "id", value = "사용자 고유키", required = true, dataType = "Integer", paramType = "path", defaultValue = ""),
     })
     @PutMapping("/user/{id}")
-    public ResponseEntity<HashMap<String, Object>> updateUser(
-        @Valid @RequestBody User user, 
-        @PathVariable String id) {
-        
-        HashMap<String, Object> resultMap = ReturnValue.getResultStatus(
-            userService.update(user), 
-            "수정에 성공했습니다.", 
-            "수정에 실패했습니다."
-        );
-
-        return new ResponseEntity<HashMap<String, Object>> (resultMap, HttpStatus.OK);
+    public ResponseEntity<Integer> updateUser(
+        @Valid @RequestBody UserDto userDto, 
+        @PathVariable Integer id) {
+        userDto.setId(id);
+        return new ResponseEntity<Integer>(userService.update(userDto), HttpStatus.OK);
     }
 
 
     @ApiOperation(value = "사용자를 삭제한다.")
     @ApiImplicitParams({
-        @ApiImplicitParam(name = "id", value = "사용자 고유키", required = true, dataType = "string", paramType = "path", defaultValue = ""),
+        @ApiImplicitParam(name = "id", value = "사용자 고유키", required = true, dataType = "Integer", paramType = "path", defaultValue = ""),
     })
     @DeleteMapping("/user/{id}")
-	public ResponseEntity<HashMap<String, Object>> deleteUser(@PathVariable String id) {
-        
-        HashMap<String, Object> resultMap = ReturnValue.getResultStatus(
-            userService.delete(id), 
-            "삭제에 성공했습니다.", 
-            "삭제에 실패했습니다."
-        );
-
-        return new ResponseEntity<HashMap<String, Object>> (resultMap, HttpStatus.OK);
+	public ResponseEntity<Integer> deleteUser(@PathVariable Integer id) {
+        return new ResponseEntity<Integer>(userService.deleteById(id), HttpStatus.OK);
 	}
 
 }

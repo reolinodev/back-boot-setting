@@ -1,4 +1,4 @@
-package com.back.dto;
+package com.back.api.dto;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -7,13 +7,17 @@ import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @ApiModel(description = "사용자")
-public class User {
+public class UserDto {
     
-    private String id;
+    private Integer id;
     
 	@ApiModelProperty(example = "이름")
     @NotBlank(message = "이름은 필수 입력 값입니다.")
