@@ -6,6 +6,8 @@ import javax.validation.Valid;
 
 import com.back.api.dto.UserDto;
 import com.back.api.service.UserService;
+import com.back.dto.ResponseMap;
+import com.back.library.Data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,8 +52,11 @@ public class UserController {
         @ApiImplicitParam(name = "id", value = "사용자 고유키", required = true, dataType = "Integer", paramType = "path", defaultValue = ""),
     })
     @GetMapping("/user/{id}")
-	public ResponseEntity <UserDto> findById(@PathVariable Integer id) {
-        return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
+	public ResponseEntity <ResponseMap> findById(@PathVariable Integer id) {
+        return new ResponseEntity<ResponseMap>(
+            Data.setReadMapper(userService.findById(id))
+            , HttpStatus.OK
+        );
 	}
 
 
