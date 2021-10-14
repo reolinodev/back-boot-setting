@@ -1,13 +1,15 @@
 package com.back.api.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import com.back.api.dto.UserDto;
+import com.back.api.dto.User;
 import com.back.api.service.UserService;
-import com.back.dto.ResponseMap;
-import com.back.library.Data;
+import com.back.dto.Header;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,13 +39,26 @@ public class UserController {
 
     @ApiOperation(value = "사용자를 전체 조회한다.")
     @PostMapping("/user")
-    public ResponseEntity<List<UserDto>> findAll(
+    public ResponseEntity<Map<String,Object>> findAll(
         @ApiParam(
             value = "name : 이름 , 널허용 \n" 
                 +   "email : 이메일 ,널허용",    
             example = "{\n  name:이름,\n  email:이메일\n}")
-        @RequestBody UserDto userDto){
-        return new ResponseEntity<List<UserDto>> (userService.findAll(userDto), HttpStatus.OK);
+        @RequestBody User user, HttpServletRequest httpServletRequest){
+            Map <String,Object> responseMap = new HashMap<String,Object>();
+
+            List<User> list = userService.findAll(user);
+            int listCount = list.size();
+
+            Header header = new Header();
+            header.setMessage(listCount+"건이 조회되었습니다.");
+            header.setRequestUrl(httpServletRequest.getRequestURI());
+            header.setResultCode("ok");
+            
+            responseMap.put("header", header);
+            responseMap.put("data", list);
+
+        return new ResponseEntity<Map<String,Object>> (responseMap, HttpStatus.OK);
     }
 
 
@@ -52,17 +67,25 @@ public class UserController {
         @ApiImplicitParam(name = "id", value = "사용자 고유키", required = true, dataType = "Integer", paramType = "path", defaultValue = ""),
     })
     @GetMapping("/user/{id}")
-	public ResponseEntity <ResponseMap> findById(@PathVariable Integer id) {
-        return new ResponseEntity<ResponseMap>(
-            Data.setReadMapper(userService.findById(id))
-            , HttpStatus.OK
-        );
+	public ResponseEntity <Map<String,Object>> findById(@PathVariable Integer id, HttpServletRequest httpServletRequest) {
+        Map <String,Object> responseMap = new HashMap<String,Object>();
+        User data = userService.findById(id);
+
+        Header header = new Header();
+        header.setMessage("1건이 조회되었습니다.");
+        header.setRequestUrl(httpServletRequest.getRequestURI());
+        header.setResultCode("ok");
+
+        responseMap.put("header", header);
+        responseMap.put("data", data);
+
+        return new ResponseEntity<Map<String,Object>> (responseMap, HttpStatus.OK);
 	}
 
 
     @ApiOperation(value = "사용자를 입력한다.")
     @PutMapping("/user")
-    public ResponseEntity<Integer> save(
+    public ResponseEntity<Map<String,Object>> save(
         @ApiParam(
             value = "name : 이름, 필수값, 2~10자 \n"
                 +"email : 이메일, 필수값, 이메일형식 제한 \n" 
@@ -70,8 +93,25 @@ public class UserController {
                 +"password : 비밀번호, 필수값, 최대 20자, 비밀번호형식(영문 대,소문자와 숫자, 특수기호가 적어도 1개 이상씩 포함된 8자 ~ 20자) \n" 
                 +"phone : 휴대폰, 필수값, 휴대폰번호형식 제한" 
         )
-        @Valid @RequestBody UserDto userDto){
-        return new ResponseEntity<Integer>(userService.save(userDto), HttpStatus.CREATED);
+        @Valid @RequestBody User user, HttpServletRequest httpServletRequest){
+            Map <String,Object> responseMap = new HashMap<String,Object>();
+
+            int result = userService.save(user);
+            String message = "사용자가 생성이 되었습니다.";
+            String code = "ok";
+            if(result < 1){
+                message ="정상적으로 생성이 되지 않았습니다.";
+                code = "fail";
+            }
+
+            Header header = new Header();
+            header.setMessage(message);
+            header.setRequestUrl(httpServletRequest.getRequestURI());
+            header.setResultCode(code);
+
+            responseMap.put("header", header);
+
+        return new ResponseEntity<Map<String,Object>>(responseMap, HttpStatus.CREATED);
     }
 
 
@@ -80,11 +120,28 @@ public class UserController {
         @ApiImplicitParam(name = "id", value = "사용자 고유키", required = true, dataType = "Integer", paramType = "path", defaultValue = ""),
     })
     @PutMapping("/user/{id}")
-    public ResponseEntity<Integer> updateUser(
-        @Valid @RequestBody UserDto userDto, 
-        @PathVariable Integer id) {
-        userDto.setId(id);
-        return new ResponseEntity<Integer>(userService.update(userDto), HttpStatus.OK);
+    public ResponseEntity<Map<String,Object>> updateUser(
+        @Valid @RequestBody User user, 
+        @PathVariable Integer id, HttpServletRequest httpServletRequest) {
+
+            Map <String,Object> responseMap = new HashMap<String,Object>();
+
+            int result = userService.update(user);
+            String message = "사용자 정보가 수정이 되었습니다.";
+            String code = "ok";
+            if(result < 1){
+                message ="정상적으로 수정이 되지 않았습니다.";
+                code = "fail";
+            }
+
+            Header header = new Header();
+            header.setMessage(message);
+            header.setRequestUrl(httpServletRequest.getRequestURI());
+            header.setResultCode(code);
+
+            responseMap.put("header", header);
+
+        return new ResponseEntity<Map<String,Object>>(responseMap, HttpStatus.OK);
     }
 
 
@@ -93,8 +150,25 @@ public class UserController {
         @ApiImplicitParam(name = "id", value = "사용자 고유키", required = true, dataType = "Integer", paramType = "path", defaultValue = ""),
     })
     @DeleteMapping("/user/{id}")
-	public ResponseEntity<Integer> deleteUser(@PathVariable Integer id) {
-        return new ResponseEntity<Integer>(userService.deleteById(id), HttpStatus.OK);
+	public ResponseEntity<Map<String,Object>> deleteUser(@PathVariable Integer id, HttpServletRequest httpServletRequest) {
+        Map <String,Object> responseMap = new HashMap<String,Object>();
+
+        int result = userService.deleteById(id);
+        String message = "사용자가 삭제 되었습니다.";
+        String code = "ok";
+        if(result < 1){
+            message ="정상적으로 삭제 되지 않았습니다.";
+            code = "fail";
+        }
+
+        Header header = new Header();
+        header.setMessage(message);
+        header.setRequestUrl(httpServletRequest.getRequestURI());
+        header.setResultCode(code);
+
+        responseMap.put("header", header);
+
+        return new ResponseEntity<Map<String,Object>>(responseMap, HttpStatus.OK);
 	}
 
 }

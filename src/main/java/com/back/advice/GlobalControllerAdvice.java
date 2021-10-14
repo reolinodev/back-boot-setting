@@ -57,7 +57,6 @@ public class GlobalControllerAdvice {
         errorResponse.setErrorList(errorList);
         errorResponse.setMessage("전송 데이터를 확인해주세요.");
         errorResponse.setRequestUrl(httpServletRequest.getRequestURI());
-        errorResponse.setStatusCode(HttpStatus.BAD_REQUEST.toString());
         errorResponse.setResultCode("FAIL");
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
@@ -89,7 +88,6 @@ public class GlobalControllerAdvice {
         errorResponse.setErrorList(errorList);
         errorResponse.setMessage("무결성 조건을 위반하였습니다.");
         errorResponse.setRequestUrl(httpServletRequest.getRequestURI());
-        errorResponse.setStatusCode(HttpStatus.BAD_REQUEST.toString());
         errorResponse.setResultCode("FAIL");
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
@@ -111,7 +109,6 @@ public class GlobalControllerAdvice {
         errorResponse.setErrorList(errorList);
         errorResponse.setMessage("required로 정의된 프로퍼티가 존재하지 않습니다");
         errorResponse.setRequestUrl(httpServletRequest.getRequestURI());
-        errorResponse.setStatusCode(HttpStatus.BAD_REQUEST.toString());
         errorResponse.setResultCode("FAIL");
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
