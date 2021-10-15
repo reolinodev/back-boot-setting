@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import com.back.api.dto.User;
 import com.back.api.service.UserService;
 import com.back.dto.Header;
+import com.back.library.ResForm;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,20 +46,19 @@ public class UserController {
                 +   "email : 이메일 ,널허용",    
             example = "{\n  name:이름,\n  email:이메일\n}")
         @RequestBody User user, HttpServletRequest httpServletRequest){
-            Map <String,Object> responseMap = new HashMap<String,Object>();
+            Map <String,Object> responseMap = new HashMap<>();
 
             List<User> list = userService.findAll(user);
             int listCount = list.size();
 
-            Header header = new Header();
-            header.setMessage(listCount+"건이 조회되었습니다.");
-            header.setRequestUrl(httpServletRequest.getRequestURI());
-            header.setResultCode("ok");
-            
+            String message = listCount+"건이 조회되었습니다.";
+            String code = "ok";
+            Header header = ResForm.setHeader(message, code, httpServletRequest);
+
             responseMap.put("header", header);
             responseMap.put("data", list);
 
-        return new ResponseEntity<Map<String,Object>> (responseMap, HttpStatus.OK);
+        return new ResponseEntity<> (responseMap, HttpStatus.OK);
     }
 
 
@@ -68,18 +68,17 @@ public class UserController {
     })
     @GetMapping("/user/{id}")
 	public ResponseEntity <Map<String,Object>> findById(@PathVariable Integer id, HttpServletRequest httpServletRequest) {
-        Map <String,Object> responseMap = new HashMap<String,Object>();
+        Map <String,Object> responseMap = new HashMap<>();
         User data = userService.findById(id);
 
-        Header header = new Header();
-        header.setMessage("1건이 조회되었습니다.");
-        header.setRequestUrl(httpServletRequest.getRequestURI());
-        header.setResultCode("ok");
+        String message = "1건이 조회되었습니다.";
+        String code = "ok";
+        Header header = ResForm.setHeader(message, code, httpServletRequest);
 
         responseMap.put("header", header);
         responseMap.put("data", data);
 
-        return new ResponseEntity<Map<String,Object>> (responseMap, HttpStatus.OK);
+        return new ResponseEntity<> (responseMap, HttpStatus.OK);
 	}
 
 
@@ -94,7 +93,7 @@ public class UserController {
                 +"phone : 휴대폰, 필수값, 휴대폰번호형식 제한" 
         )
         @Valid @RequestBody User user, HttpServletRequest httpServletRequest){
-            Map <String,Object> responseMap = new HashMap<String,Object>();
+            Map <String,Object> responseMap = new HashMap<>();
 
             int result = userService.save(user);
             String message = "사용자가 생성이 되었습니다.";
@@ -104,14 +103,10 @@ public class UserController {
                 code = "fail";
             }
 
-            Header header = new Header();
-            header.setMessage(message);
-            header.setRequestUrl(httpServletRequest.getRequestURI());
-            header.setResultCode(code);
-
+            Header header = ResForm.setHeader(message, code, httpServletRequest);
             responseMap.put("header", header);
 
-        return new ResponseEntity<Map<String,Object>>(responseMap, HttpStatus.CREATED);
+        return new ResponseEntity<>(responseMap, HttpStatus.CREATED);
     }
 
 
@@ -124,8 +119,9 @@ public class UserController {
         @Valid @RequestBody User user, 
         @PathVariable Integer id, HttpServletRequest httpServletRequest) {
 
-            Map <String,Object> responseMap = new HashMap<String,Object>();
+            Map <String,Object> responseMap = new HashMap<>();
 
+            user.setId(id);
             int result = userService.update(user);
             String message = "사용자 정보가 수정이 되었습니다.";
             String code = "ok";
@@ -134,14 +130,10 @@ public class UserController {
                 code = "fail";
             }
 
-            Header header = new Header();
-            header.setMessage(message);
-            header.setRequestUrl(httpServletRequest.getRequestURI());
-            header.setResultCode(code);
-
+            Header header = ResForm.setHeader(message, code, httpServletRequest);
             responseMap.put("header", header);
 
-        return new ResponseEntity<Map<String,Object>>(responseMap, HttpStatus.OK);
+        return new ResponseEntity<>(responseMap, HttpStatus.OK);
     }
 
 
@@ -151,7 +143,7 @@ public class UserController {
     })
     @DeleteMapping("/user/{id}")
 	public ResponseEntity<Map<String,Object>> deleteUser(@PathVariable Integer id, HttpServletRequest httpServletRequest) {
-        Map <String,Object> responseMap = new HashMap<String,Object>();
+        Map <String,Object> responseMap = new HashMap<>();
 
         int result = userService.deleteById(id);
         String message = "사용자가 삭제 되었습니다.";
@@ -161,14 +153,10 @@ public class UserController {
             code = "fail";
         }
 
-        Header header = new Header();
-        header.setMessage(message);
-        header.setRequestUrl(httpServletRequest.getRequestURI());
-        header.setResultCode(code);
-
+        Header header = ResForm.setHeader(message, code, httpServletRequest);
         responseMap.put("header", header);
 
-        return new ResponseEntity<Map<String,Object>>(responseMap, HttpStatus.OK);
+        return new ResponseEntity<>(responseMap, HttpStatus.OK);
 	}
 
 }
