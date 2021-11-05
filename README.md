@@ -11,4 +11,8 @@ SpringBoot를 사용한 기본적인 RestApi 백엔드 서버입니다. <br/>
 - [1-1.Mybatis+h2](https://github.com/reolinodev/back-boot-setting/tree/1-1.Mybatis+h2)
 : Mybatis + h2 
 
+- [1-2.Mybatis+MariaDb](https://github.com/reolinodev/back-boot-setting/tree/1-2.Mybatis+MariaDb)
+: Mybatis + Maria  
+
+
 
