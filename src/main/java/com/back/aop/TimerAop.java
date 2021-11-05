@@ -17,7 +17,7 @@ public class TimerAop {
 	/**
 	 * 서비스의 실행시간을 로그로 반환한다.
 	 */
-	@Around("execution(* com.back.service..*(..))")
+	@Around("execution(* com.back.api.service..*(..))")
 	public Object execute(ProceedingJoinPoint joinPoint) throws Throwable {
 		StopWatch stopWatch = new StopWatch();
 

@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Aspect
 @Slf4j
 public class ParameterAop {
-    @Pointcut("execution(* com.back.service..*(..))")
+    @Pointcut("execution(* com.back.api.service..*(..))")
     private void cut(){}
 
     /**

@@ -2,15 +2,18 @@ package com.back.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.back.api.dto.User;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserMapper {
-    
+
+    Logger logger = Logger.getLogger(UserMapper.class.getSimpleName());
+
     public User findById(Integer id) {
-        System.out.println("findById실행");
+        logger.info("findById실행");
         
         User data =  new User();
         data.setId(1);
@@ -22,19 +25,21 @@ public class UserMapper {
         return data;
     }
 
-    public int save(User userDto) {
-        System.out.println("save실행");
+    public int save(User user) {
+        logger.info("save실행");
+
         return 1;
     }
 
     public int deleteById(Integer id) {
-        System.out.println("deleteById실행");
+        logger.info("deleteById실행");
+
         return 1;
     }
 
-    public List<User> findAll(User userDto) {
-        System.out.println("findAll실행");
-        
+    public List<User> findAll(User user) {
+        logger.info("findAll실행");
+
         List<User> list = new ArrayList<>();
         User data =  new User();
         data.setId(1);
@@ -57,9 +62,10 @@ public class UserMapper {
         return list;
     }
 
-    public int update(User userDto){
-        System.out.println("update실행");
+    public int update(User user){
+        logger.info("update실행");
+
         return 1;
-    }; 
+    }
 }
 
