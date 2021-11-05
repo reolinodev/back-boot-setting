@@ -1,27 +1,13 @@
-# RestApi BackEnd Sample
+# RestApi BackEnd Sample Code
 
 ### 목표
-기본적인 RestApi 백엔드 서버입니다.
+기본적인 RestApi 백엔드 서버입니다. 프로젝트의 상황에 따라 각 Branch에서 Checkout 하시면 됩니다.
 
 ### 각 Branch 이름 및 설명
+- [0.Basic](https://github.com/reolinodev/back-boot-setting/tree/0.Basic)
+: DB가 설정되지 않는 기본설정
+
 - [1-1.Mybatis+h2](https://github.com/reolinodev/back-boot-setting/tree/1-1.Mybatis+h2)
-: Mybatis + h2 기본설정
+: Mybatis + h2 
 
-### Main Branch  설명
-1. AOP 적용
-- service 실행시간 체크
-- 파라미터 및 리턴값 로그 적용
 
-2. Exception 처리
-- Valid 위반
-- 무결성 조건 오류
-- request param 이 없는 경우 오류 코드 반환
-
-3. Swagger 적용
-
-4. Spring profile 설정
-
-## 추후 적용예정
-1. XSS 적용 (예정)
-2. 개인정보 암호화 (예정)
-3. API 권한 적용
