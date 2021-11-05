@@ -1,22 +1,18 @@
 # 0.Basic
 
 ### # 구현 내용
-1. AOP 적용
-- service 실행시간 체크
-- 파라미터 및 리턴값 로그 적용
-<br/>
+* AOP 적용
+  * service 실행시간 체크
+  * 파라미터 및 리턴값 로그 적용
 
-2. Exception 처리
-- Valid 위반시
-- 무결성 조건 오류
-- request param 이 없는 경우 오류 코드 반환
-<br/>
+* Exception 처리
+  * Valid 위반시
+  * 무결성 조건 오류
+  * request param 이 없는 경우 오류 코드 반환
 
-3. Swagger 적용
-<br/>
+* Swagger 적용
 
-4. Spring profile 설정
-<br/>
+* Spring profile 설정
 
 ### #추후 적용예정
 1. XSS 적용 (예정)
