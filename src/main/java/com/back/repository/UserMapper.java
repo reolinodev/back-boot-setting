@@ -1,11 +1,11 @@
 package com.back.repository;
 
+import com.back.api.dto.User;
+import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-
-import com.back.api.dto.User;
-import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserMapper {
@@ -14,7 +14,7 @@ public class UserMapper {
 
     public User findById(Integer id) {
         logger.info("findById실행");
-        
+
         User data =  new User();
         data.setId(1);
         data.setEmail("aaa@gmail.com");
@@ -49,7 +49,7 @@ public class UserMapper {
         data.setPhone("01011112222");
         data.setBirth("19000101");
         list.add(data);
-        
+
         User data2 =  new User();
         data2.setId(2);
         data2.setEmail("bbb@gmail.com");
