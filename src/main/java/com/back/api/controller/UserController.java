@@ -50,7 +50,7 @@ public class UserController {
 
     @ApiOperation(value = "사용자를 상세 조회한다.")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "사용자 고유키", required = true, dataType = "Integer", paramType = "path", defaultValue = ""),
+            @ApiImplicitParam(name = "id", value = "사용자 고유키", required = true, dataType = "Integer", paramType = "path", example = "1"),
     })
     @GetMapping("/user/{id}")
     public ResponseEntity <Map<String,Object>> findById(@PathVariable Integer id, HttpServletRequest httpServletRequest) {
@@ -98,7 +98,7 @@ public class UserController {
 
     @ApiOperation(value = "사용자를 수정한다.")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "사용자 고유키", required = true, dataType = "Integer", paramType = "path", defaultValue = ""),
+            @ApiImplicitParam(name = "id", value = "사용자 고유키", required = true, dataType = "Integer", paramType = "path", example = "1"),
     })
     @PutMapping("/user/{id}")
     public ResponseEntity<Map<String,Object>> updateUser(
@@ -125,7 +125,7 @@ public class UserController {
 
     @ApiOperation(value = "사용자를 삭제한다.")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "사용자 고유키", required = true, dataType = "Integer", paramType = "path", defaultValue = ""),
+            @ApiImplicitParam(name = "id", value = "사용자 고유키", required = true, dataType = "Integer", paramType = "path",example = "1"),
     })
     @DeleteMapping("/user/{id}")
     public ResponseEntity<Map<String,Object>> deleteUser(@PathVariable Integer id, HttpServletRequest httpServletRequest) {
