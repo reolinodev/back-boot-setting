@@ -32,7 +32,6 @@ public class User {
 
 
     @ApiModelProperty(example = "생년월일")
-    @Pattern(regexp = "^(?:[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1,2][0-9]|3[0,1]))", message = "생년월일 형식이 올바르지 않습니다. ex)19000101 ") 
     private String birth;
 
 
