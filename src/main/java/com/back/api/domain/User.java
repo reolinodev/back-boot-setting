@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 @Entity
-@Table(name="USER")
+@Table(name="TB_USER")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,16 +19,19 @@ public class User {
 
     @NonNull
     private String name;
+
     @NonNull
     private String email;
 
     private String birth;
 
+    @NonNull
     private String password;
 
+    @NonNull
     private String phone;
 
+    private LocalDateTime indate;
 
-//    INDATE,
-//    LDATE
+    private LocalDateTime ldate;
 }

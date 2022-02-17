@@ -10,12 +10,12 @@ class UserTest {
         User user = new User();
         user.setEmail("reolino@gmail.com");
         user.setName("reolino");
-//        user.setCreatedAt(LocalDateTime.now());
-//        user.setUpdatedAt(LocalDateTime.now());
+        user.setIndate(LocalDateTime.now());
+        user.setLdate(LocalDateTime.now());
         System.out.println("user = " + user);
 
-        User user1 = new User("reolino1", "reolino1@naver.com");
-        System.out.println("user1 = " + user1);
+        User user3 = new User("reolino3", "reolino3@gmail.com","123456789", "01011112222");
+        System.out.println("user3 = " + user3);
 
         User user2 =  User.builder()
                 .name("reolino2")
@@ -24,5 +24,4 @@ class UserTest {
 
         System.out.println("user2 = " + user2);
     }
-
 }
