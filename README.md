@@ -19,4 +19,4 @@
 * 외부 API 호출 예제
   * Naver 검색 Api
 
-
+* thymeleaf 기본 레이아웃 설정
