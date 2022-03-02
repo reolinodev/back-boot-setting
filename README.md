@@ -16,4 +16,7 @@
 
 * Response 형태 설정
 
+* 외부 API 호출 예제
+  * Naver 검색 Api
+
 

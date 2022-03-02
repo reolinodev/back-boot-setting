@@ -1,4 +1,4 @@
-package com.back.api.dto;
+package com.back.api.domain;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

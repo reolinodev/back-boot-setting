@@ -1,9 +1,9 @@
-package com.back.library;
+package com.back.support;
 
 import javax.servlet.http.HttpServletRequest;
-import com.back.dto.Header;
+import com.back.api.domain.common.Header;
 
-public class ResForm {
+public class ResponseUtils {
 
     public static Header setHeader(String message, String code,  HttpServletRequest httpServletRequest){
         Header header = new Header();

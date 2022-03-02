@@ -1,6 +1,6 @@
 package com.back.repository;
 
-import com.back.api.dto.User;
+import com.back.api.domain.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Repository
-public class UserMapper {
+public class UserRepository {
 
-    Logger logger = Logger.getLogger(UserMapper.class.getSimpleName());
+    Logger logger = Logger.getLogger(UserRepository.class.getSimpleName());
 
     public User findById(Integer id) {
         logger.info("findById실행");

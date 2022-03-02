@@ -1,9 +1,9 @@
 package com.back.api.controller;
 
-import com.back.api.dto.User;
+import com.back.api.domain.User;
 import com.back.api.service.UserService;
-import com.back.dto.Header;
-import com.back.library.ResForm;
+import com.back.api.domain.common.Header;
+import com.back.support.ResponseUtils;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,7 +39,7 @@ public class UserController {
 
         String message = listCount+"건이 조회되었습니다.";
         String code = "ok";
-        Header header = ResForm.setHeader(message, code, httpServletRequest);
+        Header header = ResponseUtils.setHeader(message, code, httpServletRequest);
 
         responseMap.put("header", header);
         responseMap.put("data", list);
@@ -59,7 +59,7 @@ public class UserController {
 
         String message = "1건이 조회되었습니다.";
         String code = "ok";
-        Header header = ResForm.setHeader(message, code, httpServletRequest);
+        Header header = ResponseUtils.setHeader(message, code, httpServletRequest);
 
         responseMap.put("header", header);
         responseMap.put("data", data);
@@ -89,7 +89,7 @@ public class UserController {
             code = "fail";
         }
 
-        Header header = ResForm.setHeader(message, code, httpServletRequest);
+        Header header = ResponseUtils.setHeader(message, code, httpServletRequest);
         responseMap.put("header", header);
 
         return new ResponseEntity<>(responseMap, HttpStatus.CREATED);
@@ -116,7 +116,7 @@ public class UserController {
             code = "fail";
         }
 
-        Header header = ResForm.setHeader(message, code, httpServletRequest);
+        Header header = ResponseUtils.setHeader(message, code, httpServletRequest);
         responseMap.put("header", header);
 
         return new ResponseEntity<>(responseMap, HttpStatus.OK);
@@ -139,7 +139,7 @@ public class UserController {
             code = "fail";
         }
 
-        Header header = ResForm.setHeader(message, code, httpServletRequest);
+        Header header = ResponseUtils.setHeader(message, code, httpServletRequest);
         responseMap.put("header", header);
 
         return new ResponseEntity<>(responseMap, HttpStatus.OK);

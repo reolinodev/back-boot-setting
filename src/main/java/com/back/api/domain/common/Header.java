@@ -1,4 +1,4 @@
-package com.back.dto;
+package com.back.api.domain.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
