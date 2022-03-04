@@ -1,31 +1,23 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      >
-
-    <th:block layout:fragment="head" th:include="@{/fragments/head}"></th:block>
-
-    <body>
-        <th:block layout:fragment="header" th:include="@{/fragments/header}"></th:block>
-
-        <div layout:fragment="content" class="content">
-            <h2>This is Content</h2>
-            <hr>
-            <table border="1">
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/layout}"
+>
+    <div layout:fragment="content" class="content">
+        <h2>This is Content</h2>
+        <hr>
+        <table border="1">
+            <tr>
+                <th>TEXT</th>
+            </tr>
+            <th:block th:each="rl : ${resultList}">
                 <tr>
-                    <th>TEXT</th>
+                    <td th:text="${ rl }"></td>
                 </tr>
-                <th:block th:each="rl : ${resultList}">
-                    <tr>
-                        <td th:text="${ rl }"></td>
-                    </tr>
-                </th:block>
-            </table>
-        </div>
-
-        <th:block layout:fragment="footer" th:include="@{/fragments/footer}"></th:block>
-    </body>
+            </th:block>
+        </table>
+    </div>
 </html>
+
 
 
