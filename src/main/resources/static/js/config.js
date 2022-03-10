@@ -12,3 +12,5 @@ console.log(arr1);
 // ES6
 let arr2 = myArrary.map((item) => item);
 console.log(arr2);
+
+

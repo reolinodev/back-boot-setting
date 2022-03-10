@@ -4,12 +4,13 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     entry: {
-        bundle: path.join(__dirname + '/src/main/resources/static/js/index.js')
+        config: path.join(__dirname + '/src/main/resources/static/js/config.js')
     },
     output: {
-        filename: "index.js",
-        path: path.resolve(__dirname + "/src/main/resources/static/dist")
+        path: path.resolve(__dirname + "/src/main/resources/static/dist"),
+        clean: true,
     },
+    mode:'none',
     module: {
         rules: [
             {
@@ -25,6 +26,33 @@ module.exports = {
                 test: /\.js$/,
                 use: ['babel-loader'],
             },
+            {
+                test: /\.(gif|png|jpe?g|svg)$/i,
+                use: [
+                    {
+                        loader: 'image-webpack-loader',
+                        options: {
+                            mozjpeg: {
+                                progressive: true,
+                                quality: 65
+                            },
+                            optipng: {
+                                enabled: false,
+                            },
+                            pngquant: {
+                                quality: [0.65, 0.90],
+                                speed: 4
+                            },
+                            gifsicle: {
+                                interlaced: false,
+                            },
+                            webp: {
+                                quality: 75
+                            },
+                        }
+                    },
+                ],
+            }
         ],
     },
     plugins: [
