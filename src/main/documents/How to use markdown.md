@@ -108,3 +108,10 @@ public class BootSpringBootApplication {
 
 ##9. 이미지
 ![img](../resources/static/images/webpack.png)
+
+##10. 표
+|제목|내용|설명|
+|------|---|---|
+|테스트1|테스트2|테스트3|
+|테스트1|테스트2|테스트3|
+|테스트1|테스트2|테스트3|
