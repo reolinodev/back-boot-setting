@@ -26,10 +26,17 @@
     "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.6.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-node": "^4.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.0",
+    "eslint-plugin-node": "^11.1.0",
     "file-loader": "^6.2.0",
     "image-webpack-loader": "^8.1.0",
     "postcss": "^8.3.6",
     "postcss-loader": "^6.1.1",
+    "prettier": "^2.3.2",
     "sass": "^1.38.0",
     "sass-loader": "^12.1.0",
     "style-loader": "^3.3.1",
@@ -40,5 +47,10 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "rules": {
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
+    "no-use-before-define": "off"
+  }
 }
