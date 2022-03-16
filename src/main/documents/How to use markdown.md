@@ -107,7 +107,7 @@ public class BootSpringBootApplication {
 
 
 ##9. 이미지
-![img](../resources/static/images/webpack.png)
+![img](../resources/static/images/guide/cat.jpg)
 
 ##10. 표
 |제목|내용|설명|
