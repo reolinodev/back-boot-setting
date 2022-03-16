@@ -21,6 +21,11 @@ npm install
 
 적용하려면 각자 사용하는 IDE에 eslint와 prettier 플러그인을 설치하고
 적용을 해줘야 한다. 
+intellij를 기준으로 한다면
+- eslint는 setting < Languages & Frameworks < Javascript <Code Quality Tool < ESLint에서 Automatic으로 설정해주면 된다.
+![](src/main/resources/static/images/guide/eslint.png)
+- prettier는 setting < Languages & Frameworks < Prettier 에서 On Save를 선택하면 된다.
+![](src/main/resources/static/images/guide/prettier.png)
 
 혹시 Please specify path to 'eslint' package
 이 구문이 나온다면
