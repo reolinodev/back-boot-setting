@@ -17,7 +17,7 @@ import javax.validation.constraints.Size;
 @ApiModel(description = "사용자")
 public class User {
     
-    private Integer id;
+    private int id;
     
 	@ApiModelProperty(example = "이름")
     @NotBlank(message = "이름은 필수 입력 값입니다.")

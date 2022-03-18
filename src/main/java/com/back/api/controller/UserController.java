@@ -1,8 +1,8 @@
 package com.back.api.controller;
 
 import com.back.api.domain.User;
-import com.back.api.service.UserService;
 import com.back.api.domain.common.Header;
+import com.back.api.service.UserService;
 import com.back.support.ResponseUtils;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +15,18 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @Api(value = "user controller Api")
-@RequestMapping("/api")
+@RequestMapping("/api/user")
 public class UserController {
 
     @Autowired
     UserService userService;
 
     @ApiOperation(value = "사용자를 전체 조회한다.")
-    @PostMapping("/user")
+    @PostMapping("/")
     public ResponseEntity<Map<String,Object>> findAll(
             @ApiParam(
                     value = "name : 이름 , 널허용 \n"
@@ -52,10 +53,10 @@ public class UserController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "사용자 고유키", required = true, dataType = "Integer", paramType = "path", example = "1"),
     })
-    @GetMapping("/user/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity <Map<String,Object>> findById(@PathVariable Integer id, HttpServletRequest httpServletRequest) {
         Map <String,Object> responseMap = new HashMap<>();
-        User data = userService.findById(id);
+        Optional<User> data = userService.findById(id);
 
         String message = "1건이 조회되었습니다.";
         String code = "ok";
@@ -69,7 +70,7 @@ public class UserController {
 
 
     @ApiOperation(value = "사용자를 입력한다.")
-    @PutMapping("/user")
+    @PutMapping("/")
     public ResponseEntity<Map<String,Object>> save(
             @ApiParam(
                     value = "name : 이름, 필수값, 2~10자 \n"
@@ -100,7 +101,7 @@ public class UserController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "사용자 고유키", required = true, dataType = "Integer", paramType = "path", example = "1"),
     })
-    @PutMapping("/user/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Map<String,Object>> updateUser(
             @Valid @RequestBody User user,
             @PathVariable Integer id, HttpServletRequest httpServletRequest) {
@@ -125,9 +126,9 @@ public class UserController {
 
     @ApiOperation(value = "사용자를 삭제한다.")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "사용자 고유키", required = true, dataType = "Integer", paramType = "path",example = "1"),
+            @ApiImplicitParam(name = "id", value = "사용자 고유키", required = true, dataType = "Integer", paramType = "path", example = "1"),
     })
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Map<String,Object>> deleteUser(@PathVariable Integer id, HttpServletRequest httpServletRequest) {
         Map <String,Object> responseMap = new HashMap<>();
 
@@ -144,5 +145,4 @@ public class UserController {
 
         return new ResponseEntity<>(responseMap, HttpStatus.OK);
     }
-
 }
