@@ -16,7 +16,7 @@ public class SearchLocalReq {
     private int start = 1;              //1(기본값), 1(최대)	검색 시작 위치로 1만 가능
     private String sort = "random";     //random (기본값), comment	정렬 옵션: random(유사도순), comment(카페/블로그 리뷰 개수 순)
 
-    public MultiValueMap<String, String> toMultiValueMap(){
+    public MultiValueMap<String, String> toMultiValueMap() {
         var map = new LinkedMultiValueMap<String, String>();
         map.add("query", query);
         map.add("display", String.valueOf(display));

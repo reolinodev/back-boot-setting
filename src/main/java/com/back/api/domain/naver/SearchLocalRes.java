@@ -21,6 +21,7 @@ public class SearchLocalRes {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class SearchLocalItem {
+
         private String title;               //검색 결과 업체, 기관명을 나타낸다.
         private String link;                //검색 결과 업체, 기관의 상세 정보가 제공되는 네이버 페이지의 하이퍼텍스트 link를 나타낸다.
         private String description;         //검색 결과 업체, 기관명에 대한 설명을 제공한다.

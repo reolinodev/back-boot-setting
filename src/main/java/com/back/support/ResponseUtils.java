@@ -5,7 +5,8 @@ import com.back.api.domain.common.Header;
 
 public class ResponseUtils {
 
-    public static Header setHeader(String message, String code,  HttpServletRequest httpServletRequest){
+    public static Header setHeader(String message, String code,
+        HttpServletRequest httpServletRequest) {
         Header header = new Header();
         header.setMessage(message);
         header.setRequestUrl(httpServletRequest.getRequestURI());
