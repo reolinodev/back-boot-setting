@@ -12,26 +12,26 @@ import java.util.List;
 @Controller
 public class HomeController {
 
-	@RequestMapping(value = "/")
-	public String index() {
-		String url = "/swagger-ui/";
-		return "redirect:" + url;
-	}
+    @RequestMapping(value = "/")
+    public String index() {
+        String url = "/swagger-ui/";
+        return "redirect:" + url;
+    }
 
-	@RequestMapping(value = "/home", method= RequestMethod.GET)
-	public ModelAndView  goHome(HttpServletRequest request) {
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    public ModelAndView goHome(HttpServletRequest request) {
 
-		ModelAndView mav = new ModelAndView();
-		List<String> resultList = new ArrayList<String>();
-		resultList.add("AAA");
-		resultList.add("BBB");
-		resultList.add("CCC");
-		resultList.add("DDD");
-		resultList.add("EEE");
-		resultList.add("FFF");
-		mav.addObject("resultList",resultList);
-		mav.setViewName("content/home");
-		return mav;
-	}
+        ModelAndView mav = new ModelAndView();
+        List<String> resultList = new ArrayList<String>();
+        resultList.add("AAA");
+        resultList.add("BBB");
+        resultList.add("CCC");
+        resultList.add("DDD");
+        resultList.add("EEE");
+        resultList.add("FFF");
+        mav.addObject("resultList", resultList);
+        mav.setViewName("content/home");
+        return mav;
+    }
 
 }

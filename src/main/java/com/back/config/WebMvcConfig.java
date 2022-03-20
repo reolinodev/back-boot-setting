@@ -6,14 +6,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-    
+
     /**
-     * CORS 설정 ("GET", "POST", "PUT", "DELETE" 허용) 
+     * CORS 설정 ("GET", "POST", "PUT", "DELETE" 허용)
      */
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedMethods("GET", "POST", "PUT", "DELETE");
+            .allowedOrigins("*")
+            .allowedMethods("GET", "POST", "PUT", "DELETE");
     }
 }
