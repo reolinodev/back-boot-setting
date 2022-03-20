@@ -24,14 +24,15 @@ import java.util.stream.StreamSupport;
 public class GlobalControllerAdvice {
 
     @ExceptionHandler(value = Exception.class)
-    public ResponseEntity<?> exception(Exception e){
+    public ResponseEntity<?> exception(Exception e) {
         System.out.println(e.getClass().getName());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("");
     }
-    
+
     /* @Valid의 유효조건 맞지 않을 경우 반환한다.*/
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public ResponseEntity<?> methodArgumentNotValidException(MethodArgumentNotValidException e, HttpServletRequest httpServletRequest){
+    public ResponseEntity<?> methodArgumentNotValidException(MethodArgumentNotValidException e,
+        HttpServletRequest httpServletRequest) {
         List<Error> errorList = new ArrayList<>();
 
         BindingResult bindingResult = e.getBindingResult();
@@ -61,15 +62,17 @@ public class GlobalControllerAdvice {
 
     /* 무결성 제약조건을 위반한 경우 반환한다*/
     @ExceptionHandler(value = ConstraintViolationException.class)
-    public ResponseEntity<?> constraintViolationException(ConstraintViolationException e, HttpServletRequest httpServletRequest){
+    public ResponseEntity<?> constraintViolationException(ConstraintViolationException e,
+        HttpServletRequest httpServletRequest) {
 
         List<Error> errorList = new ArrayList<>();
 
-        e.getConstraintViolations().forEach(error ->{
-            Stream<Path.Node> stream = StreamSupport.stream(error.getPropertyPath().spliterator(), false);
+        e.getConstraintViolations().forEach(error -> {
+            Stream<Path.Node> stream = StreamSupport.stream(error.getPropertyPath().spliterator(),
+                false);
             List<Path.Node> list = stream.collect(Collectors.toList());
 
-            String field = list.get(list.size() -1).getName();
+            String field = list.get(list.size() - 1).getName();
             String message = error.getMessage();
             String invalidValue = error.getInvalidValue().toString();
 
@@ -92,10 +95,11 @@ public class GlobalControllerAdvice {
 
     /* required로 정의된 프로퍼티가 없을때 반환한다 */
     @ExceptionHandler(value = MissingServletRequestParameterException.class)
-    public ResponseEntity<?> missingServletRequestParameterException(MissingServletRequestParameterException e, HttpServletRequest httpServletRequest){
+    public ResponseEntity<?> missingServletRequestParameterException(
+        MissingServletRequestParameterException e, HttpServletRequest httpServletRequest) {
 
         List<Error> errorList = new ArrayList<>();
-        
+
         Error errorMessage = new Error();
         errorMessage.setField(e.getParameterName());
         errorMessage.setMessage(e.getMessage());

@@ -17,7 +17,7 @@ public class SearchImageReq {
     private String sort = "sim";    //sim (유사도순), date (날짜순)
     private String filter = "all";  //all(전체), large(큰 사이즈), medium(중간 사이즈), small(작은 사이즈)
 
-    public MultiValueMap<String, String> toMultiValueMap(){
+    public MultiValueMap<String, String> toMultiValueMap() {
         var map = new LinkedMultiValueMap<String, String>();
         map.add("query", query);
         map.add("display", String.valueOf(display));
