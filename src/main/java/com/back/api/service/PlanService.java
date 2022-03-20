@@ -13,13 +13,13 @@ public class PlanService {
 
     private final NaverClient naverClient;
 
-    public Shop findShopAll(String query){
+    public Shop findShopAll(String query) {
 
         var searchLocalReq = new SearchLocalReq();
         searchLocalReq.setQuery(query);
         var searchLocalRes = naverClient.searchLocal(searchLocalReq);
 
-        if(searchLocalRes.getTotal() > 0){
+        if (searchLocalRes.getTotal() > 0) {
             var localItem = searchLocalRes.getItems().stream().findFirst().get();
             var imageQuery = localItem.getTitle().replaceAll("<[^>]*>\"", "");
             var searchImageReq = new SearchImageReq();
@@ -27,7 +27,7 @@ public class PlanService {
 
             var searchImageRes = naverClient.searchImage(searchImageReq);
 
-            if(searchImageRes.getTotal() > 0){
+            if (searchImageRes.getTotal() > 0) {
                 var imageItem = searchImageRes.getItems().stream().findFirst().get();
 
                 var result = new Shop();

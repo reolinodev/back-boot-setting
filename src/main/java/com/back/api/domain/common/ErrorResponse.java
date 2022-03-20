@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class ErrorResponse {
+
     String requestUrl;
     String message;
     String resultCode;

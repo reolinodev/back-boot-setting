@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class Header {
+
     String requestUrl;
     String message;
     String resultCode;

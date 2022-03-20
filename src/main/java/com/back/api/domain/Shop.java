@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @Data
 @ApiModel(description = "가게")
 public class Shop {
+
     @ApiModelProperty(example = "인덱스")
     private Integer index;
     @ApiModelProperty(example = "음식명, 장소명")
