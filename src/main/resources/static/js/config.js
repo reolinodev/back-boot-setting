@@ -1,12 +1,12 @@
-import '../css/style.css';
-import '../scss/main.scss';
-import '../css/reset.min.css';
+import "../css/style.css";
+import "../scss/main.scss";
+import "../css/reset.min.css";
 
 //Babel 적용 예제
 // ES5
 const myArrary = [1, 2, 3, 4];
 let arr1 = myArrary.map(function (item) {
-    return item;
+  return item;
 });
 console.log(arr1);
 
