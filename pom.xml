@@ -87,6 +87,12 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<!-- maria db -->
+		<dependency>
+			<groupId>org.mariadb.jdbc</groupId>
+			<artifactId>mariadb-java-client</artifactId>
+		</dependency>
+
 		<!-- JDBC -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

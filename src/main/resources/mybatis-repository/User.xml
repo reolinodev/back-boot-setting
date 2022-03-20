@@ -9,8 +9,8 @@
 				BIRTH,
 				PASSWORD,
 				PHONE,
-				INDATE,
-				LDATE
+				CREATED_AT,
+				UPDATED_AT
 		FROM 	TB_USER
 		WHERE 	1=1
 		<if test='name != "" and name != null'>
@@ -29,8 +29,8 @@
 				BIRTH,
 				PASSWORD,
 				PHONE,
-				INDATE,
-				LDATE
+				CREATED_AT,
+				UPDATED_AT
 		FROM 	TB_USER
 		WHERE	ID = #{id}
 	</select>
@@ -48,7 +48,7 @@
 			, BIRTH
 			, PASSWORD
 			, PHONE
-			, INDATE
+			, CREATED_AT
 		)
         VALUES
         (	
@@ -65,7 +65,7 @@
 
 	<update id="update" parameterType="user">
 		UPDATE 	TB_USER
-        SET 	ldate = now()
+        SET 	UPDATED_AT = now()
 		<if test='name != "" and name != null'>
 				, NAME = #{name}
 		</if>
