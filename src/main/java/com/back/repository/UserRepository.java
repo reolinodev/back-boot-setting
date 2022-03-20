@@ -15,7 +15,7 @@ public class UserRepository {
     public User findById(Integer id) {
         logger.info("findById실행");
 
-        User data =  new User();
+        User data = new User();
         data.setId(1);
         data.setEmail("aaa@gmail.com");
         data.setName("AAA");
@@ -41,7 +41,7 @@ public class UserRepository {
         logger.info("findAll실행");
 
         List<User> list = new ArrayList<>();
-        User data =  new User();
+        User data = new User();
         data.setId(1);
         data.setEmail("aaa@gmail.com");
         data.setName("AAA");
@@ -50,7 +50,7 @@ public class UserRepository {
         data.setBirth("19000101");
         list.add(data);
 
-        User data2 =  new User();
+        User data2 = new User();
         data2.setId(2);
         data2.setEmail("bbb@gmail.com");
         data2.setName("BBB");
@@ -62,7 +62,7 @@ public class UserRepository {
         return list;
     }
 
-    public int update(User user){
+    public int update(User user) {
         logger.info("update실행");
 
         return 1;
