@@ -39,7 +39,7 @@
 
     <insert id="save" parameterType="user">
         <selectKey keyProperty="id" resultType="int" order="BEFORE">
-            SELECT MAX(id) + 1 AS id FROM TB_USER
+            SELECT IFNULL(MAX(id), 0) + 1 AS id FROM TB_USER
         </selectKey>
         INSERT INTO TB_USER
         (
@@ -81,10 +81,8 @@
 
 
     <delete id="deleteById" parameterType="int">
-        DELETE
-        TB_USER
-		WHERE 	ID =
-        #{id}
+        DELETE TB_USER
+		WHERE ID = #{id}
     </delete>
 
 </mapper>

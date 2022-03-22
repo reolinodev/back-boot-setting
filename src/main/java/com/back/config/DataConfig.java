@@ -4,6 +4,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -20,18 +21,26 @@ import javax.sql.DataSource;
 @MapperScan(value = "com.back.repository")
 public class DataConfig {
 
+    @Value("${db.type}")
+    String dbType;
+
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
+        String locationPattern = "classpath:mybatis-repository/default/*.xml";
 
         sessionFactory.setDataSource(dataSource);
 
         Resource confiigLocation = new PathMatchingResourcePatternResolver()
-                .getResource("classpath:mybatis-config.xml");
+            .getResource("classpath:mybatis-config.xml");
         sessionFactory.setConfigLocation(confiigLocation);
 
+        if ("postgresql".equals(dbType)) {
+            locationPattern = "classpath:mybatis-repository/postgresql/*.xml";
+        }
+
         sessionFactory.setMapperLocations(
-                new PathMatchingResourcePatternResolver().getResources("classpath:mybatis-repository/*.xml"));
+            new PathMatchingResourcePatternResolver().getResources(locationPattern));
         return sessionFactory.getObject();
     }
 
