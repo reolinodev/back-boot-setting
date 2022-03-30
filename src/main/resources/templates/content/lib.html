@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/layout}"
+>
+    <head>
+        <script type="module" th:src="@{dist/js/index.js?20220330}"></script>
+        <!--        <script type="module" th:src="@{dist/js/module.js}"></script>-->
+    </head>
+
+    <div layout:fragment="content" class="content">
+        <header><h3>Libraries Example</h3></header>
+        <div>
+            <label><strong>[jQuery]</strong></label>
+            <p class="jquery">not yet jQuery loaded</p>
+            <br />
+            <label><strong>[Moment]</strong></label>
+            <p class="moment">not yet Moment loaded</p>
+        </div>
+    </div>
+</html>

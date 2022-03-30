@@ -1,3 +1,9 @@
-export default function detail(name, age) {
-    return `안녕 ${name}, 너의 나이는 ${age}살 이다!`;
+// eslint-disable-next-line import/prefer-default-export
+export function Alert() {
+    Swal.fire({
+        title: 'Error!',
+        text: 'Do you want to continue',
+        icon: 'error',
+        confirmButtonText: 'Cool',
+    });
 }

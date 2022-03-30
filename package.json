@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --mode development",
+    "dev": "webpack --watch",
     "build": "webpack --mode production"
   },
   "repository": {
@@ -34,6 +34,9 @@
     "eslint-plugin-node": "^11.1.0",
     "file-loader": "^6.2.0",
     "image-webpack-loader": "^8.1.0",
+    "jquery": "^3.6.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
     "postcss": "^8.3.6",
     "postcss-loader": "^6.1.1",
     "prettier": "^2.3.2",
@@ -42,8 +45,7 @@
     "style-loader": "^3.3.1",
     "webpack": "^5.50.0",
     "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.0.0-rc.1",
-    "jquery": "^3.6.0"
+    "webpack-dev-server": "^4.0.0-rc.1"
   },
   "browserslist": [
     "> 1%",
@@ -53,5 +55,8 @@
     "import/no-unresolved": "off",
     "import/extensions": "off",
     "no-use-before-define": "off"
+  },
+  "dependencies": {
+    "sweetalert2": "^11.4.8"
   }
 }

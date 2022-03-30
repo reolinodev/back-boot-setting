@@ -24,7 +24,7 @@ module.exports = {
         ],
         'js/module': [
             path.join(
-                __dirname + '/src/main/resources/static/js/module/common.js'
+                __dirname + '/src/main/resources/static/js/module/moment.js'
             ),
             path.join(
                 __dirname + '/src/main/resources/static/js/module/alert.js'
@@ -102,6 +102,12 @@ module.exports = {
             VERSION: JSON.stringify('v.1.0.0'),
             MAX_COUNT: JSON.stringify(999),
             'api.domain': JSON.stringify('http://127.0.0.1'),
+        }),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            moment: 'moment',
+            _: 'lodash',
+            Swal: 'sweetalert2',
         }),
     ],
 };

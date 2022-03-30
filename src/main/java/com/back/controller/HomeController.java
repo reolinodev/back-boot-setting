@@ -26,12 +26,17 @@ public class HomeController {
 		resultList.add("AAA");
 		resultList.add("BBB");
 		resultList.add("CCC");
-		resultList.add("DDD");
-		resultList.add("EEE");
-		resultList.add("FFF");
 		mav.addObject("resultList",resultList);
 		mav.setViewName("content/home");
 		return mav;
 	}
+
+	@RequestMapping(value = "/lib", method= RequestMethod.GET)
+	public ModelAndView  home2View(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("content/lib");
+		return mav;
+	}
+
 
 }
