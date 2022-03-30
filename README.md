@@ -1,22 +1,31 @@
-# 5.Javascript
+# 5.JsLibrary
 
 ### # 구현 내용
-* RDBMS 설정
-  * 프로필 별 DB 설정
-    * dev : h2 
-    * qa : postgresql
-    * prod : maria 
-  * DB 타입에 따라 mapper 분기
-* log4jdbc 적용
-* transaction 처리
-* 테스트 코드 예제 추가
+* 각 js 별 웹팩 모듈 관리 예제 작성
+* js 라이브러리 추가 및 예제 작성
+  * jquery
+  * moment
+  * lodash
+  * sweetalert2
+* 실시간 웹팩 빌드 추가
     
 <hr/>
 
+### # 사용방법
+서버를 구동시켜 놓은 상태에서 터미널에서
+```
+npm run dev
+```
+를 했을 경우 js나 css를 수정했을 할때 웹팩이 자동으로 빌드를 한다.
+<hr/>
+
+
 ### # 권장사항
-1. 로그 스타일은 각자의 성향에 맞게 수정할 것
-2. 사용하는 DB에 맞춰서 DataConfig.java 파일을 수정해서 사용할 것
-3. h2 테스트시 sql에 있는 data.sql, schema.sql를 resources로 옮겨서 사용하면 
-해당 스크립트가 자동 실행됨
+1. 기존의 es5 식으로 코딩을 하고자 한다면 이전 브랜치로 돌아가서 config.js에
+css 압축 전용으로 사용하는 것을 권장함
+2. es6로 변환된 dist 폴더의 js를 가져와야 정상적으로 사용이 가능하다.
+3. 필요한 js 라이브러리만 사용할 것(불필요한 것 삭제)
+4. 구성은 config.js에는 외부라이브러리, module 폴더에는 custom하게 js를 작성해서
+넣는 것을 권장
 
 
