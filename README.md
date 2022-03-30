@@ -20,6 +20,8 @@ Maven 프로젝트인 만큼 pom.xml에 있는 라이브러리를 다운로드 �
 - [4.RDBMS](https://github.com/reolinodev/back-boot-setting/tree/4.RDBMS)
 : RDBMS와 Mybatis를 사용해 transaction을 처리하는 예제입니다. h2, maria db, postgresql을 사용하였으며 간단한 테스트 코드 예제도 적용되었습니다.
 
+- [5.JsLibrary](https://github.com/reolinodev/back-boot-setting/tree/5.JsLibrary)
+: 외부 js 라이브러리를 추가했으며 es6 스타일로 테스트 코드를 작성하였습니다. (jquery, moment, lodash, sweetalert2)
 
 
 
