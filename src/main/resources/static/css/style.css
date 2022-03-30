@@ -8,7 +8,7 @@ body, html {
 }
 
 .content {
-    height: 60%;
+    padding: 5px;
 }
 
 .footer {
