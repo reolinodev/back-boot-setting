@@ -1,23 +1,39 @@
 const path = require('path');
-const webpack = require("webpack")
+const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-const childProcess = require("child_process")
+const childProcess = require('child_process');
 
-const removeNewLine = buffer => {
-    return buffer.toString().replace("\n", "")
-}
+const removeNewLine = (buffer) => {
+    return buffer.toString().replace('\n', '');
+};
 
-const env = process.env.NODE_ENV
+const env = process.env.NODE_ENV;
 
 module.exports = {
-    mode: "development",
+    mode: 'development',
 
     entry: {
-        config: path.join(__dirname + '/src/main/resources/static/js/config.js')
+        'js/config': path.join(
+            __dirname + '/src/main/resources/static/js/config.js'
+        ),
+        'js/index': [
+            path.join(
+                __dirname + '/src/main/resources/static/js/index/index.js'
+            ),
+        ],
+        'js/module': [
+            path.join(
+                __dirname + '/src/main/resources/static/js/module/common.js'
+            ),
+            path.join(
+                __dirname + '/src/main/resources/static/js/module/alert.js'
+            ),
+        ],
     },
     output: {
-        path: path.resolve(__dirname + "/src/main/resources/static/dist"),
+        path: path.resolve(__dirname + '/src/main/resources/static/dist'),
+        filename: '[name].js',
         clean: true,
     },
     module: {
@@ -43,42 +59,42 @@ module.exports = {
                         options: {
                             mozjpeg: {
                                 progressive: true,
-                                quality: 65
+                                quality: 65,
                             },
                             optipng: {
                                 enabled: false,
                             },
                             pngquant: {
-                                quality: [0.65, 0.90],
-                                speed: 4
+                                quality: [0.65, 0.9],
+                                speed: 4,
                             },
                             gifsicle: {
                                 interlaced: false,
                             },
                             webp: {
-                                quality: 75
+                                quality: 75,
                             },
-                        }
+                        },
                     },
                 ],
-            }
+            },
         ],
     },
     plugins: [
         new CleanWebpackPlugin({
-            cleanAfterEveryBuildPatterns: ['dist']
+            cleanAfterEveryBuildPatterns: ['dist'],
         }),
         new webpack.BannerPlugin({
             banner: `
                 Build Date :: ${new Date().toLocaleString()}
                 Commit Version :: ${removeNewLine(
-                    childProcess.execSync("git rev-parse --short HEAD")
+                    childProcess.execSync('git rev-parse --short HEAD')
                 )}
                 Auth.name :: ${removeNewLine(
-                    childProcess.execSync("git config user.name")
+                    childProcess.execSync('git config user.name')
                 )}
                 Auth.email :: ${removeNewLine(
-                    childProcess.execSync("git config user.email")
+                    childProcess.execSync('git config user.email')
                 )}
             `,
         }),
@@ -89,4 +105,3 @@ module.exports = {
         }),
     ],
 };
-
