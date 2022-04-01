@@ -14,22 +14,11 @@ module.exports = {
     mode: 'development',
 
     entry: {
-        'js/config': path.join(
-            __dirname + '/src/main/resources/static/js/config.js'
-        ),
-        'js/index': [
-            path.join(
-                __dirname + '/src/main/resources/static/js/index/index.js'
-            ),
-        ],
-        'js/module': [
-            path.join(
-                __dirname + '/src/main/resources/static/js/module/moment.js'
-            ),
-            path.join(
-                __dirname + '/src/main/resources/static/js/module/alert.js'
-            ),
-        ],
+        config: '/src/main/resources/static/js/config.js',
+        login: '/src/main/resources/static/js/custom/login.js',
+        signUp: '/src/main/resources/static/js/custom/signUp.js',
+        pwChange: '/src/main/resources/static/js/custom/pwChange.js',
+        index: '/src/main/resources/static/js/index/index.js',
     },
     output: {
         path: path.resolve(__dirname + '/src/main/resources/static/dist'),

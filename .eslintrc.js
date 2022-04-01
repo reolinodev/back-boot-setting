@@ -1,4 +1,10 @@
 module.exports = {
+    env: {
+        browser: true,
+        commonjs: true,
+        es6: true,
+        jquery: true,
+    },
     extends: ['airbnb-base', 'plugin:node/recommended', 'prettier'],
     parserOptions: {
         parser: 'babel-eslint',
@@ -11,5 +17,6 @@ module.exports = {
             'error',
             { ignores: ['modules'] },
         ],
+        'no-console': 'off',
     },
 };
