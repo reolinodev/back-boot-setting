@@ -1,6 +1,6 @@
 package com.back.api.service;
 
-import com.back.api.domain.User;
+import com.back.api.domain.UserSample;
 import com.back.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class UserService {
     /**
      * 사용자를 전체조회 합니다.
      */
-    public List<User> findAll(User user) {
+    public List<UserSample> findAll(UserSample user) {
         return userRepository.findAll(user);
     }
 
@@ -25,7 +25,7 @@ public class UserService {
     /**
      * 사용자를 상세 조회 합니다.
      */
-    public Optional<User> findById(int id) {
+    public Optional<UserSample> findById(int id) {
         return userRepository.findById(id);
     }
 
@@ -33,7 +33,7 @@ public class UserService {
     /**
      * 사용자를 생성합니다.
      */
-    public int save(User user) {
+    public int save(UserSample user) {
         return userRepository.save(user);
     }
 
@@ -41,7 +41,7 @@ public class UserService {
     /**
      * 사용자 정보를 수정합니다.
      */
-    public int update(User user) {
+    public int update(UserSample user) {
         return userRepository.update(user);
     }
 

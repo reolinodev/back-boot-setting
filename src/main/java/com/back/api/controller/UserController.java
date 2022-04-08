@@ -1,6 +1,6 @@
 package com.back.api.controller;
 
-import com.back.api.domain.User;
+import com.back.api.domain.UserSample;
 import com.back.api.domain.common.Header;
 import com.back.api.service.UserService;
 import com.back.support.ResponseUtils;
@@ -32,10 +32,10 @@ public class UserController {
                     value = "name : 이름 , 널허용 \n"
                             +   "email : 이메일 ,널허용",
                     example = "{\n  name:이름,\n  email:이메일\n}")
-            @RequestBody User user, HttpServletRequest httpServletRequest){
+            @RequestBody UserSample user, HttpServletRequest httpServletRequest){
         Map <String,Object> responseMap = new HashMap<>();
 
-        List<User> list = userService.findAll(user);
+        List<UserSample> list = userService.findAll(user);
         int listCount = list.size();
 
         String message = listCount+"건이 조회되었습니다.";
@@ -56,7 +56,7 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity <Map<String,Object>> findById(@PathVariable Integer id, HttpServletRequest httpServletRequest) {
         Map <String,Object> responseMap = new HashMap<>();
-        Optional<User> data = userService.findById(id);
+        Optional<UserSample> data = userService.findById(id);
 
         String message = "1건이 조회되었습니다.";
         String code = "ok";
@@ -79,7 +79,7 @@ public class UserController {
                             +"password : 비밀번호, 필수값, 최대 20자, 비밀번호형식(영문 대,소문자와 숫자, 특수기호가 적어도 1개 이상씩 포함된 8자 ~ 20자) \n"
                             +"phone : 휴대폰, 필수값, 휴대폰번호형식 제한"
             )
-            @Valid @RequestBody User user, HttpServletRequest httpServletRequest){
+            @Valid @RequestBody UserSample user, HttpServletRequest httpServletRequest){
         Map <String,Object> responseMap = new HashMap<>();
 
         int result = userService.save(user);
@@ -103,7 +103,7 @@ public class UserController {
     })
     @PutMapping("/{id}")
     public ResponseEntity<Map<String,Object>> updateUser(
-            @Valid @RequestBody User user,
+            @Valid @RequestBody UserSample user,
             @PathVariable Integer id, HttpServletRequest httpServletRequest) {
 
         Map <String,Object> responseMap = new HashMap<>();

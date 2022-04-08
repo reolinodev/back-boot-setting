@@ -1,6 +1,6 @@
 package com.back.api.service;
 
-import com.back.api.domain.User;
+import com.back.api.domain.UserSample;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ class LoginServiceTest {
          * condition :  name = AAA
          * expected : phone이 01011112222로 조회된다
          */
-        User user = new User();
+        UserSample user = new UserSample();
         user.setName("AAA");
         var result = userService.findAll(user);
         System.out.println("result = " + result);
@@ -28,7 +28,7 @@ class LoginServiceTest {
          * condition :  email = BBB@gmail.com
          * expected : name이 BBB로 조회
          */
-        user = new User();
+        user = new UserSample();
         user.setEmail("BBB@gmail.com");
         var result2 = userService.findAll(user);
         System.out.println("result2 = " + result2);
@@ -39,7 +39,7 @@ class LoginServiceTest {
          * expected : 2개의 결과값이 조회된다.
          */
 
-        user = new User();
+        user = new UserSample();
         var result3 = userService.findAll(user);
         System.out.println("result3 = " + result3);
         Assertions.assertEquals(2, result3.size());
@@ -64,7 +64,7 @@ class LoginServiceTest {
          * password = 1111111111, phone = 01011113333
          * expected : 저장후 조회 결과가 CCC가 존재한다.
          */
-        User user = new User();
+        UserSample user = new UserSample();
         user.setName("CCC");
         user.setEmail("CCC@gmail.com");
         user.setBirth("20180901");
@@ -83,7 +83,7 @@ class LoginServiceTest {
          * id = 1, name = DDD, password = AAAA@@@@####, phone = 01011113333
          * expected : DDD, AAAA@@@@####, 01011113333이 정상적으로 변경된다.
          */
-        User user = new User();
+        UserSample user = new UserSample();
         user.setId(1);
         user.setName("DDD");
         user.setPassword("AAAA@@@@####");
@@ -103,7 +103,7 @@ class LoginServiceTest {
          * condition : id = 2
          * expected : 삭제된 후의 전체 조회 사이즈가 1이다.
          */
-        User user = new User();
+        UserSample user = new UserSample();
         var result = userService.findAll(user);
         System.out.println("result = " + result);
         Assertions.assertEquals(2, result.size());

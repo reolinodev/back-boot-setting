@@ -4,18 +4,9 @@
 <mapper namespace="com.back.repository.UserRepository">
 
     <select id="countByLoginId" parameterType="user" resultType="int">
-        SELECT  count(*)
-        FROM TB_USER
-        WHERE 1=1
-        <if test='name != "" and name != null'>
-            AND NAME = #{name}
-        </if>
-        <if test='email != "" and email != null'>
-            AND EMAIL = #{email}
-        </if>
+        SELECT  COUNT(*)
+        FROM USER_TB
+        WHERE LOGIN_ID = = #{login_id}
     </select>
-
-
-
 
 </mapper>

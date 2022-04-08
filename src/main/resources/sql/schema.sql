@@ -19,6 +19,7 @@ CREATE TABLE USER_TB
     email varchar(50) not null,
     user_nm varchar(50) not null,
     user_pw varchar(255) not null,
+    cell_phone varchar(100) not null,
     created_at timestamp,
     updated_at timestamp,
     last_login_at timestamp,
@@ -32,6 +33,7 @@ COMMENT ON COLUMN public.user_tb.login_id IS '로그인 아이디';
 COMMENT ON COLUMN public.user_tb.email IS '이메일';
 COMMENT ON COLUMN public.user_tb.user_nm IS '사용자 명';
 COMMENT ON COLUMN public.user_tb.user_pw IS '비밀번호';
+COMMENT ON COLUMN public.user_tb.cell_phone IS '휴대폰';
 COMMENT ON COLUMN public.user_tb.created_at IS '생성일';
 COMMENT ON COLUMN public.user_tb.updated_at IS '수정일';
 COMMENT ON COLUMN public.user_tb.last_login_at IS '마지막 로그인 일시';

@@ -1,10 +1,7 @@
 package com.back.service;
 
-import com.back.domain.User;
+import com.back.api.domain.User;
 import com.back.repository.LoginRepository;
-import com.back.repository.UserRepository;
-import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
