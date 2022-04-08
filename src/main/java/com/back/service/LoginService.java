@@ -17,7 +17,7 @@ public class LoginService {
     /**
      * 아이디 존재 여부를 조회합니다.
      */
-    public int countByLoginId(User user) {
+    public int signUpIdCheck(User user) {
         return loginRepository.countByLoginId(user);
     }
 

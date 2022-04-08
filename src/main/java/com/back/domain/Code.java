@@ -7,23 +7,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class User {
+public class Code {
 
-    public int user_id; //사용자 아이디
+    public int code_id; //코드 아이디
 
-    public String login_id; //로그인 아이디
+    public int code_grp_id; //코드 그룹 아이디
 
-    public String email; //이메일
+    public String code_nm; //코드 명
 
-    public String user_nm; //사용자 이름
+    public String bigo; // 비고
 
-    public String user_pw; //사용자 패스워드
+    public int ord; //순서
 
     public String created_at; //생성시간
 
     public String updated_at; //수정시간
 
-    public String last_login_at; //수정시간
+    public String updated_id; //수정자
 
     public String use_yn; //사용여부
 }

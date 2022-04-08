@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.back.repository.UserRepository">
+
+    <select id="countByLoginId" parameterType="user" resultType="int">
+        SELECT  count(*)
+        FROM TB_USER
+        WHERE 1=1
+        <if test='name != "" and name != null'>
+            AND NAME = #{name}
+        </if>
+        <if test='email != "" and email != null'>
+            AND EMAIL = #{email}
+        </if>
+    </select>
+
+
+
+
+</mapper>

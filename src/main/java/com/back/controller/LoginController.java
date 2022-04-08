@@ -72,7 +72,7 @@ public class LoginController {
 	public ResponseEntity<Map<String,Object>> signUpIdCheck(@RequestBody User user, HttpServletRequest request){
 		Map <String,Object> responseMap = new HashMap<>();
 
-		int result = loginService.countByLoginId(user);
+		int result = loginService.signUpIdCheck(user);
 		String message = result+" item was viewed";
 		String data = "Username is available";
 		String code = "ok";
