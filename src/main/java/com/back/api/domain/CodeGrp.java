@@ -13,20 +13,20 @@ import lombok.NoArgsConstructor;
 public class CodeGrp {
 
     @ApiModelProperty(example = "코드 그룹 아이디")
-    public int code_grp_id;
+    private int code_grp_id;
 
     @ApiModelProperty(example = "코드 그룹 명")
-    public String code_grp_nm;
+    private String code_grp_nm;
 
     @ApiModelProperty(example = "생성시간")
-    public String created_at;
+    private String created_at;
 
     @ApiModelProperty(example = "수정시간")
-    public String updated_at;
+    private String updated_at;
 
     @ApiModelProperty(example = "수정자")
-    public String updated_id;
+    private int updated_id;
 
     @ApiModelProperty(example = "사용여부")
-    public String use_yn;
+    private String use_yn;
 }

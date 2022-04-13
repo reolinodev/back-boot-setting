@@ -203,11 +203,11 @@ COMMENT ON COLUMN public.update_history_tb.api IS 'API';
 COMMENT ON COLUMN public.update_history_tb.created_at IS '생성일';
 
 
-CREATE SEQUENCE seq_user START 1;
-CREATE SEQUENCE seq_auth START 1;
-CREATE SEQUENCE seq_menu START 1;
-CREATE SEQUENCE seq_code_grp START 1;
-CREATE SEQUENCE seq_code START 1;
+CREATE SEQUENCE user_seq START 1;
+CREATE SEQUENCE auth_seq START 1;
+CREATE SEQUENCE menu_seq START 1;
+CREATE SEQUENCE code_grp_seq START 1;
+CREATE SEQUENCE code_seq START 1;
 
 
 

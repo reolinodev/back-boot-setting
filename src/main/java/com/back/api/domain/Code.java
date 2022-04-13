@@ -34,7 +34,7 @@ public class Code {
     public String updated_at;
 
     @ApiModelProperty(example = "수정자")
-    public String updated_id;
+    public int updated_id;
 
     @ApiModelProperty(example = "사용여부")
     public String use_yn;

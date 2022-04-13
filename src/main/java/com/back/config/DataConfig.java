@@ -18,6 +18,7 @@ import javax.sql.DataSource;
  * RDBMS와 mybatis 세팅
  */
 @Configuration
+@MapperScan(value = "com.back.api.repository")
 @MapperScan(value = "com.back.repository")
 public class DataConfig {
 

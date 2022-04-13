@@ -1,6 +1,7 @@
 package com.back.repository;
 
 import com.back.api.domain.UserSample;
+import com.back.api.repository.CommonRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -1,4 +1,4 @@
-package com.back.repository;
+package com.back.api.repository;
 
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +11,11 @@ public interface CommonRepository<T> {
 
     List<T> findAll(T entity);
 
+    List<T> findByUseYn(T entity);
+
     int save(T entity);
+
+    int updateUseYnById(T entity);
 
     int deleteById(int id);
 
