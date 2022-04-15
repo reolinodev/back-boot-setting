@@ -95,6 +95,7 @@ CREATE TABLE CODE_GRP_TB
 (
     code_grp_id int NOT NULL,
     code_grp_nm varchar(50) not null,
+    code_grp_val varchar(10) not null,
     created_at timestamp,
     updated_at timestamp,
     updated_id int,
@@ -104,6 +105,7 @@ CREATE TABLE CODE_GRP_TB
 COMMENT ON TABLE public.code_grp_tb IS '코드 그룹';
 COMMENT ON COLUMN public.code_grp_tb.code_grp_id IS '코드 그룹 아이디';
 COMMENT ON COLUMN public.code_grp_tb.code_grp_nm IS '코드 그룹 명';
+COMMENT ON COLUMN public.code_grp_tb.code_grp_val IS '코드 그룹 값';
 COMMENT ON COLUMN public.code_grp_tb.created_at IS '생성일';
 COMMENT ON COLUMN public.code_grp_tb.updated_at IS '수정일';
 COMMENT ON COLUMN public.code_grp_tb.updated_id IS '수정자';
@@ -114,8 +116,9 @@ CREATE TABLE CODE_TB
     code_id int NOT NULL,
     code_grp_id int NOT NULL,
     code_nm varchar(50) not null,
+    code_val varchar(10) not null,
     bigo varchar(500),
-    ord int,
+    ord varchar(10),
     created_at timestamp,
     updated_at timestamp,
     updated_id int,
@@ -128,6 +131,7 @@ COMMENT ON TABLE public.code_tb IS '코드';
 COMMENT ON COLUMN public.code_tb.code_id IS '코드 아이디';
 COMMENT ON COLUMN public.code_tb.code_grp_id IS '코드 그룹 아이디';
 COMMENT ON COLUMN public.code_tb.code_nm IS '코드 명';
+COMMENT ON COLUMN public.code_tb.code_val IS '코드 값';
 COMMENT ON COLUMN public.code_tb.bigo IS '비고';
 COMMENT ON COLUMN public.code_tb.ord IS '순서';
 COMMENT ON COLUMN public.code_tb.created_at IS '생성일';

@@ -6,5 +6,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CodeGrpRepository extends CommonRepository<CodeGrp> {
+    int countByCodeGrpVal(CodeGrp codeGrp);
+
     List<CodeGrp> findByUseYn();
+
+    int update(CodeGrp codeGrp);
 }

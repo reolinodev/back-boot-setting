@@ -3,9 +3,33 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.back.api.repository.CodeGrpRepository">
 
+    <select id="countByCodeGrpVal" parameterType="codeGrp" resultType="int">
+        SELECT  COUNT(*)
+        FROM CODE_GRP_TB
+        WHERE CODE_GRP_VAL = #{code_grp_val}
+    </select>
+
+    <insert id="save" parameterType="codeGrp">
+        INSERT INTO CODE_GRP_TB
+        (
+            CODE_GRP_ID,
+            CODE_GRP_NM,
+            CODE_GRP_VAL,
+            CREATED_AT
+        )
+        VALUES
+        (
+            nextval('code_grp_seq'),
+            #{code_grp_nm},
+            #{code_grp_val},
+            NOW()
+        )
+    </insert>
+
     <select id="findByUseYn" resultType="codeGrp">
         SELECT  CODE_GRP_ID,
                 CODE_GRP_NM,
+                CODE_GRP_VAL,
                 CREATED_AT,
                 UPDATED_AT,
                 UPDATED_ID,
@@ -14,26 +38,34 @@
         WHERE USE_YN= 'Y'
     </select>
 
-    <insert id="save" parameterType="codeGrp">
-        INSERT INTO CODE_GRP_TB
-        (
-            CODE_GRP_ID,
-            CODE_GRP_NM,
-            CREATED_AT
-        )
-        VALUES
-        (
-            nextval('code_grp_seq'),
-            #{code_grp_nm},
-            NOW()
-        )
-    </insert>
+
+    <select id="findById" parameterType="int" resultType="codeGrp">
+        SELECT  CODE_GRP_ID,
+                CODE_GRP_NM,
+                CODE_GRP_VAL,
+                CREATED_AT,
+                UPDATED_AT,
+                UPDATED_ID,
+                USE_YN
+        FROM CODE_GRP_TB
+        WHERE CODE_GRP_ID = #{code_grp_id}
+    </select>
+
+
+    <update id="update" parameterType="code">
+        UPDATE CODE_GRP_TB
+        SET UPDATED_AT = now()
+            , UPDATED_ID = #{updated_id}
+            , CODE_GRP_NM = #{code_grp_nm}
+        WHERE CODE_GRP_ID = #{code_grp_id}
+    </update>
+
 
     <update id="updateUseYnById" parameterType="codeGrp">
         UPDATE CODE_GRP_TB
-        SET UPDATED_AT = now(),
-            UPDATED_ID = #{updated_id},
-            USE_YN =  #{use_yn}
+        SET UPDATED_AT = now()
+            , UPDATED_ID = #{updated_id}
+            , USE_YN =  #{use_yn}
         WHERE CODE_GRP_ID = #{code_grp_id}
     </update>
 

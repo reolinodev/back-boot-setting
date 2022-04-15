@@ -14,27 +14,23 @@ class CodeGrpServiceTest {
     private CodeGrpRepository codeGrpRepository;
 
     @Test
-    void getCodeGrpData() {
-        //given
-        //when
-        var result = codeGrpRepository.findById(2);
-        System.out.println("result << " + result);
-
-        //then
-        Assertions.assertEquals("사용자 권한", result.get().getCode_grp_nm());
-    }
-
-    @Test
     void inputCodeGrp() {
         //given
+        int result = 0;
         CodeGrp codeGrp = new CodeGrp();
-        codeGrp.setCode_grp_nm("메뉴구분");
+        codeGrp.setCode_grp_nm("권한구분");
+        codeGrp.setCode_grp_val("");
+
         //when
-        codeGrpRepository.save(codeGrp);
-        var result = codeGrpRepository.findById(4);
-        System.out.println("result << " + result);
+        int count = codeGrpRepository.countByCodeGrpVal(codeGrp);
+        if(count > 0){
+            result = -1;
+        }else {
+            result = codeGrpRepository.save(codeGrp);
+        }
+
         //then
-        Assertions.assertEquals("메뉴구분", result.get().getCode_grp_nm());
+        Assertions.assertEquals(-1, result);
     }
 
     @Test
@@ -45,25 +41,44 @@ class CodeGrpServiceTest {
         var result = codeGrpRepository.findByUseYn();
         System.out.println("result << " + result);
         //then
-        Assertions.assertEquals(3, result.size());
+        Assertions.assertEquals(1, result.size());
     }
+
+
+    @Test
+    void updateCodeGrp() {
+        //given
+        CodeGrp codeGrp = new CodeGrp();
+        codeGrp.setUpdated_id(1);
+        codeGrp.setCode_grp_nm("권한 구분");
+        codeGrp.setCode_grp_id(5);
+
+        //when
+        codeGrpRepository.update(codeGrp);
+
+        var result = codeGrpRepository.findById(5);
+        System.out.println("result << " + result);
+
+        //then
+        Assertions.assertEquals("권한 구분", result.get().getCode_grp_nm());
+    }
+
 
     @Test
     void deleteCodeGrp() {
         //given
         CodeGrp codeGrp = new CodeGrp();
-        codeGrp.setCode_grp_id(1);
+        codeGrp.setCode_grp_id(5);
         codeGrp.setUpdated_id(1);
         codeGrp.setUse_yn("N");
 
         //when
         codeGrpRepository.updateUseYnById(codeGrp);
 
-        var result = codeGrpRepository.findByUseYn(codeGrp);
+        var result = codeGrpRepository.findById(5);
         System.out.println("result << " + result);
         //then
-        Assertions.assertEquals(3, result.size());
+        Assertions.assertEquals("N", result.get().getUse_yn());
     }
-
 
 }

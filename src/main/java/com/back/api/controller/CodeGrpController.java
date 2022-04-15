@@ -2,6 +2,7 @@ package com.back.api.controller;
 
 import com.back.api.domain.CodeGrp;
 import com.back.api.domain.common.Header;
+import com.back.api.domain.common.ValidationGroups;
 import com.back.api.service.CodeGrpService;
 import com.back.support.ResponseUtils;
 import io.swagger.annotations.Api;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,9 +38,10 @@ public class CodeGrpController {
     @PutMapping("/")
     public ResponseEntity<Map<String,Object>> inputCodeGrp(
         @ApiParam(
-            value = "code_grp_nm : 이름, 필수값, 15자 \n"
+            value = "code_grp_nm : 코드 그룹 명, 필수값, 15자 \n"
+                + "code_grp_val : 코드 그룹 값, 필수값, 10자 \n"
         )
-        @RequestBody CodeGrp codeGrp, HttpServletRequest httpServletRequest){
+        @Validated(ValidationGroups.CodeGrpAllGroup.class) @RequestBody CodeGrp codeGrp, HttpServletRequest httpServletRequest){
         Map <String,Object> responseMap = new HashMap<>();
 
         int result = codeGrpService.inputCodeGrp(codeGrp);
@@ -46,8 +49,11 @@ public class CodeGrpController {
         String message = "코드 그룹이 생성 되었습니다.";
         String code = "ok";
 
-        if(result < 1){
+        if(result == 0){
             message ="정상적으로 생성이 되지 않았습니다.";
+            code = "fail";
+        }else if(result == -1) {
+            message ="중복된 값이 존재합니다.";
             code = "fail";
         }
 
@@ -74,6 +80,33 @@ public class CodeGrpController {
 
         return new ResponseEntity<> (responseMap, HttpStatus.OK);
     }
+
+    @ApiOperation(value = "코드 그룹 데이터를 수정한다.")
+    @PutMapping("/update")
+    public ResponseEntity<Map<String,Object>> updateCodeGrp(
+        @ApiParam(
+            value = "code_grp_id : 아이디 \n"
+                + "code_grp_nm : 그룹 코드 명, 필수값, 15자\n"
+        )
+        @Validated(ValidationGroups.CodeGrpPartGroup.class) @RequestBody CodeGrp codeGrp, HttpServletRequest httpServletRequest){
+        Map <String,Object> responseMap = new HashMap<>();
+
+        int result = codeGrpService.updateCodeGrp(codeGrp);
+
+        String message = "코드 그룹이 수정 되었습니다.";
+        String code = "ok";
+
+        if(result < 1){
+            message ="정상적으로 수정 되지 않았습니다.";
+            code = "fail";
+        }
+
+        Header header = ResponseUtils.setHeader(message, code, httpServletRequest);
+        responseMap.put("header", header);
+
+        return new ResponseEntity<>(responseMap, HttpStatus.CREATED);
+    }
+
 
     @ApiOperation(value = "코드 그룹을 삭제한다. 실제 삭제하지는 않고 사용여부 변경하며 하위 코드들 역시 사용여부 변경 처리 한다.")
     @ApiImplicitParams({
