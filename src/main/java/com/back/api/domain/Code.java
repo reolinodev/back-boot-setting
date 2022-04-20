@@ -1,9 +1,8 @@
 package com.back.api.domain;
 
-import com.back.api.domain.common.ValidationGroups.CodeAllGroup;
-import com.back.api.domain.common.ValidationGroups.CodeGrpAllGroup;
-import com.back.api.domain.common.ValidationGroups.CodeGrpPartGroup;
-import com.back.api.domain.common.ValidationGroups.CodePartGroup;
+
+import com.back.api.domain.common.ValidationGroups.CodeGroup1;
+import com.back.api.domain.common.ValidationGroups.CodeGroup2;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.NotEmpty;
@@ -21,25 +20,24 @@ public class Code {
     @ApiModelProperty(example = "코드 아이디")
     public int code_id;
 
-    @NotEmpty(groups = { CodePartGroup.class, CodeAllGroup.class }, message = "코드 그룹 아이디를 입력해주세요.")
     @ApiModelProperty(example = "코드 그룹 아이디")
     public int code_grp_id;
 
-    @NotEmpty(groups = { CodePartGroup.class, CodeAllGroup.class }, message = "코드 명을 입력해주세요.")
-    @Size(groups = { CodePartGroup.class, CodeAllGroup.class },max=15, message = "최대 15자로 입력해주세요")
+    @NotEmpty(groups = { CodeGroup1.class, CodeGroup2.class }, message = "코드 명을 입력해주세요.")
+    @Size(groups = { CodeGroup1.class, CodeGroup2.class }, max=15, message = "최대 15자로 입력해주세요")
     @ApiModelProperty(example = "코드 명")
     public String code_nm;
 
-    @NotEmpty(groups = {CodeAllGroup.class }, message = "코드 값을 입력해주세요.")
-    @Size(groups = {CodeAllGroup.class },max=10, message = "최대 10자로 입력해주세요")
+    @NotEmpty(groups = { CodeGroup1.class }, message = "코드 값을 입력해주세요.")
+    @Size(groups = { CodeGroup1.class },max=10, message = "최대 10자로 입력해주세요")
     @ApiModelProperty(example = "코드 값")
     public String code_val;
 
-    @Size(groups = { CodePartGroup.class, CodeAllGroup.class },max=165, message = "최대 165자로 입력해주세요")
+    @Size(groups = { CodeGroup1.class, CodeGroup2.class }, max=165, message = "최대 165자로 입력해주세요")
     @ApiModelProperty(example = "비고")
     public String bigo;
 
-    @Size(groups = { CodePartGroup.class, CodeAllGroup.class },max=10, message = "최대 10자로 입력해주세요")
+    @Size(groups = { CodeGroup1.class, CodeGroup2.class }, max=10, message = "최대 10자로 입력해주세요")
     @ApiModelProperty(example = "순서")
     public String ord;
 

@@ -41,26 +41,29 @@ public class CodeGrpController {
             value = "code_grp_nm : 코드 그룹 명, 필수값, 15자 \n"
                 + "code_grp_val : 코드 그룹 값, 필수값, 10자 \n"
         )
-        @Validated(ValidationGroups.CodeGrpAllGroup.class) @RequestBody CodeGrp codeGrp, HttpServletRequest httpServletRequest){
+        @Validated(ValidationGroups.CodeGrpGroup1.class) @RequestBody CodeGrp codeGrp, HttpServletRequest httpServletRequest){
         Map <String,Object> responseMap = new HashMap<>();
 
         int result = codeGrpService.inputCodeGrp(codeGrp);
 
         String message = "코드 그룹이 생성 되었습니다.";
         String code = "ok";
+        HttpStatus status = HttpStatus.CREATED;
 
         if(result == 0){
             message ="정상적으로 생성이 되지 않았습니다.";
             code = "fail";
+            status = HttpStatus.BAD_REQUEST;
         }else if(result == -1) {
             message ="중복된 값이 존재합니다.";
             code = "fail";
+            status = HttpStatus.BAD_REQUEST;
         }
 
         Header header = ResponseUtils.setHeader(message, code, httpServletRequest);
         responseMap.put("header", header);
 
-        return new ResponseEntity<>(responseMap, HttpStatus.CREATED);
+        return new ResponseEntity<>(responseMap, status);
     }
 
     @ApiOperation(value = "사용가능한 코드 그룹 리스트를 전체 조회한다.")
@@ -88,23 +91,25 @@ public class CodeGrpController {
             value = "code_grp_id : 아이디 \n"
                 + "code_grp_nm : 그룹 코드 명, 필수값, 15자\n"
         )
-        @Validated(ValidationGroups.CodeGrpPartGroup.class) @RequestBody CodeGrp codeGrp, HttpServletRequest httpServletRequest){
+        @Validated(ValidationGroups.CodeGrpGroup2.class) @RequestBody CodeGrp codeGrp, HttpServletRequest httpServletRequest){
         Map <String,Object> responseMap = new HashMap<>();
 
         int result = codeGrpService.updateCodeGrp(codeGrp);
 
         String message = "코드 그룹이 수정 되었습니다.";
         String code = "ok";
+        HttpStatus status = HttpStatus.OK;
 
         if(result < 1){
             message ="정상적으로 수정 되지 않았습니다.";
             code = "fail";
+            status = HttpStatus.BAD_REQUEST;
         }
 
         Header header = ResponseUtils.setHeader(message, code, httpServletRequest);
         responseMap.put("header", header);
 
-        return new ResponseEntity<>(responseMap, HttpStatus.CREATED);
+        return new ResponseEntity<>(responseMap, status);
     }
 
 
@@ -117,17 +122,20 @@ public class CodeGrpController {
         Map <String,Object> responseMap = new HashMap<>();
 
         int result = codeGrpService.deleteCodeGrp(code_grp_id);
-        String message = "사용자가 삭제 되었습니다.";
+        String message = "코드 그룹이 삭제 되었습니다.";
         String code = "ok";
+        HttpStatus status = HttpStatus.OK;
+
         if(result < 1){
             message ="정상적으로 삭제 되지 않았습니다.";
             code = "fail";
+            status = HttpStatus.BAD_REQUEST;
         }
 
         Header header = ResponseUtils.setHeader(message, code, httpServletRequest);
         responseMap.put("header", header);
 
-        return new ResponseEntity<>(responseMap, HttpStatus.OK);
+        return new ResponseEntity<>(responseMap, status);
     }
 
 }
