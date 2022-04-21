@@ -3,7 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <typeAliases>
-    <typeAlias type="com.back.api.domain.UserSample" alias="user"/>
+    <typeAlias type="com.back.api.domain.User" alias="user"/>
     <typeAlias type="com.back.api.domain.Code" alias="code"/>
     <typeAlias type="com.back.api.domain.CodeGrp" alias="codeGrp"/>
   </typeAliases>

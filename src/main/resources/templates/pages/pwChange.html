@@ -15,10 +15,10 @@
         <div class="login-box">
             <div class="card card-outline card-primary">
                 <div class="card-header text-center">
-                    <a href="#" class="h1"><b>EX-EM</b></a>
+                    <a href="#" class="h1"><b>Admin</b></a>
                 </div>
                 <div class="card-body">
-                    <p class="login-box-msg">비밀번호 변경</p>
+                    <p class="login-box-msg">Change Password</p>
                     <form name="frm" id="frm" method="POST">
                         <div class="input-group mb-3">
                             <input
@@ -61,26 +61,28 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="input-group mb-3" style="height: 15px">
                             <span id="msg"></span>
                         </div>
+
                         <div class="row">
                             <div class="col-6">
                                 <button
                                     type="button"
                                     class="btn btn-secondary btn-block"
-                                    onclick="login()"
+                                    id="returnBtn"
                                 >
-                                    돌아가기
+                                    Return
                                 </button>
                             </div>
                             <div class="col-6">
                                 <button
                                     type="button"
                                     class="btn btn-primary btn-block"
-                                    onclick="pwChangeProc()"
+                                    id="pwChangeBtn"
                                 >
-                                    변경하기
+                                    Submit
                                 </button>
                             </div>
                         </div>

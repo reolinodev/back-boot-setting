@@ -1,12 +1,12 @@
-import { Alert, AlertMove } from '../module/alert';
-import { checkKr, checkEmail, checkPw } from '../module/validation';
+import { AlertMove } from '../module/alert';
+import { checkKr} from '../module/validation';
 
 const $loginId = $('#loginId');
 const $userNm = $('#userNm');
 const $email = $('#email');
+const $cellPhone = $('#cellPhone');
 const $userPw = $('#userPw');
 const $userPwRe = $('#userPwRe');
-const $frm = $('#frm');
 
 /**
  *  signUpCheck : 회원 가입시 중복 아이디 체크
@@ -17,27 +17,19 @@ const signUpCheck = () => {
         return;
     }
 
-    const param = {
-        login_id: $loginId.val(),
-    };
-
     $.ajax({
-        url: '/signUpCheck',
-        dataType: 'json',
-        data: param,
-        success(data) {
-            $('#msg').html(data.msg);
-            if (data.code === 'ok') {
-                $('#signUpChk').val('Y');
-            }
-        },
-        error(request, status, error) {
-            console.log(
-                `code:${request.status}\n` +
-                    `message:${request.responseText}\n` +
-                    `error:${error}`
-            );
-        },
+        url: '/api/user/'+$loginId.val(),
+    }).then((data) => {
+        $('#msg').html(data.header.message);
+        if (data.header.resultCode === 'ok') {
+            $('#signUpChk').val('Y');
+        }
+    }, (request, status, error) => {
+        console.log(
+            `code:${request.status}\n` +
+            `message:${request.responseText}\n` +
+            `error:${error}`
+        );
     });
 };
 
@@ -48,9 +40,8 @@ const signUpProc = () => {
     let msg = '';
 
     if ($loginId.val() === '') {
-        msg = 'Please enter your ID';
+        msg = 'Please enter ID';
         $('#msg').html(msg);
-        Alert(msg);
         $('#loginId').focus();
         return;
     }
@@ -61,39 +52,33 @@ const signUpProc = () => {
         return;
     }
     if ($('#signUpChk').val() === 'N') {
-        msg = 'Please double check the ID';
+        msg = 'Please check the ID';
         $('#msg').html(msg);
+        $('#loginId').focus();
         return;
     }
     if ($userNm.val() === '') {
-        msg = 'Input your name, please';
+        msg = 'Please enter name.';
         $('#msg').html(msg);
         $('#userNm').focus();
         return;
     }
     if ($email.val() === '') {
-        msg = 'Please enter your e-mail';
+        msg = 'Please enter e-mail';
         $('#msg').html(msg);
         $('#email').focus();
         return;
     }
-    if (!checkEmail($email.val())) {
-        msg = 'This is not a valid email';
+    if ($cellPhone.val() === '') {
+        msg = 'Please enter phone number';
         $('#msg').html(msg);
-        $('#email').focus();
+        $('#cellPhone').focus();
         return;
     }
     if ($userPw.val() === '') {
         msg = 'Please enter a password';
         $('#msg').html(msg);
         $userPw.focus();
-        return;
-    }
-    if (!checkPw($userPw.val())) {
-        msg =
-            'Please enter a password of at least 8 characters and at least one letter, number, or special character.';
-        $('#msg').html(msg);
-        $('#userPw').focus();
         return;
     }
     if ($userPwRe.val() === '') {
@@ -113,27 +98,40 @@ const signUpProc = () => {
         login_id: $loginId.val(),
         user_nm: $userNm.val(),
         email: $email.val(),
+        cell_phone: $cellPhone.val(),
         user_pw: $userPw.val(),
     };
 
     $.ajax({
-        url: '/admin/home/signUpProc.do',
-        dataType: 'json',
-        data: param,
-        success(data) {
-            if (data.code === 'ok') {
-                AlertMove(data.msg, '/login');
-            } else {
-                $('#msg').html(data.msg);
-            }
-        },
-        error(request, status, error) {
+        url: "/api/user/",
+        type: 'PUT',
+        data: JSON.stringify(param),
+        headers: {'Content-Type': 'application/json'},
+    }).then((data) => {
+        if (data.header.resultCode === 'ok') {
+            AlertMove(data.header.message, '/login');
+        } else {
+            $('#msg').html(data.header.message);
+        }
+    }, (request, status, error) => {
+        if(request.status === 500){
             console.log(
                 `code:${request.status}\n` +
-                    `message:${request.responseText}\n` +
-                    `error:${error}`
+                `message:${request.responseText}\n` +
+                `error:${error}`
             );
-        },
+        }else if(request.status === 400){
+            const errorList = request.responseJSON.errorList;
+            if(errorList !== undefined){
+                if(errorList.lengh !==0){
+                    const message = errorList[0].message;
+                    $('#msg').html(message);
+                }
+            }else {
+                const data = request.responseJSON.header;
+                $('#msg').html(data.message);
+            }
+        }
     });
 };
 
@@ -141,9 +139,7 @@ const signUpProc = () => {
  *  login : 로그인 화면 이동
  */
 const login = () => {
-    $frm.attr('action', '/login');
-    $frm.attr('method', 'get');
-    $frm.submit();
+    location.href = '/login';
 };
 
 $(document).ready(() => {
@@ -151,12 +147,12 @@ $(document).ready(() => {
         $('#signUpChk').val('N');
     });
 
-    // 회원가입 체크 이벤트
+    // 사용자 아이디 체크 이벤트
     $('#signUpCheckBtn').click(() => {
         signUpCheck();
     });
 
-    // 패스워드 변경 이벤트
+    // 사용자 등록 이벤트
     $('#signUpBtn').click(() => {
         signUpProc();
     });

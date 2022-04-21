@@ -1,17 +1,3 @@
-CREATE TABLE TB_USER
-(
-    id int NOT NULL,
-    name varchar(30) not null,
-    email varchar(50) not null,
-    birth varchar(8),
-    password varchar(255) not null,
-    phone varchar(20),
-    created_at timestamp,
-    updated_at timestamp,
-    primary key(id)
-);
-
-
 CREATE TABLE USER_TB
 (
     user_id int NOT NULL,
@@ -23,7 +9,7 @@ CREATE TABLE USER_TB
     created_at timestamp,
     updated_at timestamp,
     last_login_at timestamp,
-    use_yn varchar(1),
+    use_yn varchar(1) DEFAULT 'Y'::character varying,
     primary key(user_id)
 );
 
@@ -49,7 +35,7 @@ CREATE TABLE AUTH_TB
     created_at timestamp,
     updated_at timestamp,
     updated_id int,
-    use_yn varchar(1),
+    use_yn varchar(1) DEFAULT 'Y'::character varying,
     primary key(auth_id)
 );
 
@@ -75,7 +61,7 @@ CREATE TABLE MENU_TB
     created_at timestamp,
     updated_at timestamp,
     updated_id int,
-    use_yn varchar(1),
+    use_yn varchar(1) DEFAULT 'Y'::character varying,
     primary key(menu_id)
 );
 
@@ -99,7 +85,7 @@ CREATE TABLE CODE_GRP_TB
     created_at timestamp,
     updated_at timestamp,
     updated_id int,
-    use_yn varchar(1),
+    use_yn varchar(1) DEFAULT 'Y'::character varying,
     primary key(code_grp_id)
 );
 COMMENT ON TABLE public.code_grp_tb IS '코드 그룹';
@@ -122,7 +108,7 @@ CREATE TABLE CODE_TB
     created_at timestamp,
     updated_at timestamp,
     updated_id int,
-    use_yn varchar(1),
+    use_yn varchar(1) DEFAULT 'Y'::character varying,
     primary key(code_id),
     foreign key (code_grp_id) REFERENCES CODE_GRP_TB (code_grp_id)
 );
@@ -205,7 +191,6 @@ COMMENT ON TABLE public.update_history_tb IS '로그인 내역';
 COMMENT ON COLUMN public.update_history_tb.user_id IS '사용자 아이디';
 COMMENT ON COLUMN public.update_history_tb.api IS 'API';
 COMMENT ON COLUMN public.update_history_tb.created_at IS '생성일';
-
 
 CREATE SEQUENCE user_seq START 1;
 CREATE SEQUENCE auth_seq START 1;

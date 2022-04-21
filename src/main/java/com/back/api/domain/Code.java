@@ -23,21 +23,21 @@ public class Code {
     @ApiModelProperty(example = "코드 그룹 아이디")
     public int code_grp_id;
 
-    @NotEmpty(groups = { CodeGroup1.class, CodeGroup2.class }, message = "코드 명을 입력해주세요.")
-    @Size(groups = { CodeGroup1.class, CodeGroup2.class }, max=15, message = "최대 15자로 입력해주세요")
+    @NotEmpty(groups = { CodeGroup1.class, CodeGroup2.class }, message = "Please enter code name.")
+    @Size(groups = { CodeGroup1.class, CodeGroup2.class }, max=15, message = "Please enter up to 15 characters.")
     @ApiModelProperty(example = "코드 명")
     public String code_nm;
 
-    @NotEmpty(groups = { CodeGroup1.class }, message = "코드 값을 입력해주세요.")
-    @Size(groups = { CodeGroup1.class },max=10, message = "최대 10자로 입력해주세요")
+    @NotEmpty(groups = { CodeGroup1.class }, message = "Please enter code value.")
+    @Size(groups = { CodeGroup1.class },max=10, message = "Please enter up to 10 characters.")
     @ApiModelProperty(example = "코드 값")
     public String code_val;
 
-    @Size(groups = { CodeGroup1.class, CodeGroup2.class }, max=165, message = "최대 165자로 입력해주세요")
+    @Size(groups = { CodeGroup1.class, CodeGroup2.class }, max=165, message = "Please enter up to 165 characters.")
     @ApiModelProperty(example = "비고")
     public String bigo;
 
-    @Size(groups = { CodeGroup1.class, CodeGroup2.class }, max=10, message = "최대 10자로 입력해주세요")
+    @Size(groups = { CodeGroup1.class, CodeGroup2.class }, max=10, message = "Please enter up to 10 characters.")
     @ApiModelProperty(example = "순서")
     public String ord;
 
