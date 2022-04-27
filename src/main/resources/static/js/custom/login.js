@@ -9,13 +9,13 @@ const $userPw = $('#userPw');
  */
 const loginProc = () => {
     if ($loginId.val() === '') {
-        Alert('Please input the id');
+        Alert('Please input the ID.');
         $loginId.focus();
         return;
     }
 
     if ($userPw.val() === '') {
-        Alert('Please input the password');
+        Alert('Please input the password.');
         $userPw.focus();
         return;
     }
@@ -25,8 +25,9 @@ const loginProc = () => {
     //     setCookie("userId", $("#loginId").val(), 30);
     // }
 
-    $frm.attr('action', '/loginProc');
+    $frm.attr('action', '/login');
     $frm.attr('method', 'post');
+
     $frm.submit();
 };
 

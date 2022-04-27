@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.back.repository.UserRepository">
+<mapper namespace="com.back.repository.LoginRepository">
 
     <select id="countByLoginId" parameterType="user" resultType="int">
         SELECT  COUNT(*)
         FROM USER_TB
-        WHERE LOGIN_ID = = #{login_id}
+        WHERE LOGIN_ID = #{login_id}
+    </select>
+
+    <select id="countByLoginIdAndUserPw" parameterType="user" resultType="int">
+        SELECT  COUNT(*)
+        FROM USER_TB
+        WHERE LOGIN_ID = #{login_id}
+        AND USER_PW = #{user_pw}
     </select>
 
 </mapper>

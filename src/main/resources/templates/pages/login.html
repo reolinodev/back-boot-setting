@@ -21,7 +21,7 @@
                 <div class="card-body">
                     <p class="login-box-msg">LOGIN</p>
 
-                    <form name="frm" id="frm" method="POST" action="http://10.10.30.190:8081/api/login">
+                    <form name="frm" id="frm">
                         <div class="input-group mb-3">
                             <input
                                 type="text"
@@ -74,6 +74,10 @@
                             </div>
                         </div>
                     </form>
+
+                    <div class="form-group row" style="margin: 5px;">
+                        <div class="col-12 text-lg-center" th:text="${ msg }"></div>
+                    </div>
 
                     <p class="mb-1" id="pwChangeBtn">
                         <a href="#">Change Password</a>
