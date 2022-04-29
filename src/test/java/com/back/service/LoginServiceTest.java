@@ -1,8 +1,6 @@
 package com.back.service;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import com.back.api.domain.User;
+import com.back.api.domain.LoginEntity;
 import com.back.repository.LoginRepository;
 import com.back.support.CryptUtils;
 import java.security.NoSuchAlgorithmException;
@@ -20,10 +18,10 @@ class LoginServiceTest {
     @Test
     void checkLoginId() {
         //when
-        User user = new User();
-        user.setLogin_id("kychoi83");
+        LoginEntity loginEntity = new LoginEntity();
+        loginEntity.setLogin_id("kychoi83");
         //given
-        int result = loginRepository.countByLoginId(user);
+        int result = loginRepository.countByLoginId(loginEntity);
         //then
         Assertions.assertEquals(1, result);
     }
@@ -31,14 +29,53 @@ class LoginServiceTest {
     @Test
     void checkUserPw() throws NoSuchAlgorithmException {
         //when
-        User user = new User();
-        user.setLogin_id("kychoi83");
-        user.setUser_pw(CryptUtils.encryptSha256("1111"));
+        LoginEntity loginEntity = new LoginEntity();
+        loginEntity.setLogin_id("kychoi83");
+        loginEntity.setUser_pw(CryptUtils.encryptSha256("1111"));
 
         //given
-        int result = loginRepository.countByLoginIdAndUserPw(user);
+        int result = loginRepository.countByLoginIdAndUserPw(loginEntity);
         //then
         Assertions.assertEquals(1, result);
+    }
+
+    @Test
+    void getLoginId() {
+        //when
+        LoginEntity loginEntity = new LoginEntity();
+        loginEntity.setLogin_id("kychoi83");
+        //given
+        LoginEntity result = loginRepository.findByLoginId(loginEntity);
+        //then
+        Assertions.assertEquals(3, result.getUser_id());
+
+    }
+
+    @Test
+    void inputLoginHistory() {
+        //when
+        LoginEntity loginEntity = new LoginEntity();
+        loginEntity.setUser_id(3);
+        loginEntity.setLogin_device("PC");
+        loginEntity.setDevice_browser("Chrome");
+        loginEntity.setLogin_id("kychoi83");
+
+        //given
+        loginRepository.saveLoginHistory(loginEntity);
+    }
+
+    @Test
+    void updateLastLoginAt() {
+        //when
+        LoginEntity loginEntity = new LoginEntity();
+        loginEntity.setUser_id(3);
+        loginEntity.setLogin_id("kychoi83");
+
+        //given
+        loginRepository.saveLastLoginAt(loginEntity);
+        //then
+        LoginEntity result = loginRepository.findByLoginId(loginEntity);
+        System.out.println(result);
     }
 
 

@@ -30,7 +30,7 @@ CREATE TABLE AUTH_TB
     auth_id int NOT NULL,
     auth_nm varchar(50) not null,
     auth_role varchar(20) not null,
-    ord int,
+    ord varchar(10),
     bigo varchar(500),
     created_at timestamp,
     updated_at timestamp,

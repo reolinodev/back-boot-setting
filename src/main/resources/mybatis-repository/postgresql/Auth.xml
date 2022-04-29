@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.back.api.repository.AuthRepository">
+
+    <insert id="save" parameterType="auth">
+        INSERT INTO AUTH_TB
+        (
+            AUTH_ID,
+            AUTH_NM,
+            AUTH_ROLE,
+            ORD,
+            BIGO,
+            CREATED_AT
+        )
+        VALUES
+        (
+            nextval('auth_seq'),
+            #{auth_nm},
+            #{auth_role},
+            #{ord},
+            #{bigo},
+            now()
+        )
+    </insert>
+
+    <select id="findByUseYn" parameterType="auth" resultType="auth">
+        SELECT  AUTH_ID,
+                AUTH_NM,
+                AUTH_ROLE,
+                ORD,
+                BIGO,
+                CREATED_AT,
+                UPDATED_AT,
+                UPDATED_ID,
+                USE_YN
+        FROM AUTH_TB
+        WHERE USE_YN= 'Y'
+        <if test="auth_role != null and auth_role != ''">
+            AND AUTH_ROLE = #{auth_role}
+        </if>
+    </select>
+
+</mapper>

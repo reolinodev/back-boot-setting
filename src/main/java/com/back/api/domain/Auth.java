@@ -22,7 +22,7 @@ public class Auth {
     public String auth_role;
 
     @ApiModelProperty(example = "순서")
-    public int ord;
+    public String ord;
 
     @ApiModelProperty(example = "비고")
     public String bigo;

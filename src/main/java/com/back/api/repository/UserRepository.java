@@ -8,4 +8,6 @@ public interface UserRepository extends CommonRepository<User> {
     int countByLoginId(String login_id);
 
     int updateUserPw(User user);
+
+    User findByLoginId(User user);
 }

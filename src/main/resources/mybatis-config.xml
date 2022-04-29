@@ -4,6 +4,9 @@
 <configuration>
   <typeAliases>
     <typeAlias type="com.back.api.domain.User" alias="user"/>
+    <typeAlias type="com.back.api.domain.LoginEntity" alias="loginEntity"/>
+    <typeAlias type="com.back.api.domain.Auth" alias="auth"/>
+    <typeAlias type="com.back.api.domain.UserAuth" alias="userAuth"/>
     <typeAlias type="com.back.api.domain.Code" alias="code"/>
     <typeAlias type="com.back.api.domain.CodeGrp" alias="codeGrp"/>
   </typeAliases>

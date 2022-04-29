@@ -31,7 +31,16 @@
                                 title="login id"
                                 placeholder="ID"
                             />
-
+                            <input
+                                type="hidden"
+                                name="login_device"
+                                id="loginDevice"
+                            />
+                            <input
+                                type="hidden"
+                                name="device_browser"
+                                id="deviceBrowser"
+                            />
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-envelope"></span>
@@ -76,7 +85,7 @@
                     </form>
 
                     <div class="form-group row" style="margin: 5px;">
-                        <div class="col-12 text-lg-center" th:text="${ msg }"></div>
+                        <div class="col-12 text-lg-center" th:text="${ msg }" id="msg"></div>
                     </div>
 
                     <p class="mb-1" id="pwChangeBtn">

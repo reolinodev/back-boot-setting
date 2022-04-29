@@ -9,6 +9,12 @@
         WHERE	LOGIN_ID = #{login_id}
     </select>
 
+    <select id="findByLoginId" parameterType="string" resultType="user">
+        SELECT  *
+        FROM 	USER_TB
+        WHERE	LOGIN_ID = #{login_id}
+    </select>
+
     <insert id="save" parameterType="user">
         INSERT INTO USER_TB
         (

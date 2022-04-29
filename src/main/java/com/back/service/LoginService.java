@@ -1,6 +1,6 @@
 package com.back.service;
 
-import com.back.api.domain.User;
+import com.back.api.domain.LoginEntity;
 import com.back.repository.LoginRepository;
 import com.back.support.CryptUtils;
 import java.security.NoSuchAlgorithmException;
@@ -13,14 +13,26 @@ public class LoginService {
 
     private final LoginRepository loginRepository;
 
-    public int checkLoginId(User user) {
-        return loginRepository.countByLoginId(user);
+    public int checkLoginId(LoginEntity loginEntity) {
+        return loginRepository.countByLoginId(loginEntity);
     }
 
-    public int checkUserPw(User user) throws NoSuchAlgorithmException {
-        user.setUser_pw(CryptUtils.encryptSha256(user.getUser_pw()));
+    public int checkUserPw(LoginEntity loginEntity) throws NoSuchAlgorithmException {
+        loginEntity.setUser_pw(CryptUtils.encryptSha256(loginEntity.getUser_pw()));
 
-        return loginRepository.countByLoginIdAndUserPw(user);
+        return loginRepository.countByLoginIdAndUserPw(loginEntity);
+    }
+
+    public LoginEntity getLoginId(LoginEntity loginEntity) {
+        return loginRepository.findByLoginId(loginEntity);
+    }
+
+    public void inputLoginHistory(LoginEntity loginEntity) {
+        loginRepository.saveLoginHistory(loginEntity);
+    }
+
+    public void updateLastLoginAt(LoginEntity loginEntity) {
+        loginRepository.saveLastLoginAt(loginEntity);
     }
 
 }

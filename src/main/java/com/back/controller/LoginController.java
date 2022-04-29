@@ -1,14 +1,14 @@
 package com.back.controller;
 
-import com.back.api.domain.User;
-import com.back.api.service.UserService;
+import com.back.api.domain.LoginEntity;
+import com.back.api.domain.SessionInfo;
 import com.back.service.LoginService;
 import java.security.NoSuchAlgorithmException;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,9 +19,14 @@ public class LoginController {
     /*******************************************************************************************************************
      * [로그인 컨트롤러 - 로그인 화면 및 관련 로직 정의
      * 1.로그인 화면 : /login
+     * 2.로그인 로직 : /login
+     * 3.로그아웃 로직 : /logout
      ******************************************************************************************************************/
 
     private final LoginService loginService;
+
+    @Resource
+    private SessionInfo sessionInfo;
 
     /**
      * 로그인 화면
@@ -34,15 +39,21 @@ public class LoginController {
     }
 
     /**
-     * 회원가입 화면
+     * 로그인
+     * 1. 해당 아이디가 없으면 'ID does not exist' 반환 후 로그인 화면으로 이동
+     * 2. 패스워드가 일치하지 않을 경우 'Passwords do not match' 반환 후 로그인 화면으로 이동
+     * 3. 해당 유저의 정보를 조회후 세션에 저장
+     * 4. 로그인 이력을 저장
+     * 5. 메인화면으로 이동
      */
     @RequestMapping(value = "/login", method= RequestMethod.POST)
-    public ModelAndView loginProc(User user, HttpServletRequest request) throws NoSuchAlgorithmException {
+    public ModelAndView login(LoginEntity loginEntity, HttpServletRequest request) throws NoSuchAlgorithmException {
         ModelAndView mav = new ModelAndView();
 
         String msg = "";
 
-        int countLoginId = loginService.checkLoginId(user);
+        //아이디 체크
+        int countLoginId = loginService.checkLoginId(loginEntity);
         if(countLoginId == 0){
             msg = "ID does not exist.";
             mav.addObject("msg", msg);
@@ -50,7 +61,8 @@ public class LoginController {
             return mav;
         }
 
-        int countUserPw = loginService.checkUserPw(user);
+        //패스워드 체크
+        int countUserPw = loginService.checkUserPw(loginEntity);
         if(countUserPw == 0){
             msg = "Passwords do not match.";
             mav.addObject("msg", msg);
@@ -58,18 +70,43 @@ public class LoginController {
             return mav;
         }
 
+        //세션저장
+        LoginEntity loginInfo = loginService.getLoginId(loginEntity);
+        setSessionInfo(loginInfo);
 
-        //todo 사용자의 기본적인 사항을 조회한후 세션에 저장한다.
+        //로그인 내역 기록
+        loginEntity.setUser_id(loginInfo.getUser_id());
+        loginService.inputLoginHistory(loginEntity);
+        loginService.updateLastLoginAt(loginEntity);
 
-        //todo 메인 페이지로 이동한다.
+        mav.setViewName("redirect:/main");
+        return mav;
+    }
 
-        mav.addObject("msg", msg);
-        mav.setViewName("pages/login");
-        //            mav.setViewName("redirect:/login");
+    /**
+     * 로그 아웃
+     * : 세션을 초기화 후 로그인 화면으로 이동한다.
+     */
+    @RequestMapping(value = "/logout", method= RequestMethod.GET)
+    public ModelAndView logout(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = request.getSession();
+        session.invalidate();
 
-
+        mav.setViewName("redirect:/login");
         return mav;
     }
 
 
+    /**
+     * 로그인 정보 세션에 입력
+     */
+    private void setSessionInfo(LoginEntity loginEntity) {
+
+        sessionInfo.setLogin_id(loginEntity.getLogin_id());
+        sessionInfo.setAuth_id(loginEntity.getAuth_id());
+        sessionInfo.setAuth_nm(loginEntity.getAuth_nm());
+        sessionInfo.setUser_id(loginEntity.getUser_id());
+        sessionInfo.setUser_nm(loginEntity.getUser_nm());
+    }
 }

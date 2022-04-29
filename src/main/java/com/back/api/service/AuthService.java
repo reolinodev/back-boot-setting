@@ -1,8 +1,8 @@
 package com.back.api.service;
 
+import com.back.api.domain.Auth;
 import com.back.api.domain.User;
-import com.back.api.domain.UserAuth;
-import com.back.api.repository.UserAuthRepository;
+import com.back.api.repository.AuthRepository;
 import com.back.api.repository.UserRepository;
 import com.back.support.CryptUtils;
 import java.security.NoSuchAlgorithmException;
@@ -11,36 +11,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class AuthService {
 
-    private final UserRepository userRepository;
-    private final UserAuthRepository userAuthRepository;
+    private final AuthRepository authRepository;
 
-    public int checkLoginId(String login_id) {
-        return userRepository.countByLoginId(login_id);
+
+    public int inputAuth(Auth auth) {
+        return authRepository.save(auth);
     }
 
-    public int inputUser(User user) throws NoSuchAlgorithmException {
-        int result = 0;
-
-        user.setUser_pw(CryptUtils.encryptSha256(user.getUser_pw()));
-        userRepository.save(user);
-
-        User userResult = userRepository.findByLoginId(user);
-        if(userResult.getUser_id() != 0){
-            UserAuth userAuth = new UserAuth();
-            userAuth.setUser_id(userResult.getUser_id());
-            //todo 프로퍼티로 처리 (어드민/슈퍼 관리자 권한 부여)
-            userAuth.setAuth_id(1);
-            result = userAuthRepository.save(userAuth);
-        }
-        return result;
-    }
-
-    public int updateUserPw(User user) throws NoSuchAlgorithmException {
-        user.setUser_pw(CryptUtils.encryptSha256(user.getUser_pw()));
-        return userRepository.updateUserPw(user);
-    }
 
 
 //    /**

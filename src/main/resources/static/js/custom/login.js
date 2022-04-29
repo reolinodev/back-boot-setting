@@ -1,4 +1,5 @@
-import { Alert } from '../module/alert';
+import { setCookie, getCookie, deleteCookie } from '../module/cookie'
+import { getDeviceInfo } from '../module/device'
 
 const $frm = $('#frm');
 const $loginId = $('#loginId');
@@ -9,21 +10,25 @@ const $userPw = $('#userPw');
  */
 const loginProc = () => {
     if ($loginId.val() === '') {
-        Alert('Please input the ID.');
+        $("#msg").html('Please input the ID');
         $loginId.focus();
         return;
     }
 
     if ($userPw.val() === '') {
-        Alert('Please input the password.');
+        $("#msg").html('Please input the password');
         $userPw.focus();
         return;
     }
 
-    // let id_save_check = document.getElementById('idSaveCheck').checked;
-    // if(id_save_check){
-    //     setCookie("userId", $("#loginId").val(), 30);
-    // }
+    const idSaveCheck = document.getElementById('idSaveCheck').checked;
+    if(idSaveCheck){
+        setCookie("loginId", $loginId.val(), 30);
+        setCookie("idSaveCheck", 'Y', 30);
+    }else{
+        deleteCookie("loginId");
+        setCookie("idSaveCheck", 'N', 30);
+    }
 
     $frm.attr('action', '/login');
     $frm.attr('method', 'post');
@@ -44,6 +49,7 @@ const signUp = () => {
 const pwChange = () => {
     location.href = 'pwChange';
 };
+
 
 $(document).ready(() => {
     // 엔터 입력시 로그인 처리
@@ -67,4 +73,19 @@ $(document).ready(() => {
     $('#signUpBtn').click(() => {
         signUp();
     });
+
+    //디바이스 정보 세팅
+    const deviceInfo = getDeviceInfo();
+    $('#loginDevice').val(deviceInfo.device);
+    $('#deviceBrowser').val(deviceInfo.browser);
+
+    //아이디 기억하기(쿠키 불러오기)
+    const idSaveCheck = document.getElementById('idSaveCheck');
+
+    if (getCookie("idSaveCheck") === 'Y'){
+        idSaveCheck.checked = true;
+        $loginId.val(getCookie("loginId"));
+    }else{
+        idSaveCheck.checked = false;
+    }
 });
