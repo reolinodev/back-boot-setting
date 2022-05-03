@@ -27,7 +27,7 @@ public class HomeController {
 		resultList.add("BBB");
 		resultList.add("CCC");
 		mav.addObject("resultList",resultList);
-		mav.setViewName("content/home");
+		mav.setViewName("main");
 		return mav;
 	}
 

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <nav th:fragment="navFragment">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <a href="#" class="brand-link" style="text-align: center;"
+               th:id="menuUrl"
+               th:data-id="${firstUrl.menu_id}"
+               th:data-url="${firstUrl.menu_url}"
+               th:data-menunm="${firstUrl.menu_nm}"
+               th:data-parentnm="${firstUrl.parent_nm}"
+            >
+                Admin Page
+            </a>
+
+            <div class="sidebar">
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" id="navUl">
+                        <li class="nav-item" th:each="menuLv1 : ${ menuLv1List }">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-hockey-puck"></i>
+                                <p>
+                                    <span th:text="${menuLv1.menu_nm}"></span>
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item"  th:each="menuLv2 : ${ menuLv2List }"  th:if="${menuLv1.menu_id} == ${menuLv2.parent_id}"
+                                    th:id="|menu_${menuLv2.menu_id}|"
+                                    th:data-id="${menuLv2.menu_id}"
+                                    th:data-url="${menuLv2.menu_url}"
+                                    th:data-menunm="${menuLv2.menu_nm}"
+                                    th:data-parentnm="${menuLv2.parent_nm}"
+                                >
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p th:text="${menuLv2.menu_nm}"></p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+    </nav>
+</html>

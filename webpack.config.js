@@ -18,6 +18,7 @@ module.exports = {
         login: '/src/main/resources/static/js/custom/login.js',
         signUp: '/src/main/resources/static/js/custom/signUp.js',
         pwChange: '/src/main/resources/static/js/custom/pwChange.js',
+        main: '/src/main/resources/static/js/custom/main.js',
         index: '/src/main/resources/static/js/index/index.js',
     },
     output: {

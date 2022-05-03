@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/layout}"
+>
+    <head>
+        <title>Main</title>
+        <script type="text/javascript" th:src="@{dist/main.js}"></script>
+    </head>
+
+    <div layout:fragment="content" class="content-wrapper">
+        <input id="mainId" type="hidden" th:value="${firstUrl.menu_id}"/>
+        <input id="mainUrl" type="hidden" th:value="${firstUrl.menu_url}"/>
+        <input id="mainMenuNm" type="hidden" th:value="${firstUrl.menu_nm}"/>
+        <input id="mainParentNm" type="hidden" th:value="${firstUrl.parent_nm}"/>
+
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0" th:id="menuNm" th:text="${firstUrl.menu_nm}"></h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item" th:id="parentMenuNm" th:text="${firstUrl.menu_nm}"></li>
+                            <li class="breadcrumb-item active" th:id="childMenuNm" th:text="${firstUrl.menu_nm}"></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <iframe id="contentFrame"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</html>

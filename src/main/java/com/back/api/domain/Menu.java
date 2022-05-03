@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@ApiModel(description = "로그인 이력")
+@ApiModel(description = "메뉴")
 public class Menu {
 
     @ApiModelProperty(example = "메뉴 아이디")

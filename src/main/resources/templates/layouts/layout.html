@@ -5,14 +5,24 @@
 >
     <head>
         <meta charset="UTF-8" />
+        <title>Admin</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <script type="module" th:src="@{dist/config.js}"></script>
+
+        <!-- Theme style -->
+        <link rel="stylesheet" href="/lib/tmpl/dist/css/adminlte.min.css">
     </head>
 
-    <body>
-        <header th:replace="fragments/header :: headerFragment"></header>
+    <body class="hold-transition sidebar-mini">
+        <div class="wrapper">
 
-        <div layout:fragment="content"></div>
+            <header th:replace="fragments/header :: headerFragment"></header>
 
-        <footer th:replace="fragments/footer :: footerFragment"></footer>
+            <nav th:replace="fragments/nav :: navFragment"></nav>
+
+            <div layout:fragment="content"></div>
+
+            <footer th:replace="fragments/footer :: footerFragment"></footer>
+        </div>
     </body>
 </html>
