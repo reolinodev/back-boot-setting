@@ -1,23 +1,19 @@
-body, html {
-    height: 100%;
+#msg {
+    color : red;
 }
 
-.header {
-    background-color: Gray;
-    height: 20%
+#container {
+    padding: 10px;
+    overflow-x:hidden;
 }
 
-.content {
-    padding: 5px;
-}
-
-.footer {
-    background-color: yellow;
-    height: 20%
-}
-
-.img {
-    width: 400px;
-    height: 400px;
-    background-image: url("../images/webpack.png");
+.card-body iframe{
+    border: 0;
+    width: 100%;
+    overflow-x:hidden;
+    overflow-y:hidden;
+    overflow:auto;
+    width:100%;
+    min-height:800px;
+    padding: 10px ;
 }
