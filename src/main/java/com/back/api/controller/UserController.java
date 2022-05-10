@@ -1,6 +1,6 @@
 package com.back.api.controller;
 
-import com.back.api.domain.User;
+import com.back.api.domain.UserEntity;
 import com.back.api.domain.common.Header;
 import com.back.api.domain.common.ValidationGroups;
 import com.back.api.service.UserService;
@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -65,12 +66,12 @@ public class UserController {
                 +"cell_phone : 휴대폰, 필수값, 휴대폰번호형식 제한\n"
                 +"user_pw : 비밀번호, 필수값, 8~20자, 비밀번호형식(영문 대,소문자와 숫자, 특수기호가 적어도 1개 이상씩 포함된 8자 ~ 20자) \n"
         )
-        @Validated(ValidationGroups.UserGroup1.class) @RequestBody User user
+        @Validated(ValidationGroups.UserGroup1.class) @RequestBody UserEntity userEntity
         , HttpServletRequest httpServletRequest)
         throws NoSuchAlgorithmException {
         Map <String,Object> responseMap = new HashMap<>();
 
-        int result = userService.inputUser(user);
+        int result = userService.inputUser(userEntity);
 
         String message = "User has been created.";
         String code = "ok";
@@ -95,11 +96,11 @@ public class UserController {
             value = "login_id : 아이디, 필수값, 50자 \n"
                 +"user_pw : 비밀번호, 필수값, 8~20자, 비밀번호형식(영문 대,소문자와 숫자, 특수기호가 적어도 1개 이상씩 포함된 8자 ~ 20자) \n"
         )
-        @Validated(ValidationGroups.UserGroup2.class) @RequestBody User user
+        @Validated(ValidationGroups.UserGroup2.class) @RequestBody UserEntity userEntity
         , HttpServletRequest httpServletRequest) throws NoSuchAlgorithmException {
 
         Map <String,Object> responseMap = new HashMap<>();
-        String loginId = user.getLogin_id();
+        String loginId = userEntity.getLogin_id();
         int count = userService.checkLoginId(loginId);
 
         String message = "Your password has been changed.";
@@ -111,7 +112,7 @@ public class UserController {
             code ="fail";
             status = HttpStatus.BAD_REQUEST;
         }else {
-            int result = userService.updateUserPw(user);
+            int result = userService.updateUserPw(userEntity);
             if(result < 1){
                 message = "Edit failed.";
                 code = "fail";
@@ -125,34 +126,30 @@ public class UserController {
         return new ResponseEntity<>(responseMap, status);
     }
 
-//
-//
-//
-//
-//
-//
-//    @ApiOperation(value = "사용자를 전체 조회한다.")
-//    @PostMapping("/")
-//    public ResponseEntity<Map<String,Object>> findAll(
-//            @ApiParam(
-//                    value = "name : 이름 , 널허용 \n"
-//                            +   "email : 이메일 ,널허용",
-//                    example = "{\n  name:이름,\n  email:이메일\n}")
-//            @RequestBody UserSample user, HttpServletRequest httpServletRequest){
-//        Map <String,Object> responseMap = new HashMap<>();
-//
-//        List<UserSample> list = userService.findAll(user);
-//        int listCount = list.size();
-//
-//        String message = listCount+"건이 조회되었습니다.";
-//        String code = "ok";
-//        Header header = ResponseUtils.setHeader(message, code, httpServletRequest);
-//
-//        responseMap.put("header", header);
-//        responseMap.put("data", list);
-//
-//        return new ResponseEntity<> (responseMap, HttpStatus.OK);
-//    }
+    @ApiOperation(value = "사용자를 전체 조회한다.")
+    @PostMapping("/")
+    public ResponseEntity<Map<String,Object>> findAll(
+        @ApiParam(
+            value = "search_str : 이름 / 이메일/ 아이디 , 널허용 \n"
+                +"page_per : 페이지당 항목 수, 필수값  \n"
+                +"current_page : 현재 페이지, 필수값\n",
+            example = "{\n  search_str:aaa,\n  page_per : 10\n, current_page : 1\n}")
+        @RequestBody UserEntity userEntity, HttpServletRequest httpServletRequest){
+        Map <String,Object> responseMap = new HashMap<>();
+
+        List<UserEntity> list = userService.findAll(userEntity);
+        int listCount = list.size();
+
+        String message = listCount+"건이 조회되었습니다.";
+        String code = "ok";
+        Header header = ResponseUtils.setHeader(message, code, httpServletRequest);
+
+        responseMap.put("header", header);
+        responseMap.put("data", list);
+        responseMap.put("total", listCount);
+
+        return new ResponseEntity<> (responseMap, HttpStatus.OK);
+    }
 //
 //
 //    @ApiOperation(value = "사용자를 상세 조회한다.")

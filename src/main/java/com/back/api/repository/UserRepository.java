@@ -1,13 +1,13 @@
 package com.back.api.repository;
 
-import com.back.api.domain.User;
+import com.back.api.domain.UserEntity;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends CommonRepository<User> {
+public interface UserRepository extends CommonRepository<UserEntity> {
     int countByLoginId(String login_id);
 
-    int updateUserPw(User user);
+    int updateUserPw(UserEntity userEntity);
 
-    User findByLoginId(User user);
+    UserEntity findByLoginId(UserEntity userEntity);
 }

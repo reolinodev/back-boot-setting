@@ -57,6 +57,7 @@
     "no-use-before-define": "off"
   },
   "dependencies": {
-    "sweetalert2": "^11.4.8"
+    "sweetalert2": "^11.4.8",
+    "tui-grid": "^4.21.1"
   }
 }

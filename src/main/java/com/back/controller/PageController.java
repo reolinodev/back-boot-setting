@@ -72,6 +72,13 @@ public class PageController {
         return mav;
     }
 
-
-
+    /**
+     * 비밀번호 변경 화면
+     */
+    @RequestMapping(value = "/user/userMng", method= RequestMethod.GET)
+    public ModelAndView  userMngView() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("content/user/userMngView");
+        return mav;
+    }
 }

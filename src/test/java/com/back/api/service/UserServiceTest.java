@@ -1,6 +1,6 @@
 package com.back.api.service;
 
-import com.back.api.domain.User;
+import com.back.api.domain.UserEntity;
 import com.back.api.repository.UserRepository;
 import com.back.support.CryptUtils;
 import java.security.NoSuchAlgorithmException;
@@ -28,17 +28,17 @@ class UserServiceTest {
     @Test
     void save() {
         //when
-        User user = new User();
-        user.setLogin_id("kychoi83");
-        user.setUser_nm("최규연");
-        user.setUser_pw("1111");
-        user.setEmail("reolino@gmail.com");
-        user.setCell_phone("01011112222");
+        UserEntity userEntity = new UserEntity();
+        userEntity.setLogin_id("kychoi83");
+        userEntity.setUser_nm("최규연");
+        userEntity.setUser_pw("1111");
+        userEntity.setEmail("reolino@gmail.com");
+        userEntity.setCell_phone("01011112222");
 
         String login_id="kychoi83";
 
         //given
-        userRepository.save(user);
+        userRepository.save(userEntity);
         int result = userRepository.countByLoginId(login_id);
 
         //then
@@ -48,17 +48,33 @@ class UserServiceTest {
     @Test
     void updateUserPw() throws NoSuchAlgorithmException {
         //when
-        User user = new User();
-        user.setLogin_id("kychoi83");
-        user.setUser_pw("1111");
-        user.setUser_pw(CryptUtils.encryptSha256(user.getUser_pw()));
+        UserEntity userEntity = new UserEntity();
+        userEntity.setLogin_id("kychoi83");
+        userEntity.setUser_pw("1111");
+        userEntity.setUser_pw(CryptUtils.encryptSha256(userEntity.getUser_pw()));
 
         //given
-        userRepository.updateUserPw(user);
+        userRepository.updateUserPw(userEntity);
 
         //then
 //        String dbData = "0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c";
 //        Assertions.assertEquals(ecnryptStr, dbData);
+    }
+
+    @Test
+    void findAll() {
+        //when
+        UserEntity userEntity = new UserEntity();
+        userEntity.setCurrent_page(1);
+        userEntity.setPage_per(1);
+        userEntity.setSearch_str("kychoi83");
+
+        //given
+        var result = userRepository.findAll(userEntity);
+        System.out.println("<<"+ result);
+
+        //then
+        Assertions.assertEquals(1, result.size());
     }
 
 }

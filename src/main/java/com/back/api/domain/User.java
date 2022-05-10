@@ -1,5 +1,6 @@
 package com.back.api.domain;
 
+import com.back.api.domain.common.Param;
 import com.back.api.domain.common.ValidationGroups.CodeGroup1;
 import com.back.api.domain.common.ValidationGroups.CodeGroup2;
 import com.back.api.domain.common.ValidationGroups.UserGroup1;
@@ -19,7 +20,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @ApiModel(description = "사용자")
-public class User {
+public class User extends Param {
 
     @ApiModelProperty(example = "사용자 아이디")
     public int user_id;

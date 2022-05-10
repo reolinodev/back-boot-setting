@@ -1,6 +1,7 @@
 package com.back.api.controller;
 
 import com.back.api.domain.User;
+import com.back.api.domain.UserEntity;
 import com.back.api.domain.common.Header;
 import com.back.api.domain.common.ValidationGroups;
 import com.back.api.service.UserService;
@@ -64,12 +65,12 @@ public class AuthController {
                 +"cell_phone : 휴대폰, 필수값, 휴대폰번호형식 제한\n"
                 +"user_pw : 비밀번호, 필수값, 8~20자, 비밀번호형식(영문 대,소문자와 숫자, 특수기호가 적어도 1개 이상씩 포함된 8자 ~ 20자) \n"
         )
-        @Validated(ValidationGroups.UserGroup1.class) @RequestBody User user
+        @Validated(ValidationGroups.UserGroup1.class) @RequestBody UserEntity userEntity
         , HttpServletRequest httpServletRequest)
         throws NoSuchAlgorithmException {
         Map <String,Object> responseMap = new HashMap<>();
 
-        int result = userService.inputUser(user);
+        int result = userService.inputUser(userEntity);
 
         String message = "User has been created.";
         String code = "ok";
@@ -94,11 +95,11 @@ public class AuthController {
             value = "login_id : 아이디, 필수값, 50자 \n"
                 +"user_pw : 비밀번호, 필수값, 8~20자, 비밀번호형식(영문 대,소문자와 숫자, 특수기호가 적어도 1개 이상씩 포함된 8자 ~ 20자) \n"
         )
-        @Validated(ValidationGroups.UserGroup2.class) @RequestBody User user
+        @Validated(ValidationGroups.UserGroup2.class) @RequestBody UserEntity userEntity
         , HttpServletRequest httpServletRequest) throws NoSuchAlgorithmException {
 
         Map <String,Object> responseMap = new HashMap<>();
-        String loginId = user.getLogin_id();
+        String loginId = userEntity.getLogin_id();
         int count = userService.checkLoginId(loginId);
 
         String message = "Your password has been changed.";
@@ -110,7 +111,7 @@ public class AuthController {
             code ="fail";
             status = HttpStatus.BAD_REQUEST;
         }else {
-            int result = userService.updateUserPw(user);
+            int result = userService.updateUserPw(userEntity);
             if(result < 1){
                 message = "Edit failed.";
                 code = "fail";

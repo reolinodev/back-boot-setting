@@ -11,4 +11,6 @@ public interface CodeRepository extends CommonRepository<Code> {
     List<Code> findByUseYn(int id);
 
     int update(Code code);
+
+    List<Code> findByCodeGrpVal(String CodeGrpVal);
 }

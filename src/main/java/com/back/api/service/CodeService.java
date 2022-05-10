@@ -47,4 +47,8 @@ public class CodeService {
         return codeRepository.updateUseYnById(code);
         // todo history 테이블에 내역 입력
     }
+
+    public List<Code> getCodeItemList(String CodeGrpVal) {
+        return codeRepository.findByCodeGrpVal(CodeGrpVal);
+    }
 }

@@ -199,4 +199,16 @@ CREATE SEQUENCE code_grp_seq START 1;
 CREATE SEQUENCE code_seq START 1;
 
 
+CREATE FUNCTION getCodeNm (codeGrpVal varchar(50), codeVal varchar(50))
+    RETURNS TABLE( codeNm varchar(50)) AS $$
+begin
+RETURN QUERY
+SELECT B.CODE_NM
+FROM CODE_GRP_TB A, CODE_TB B
+WHERE A.CODE_GRP_ID = B.CODE_GRP_ID
+  AND A.CODE_GRP_VAL  = codeGrpVal
+  AND B.CODE_VAL = codeVal ;
+END; $$
+LANGUAGE 'plpgsql';
+
 

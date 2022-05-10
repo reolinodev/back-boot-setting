@@ -86,4 +86,16 @@
         WHERE CODE_ID = #{code_id}
     </select>
 
+    <select id="findByCodeGrpVal" parameterType="string" resultType="code">
+        SELECT A.CODE_ID,
+               A.CODE_NM,
+               A.CODE_VAL,
+               A.CODE_GRP_ID
+        FROM CODE_TB A, CODE_GRP_TB B
+        WHERE A.CODE_GRP_ID = B.CODE_GRP_ID
+          AND B.CODE_GRP_VAL = #{code_grp_val}
+          AND A.USE_YN = 'Y'
+        ORDER BY CAST(A.ORD AS INTEGER) ASC
+    </select>
+
 </mapper>

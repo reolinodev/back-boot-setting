@@ -32,7 +32,6 @@ const loginProc = () => {
 
     $frm.attr('action', '/login');
     $frm.attr('method', 'post');
-
     $frm.submit();
 };
 

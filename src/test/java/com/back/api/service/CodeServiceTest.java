@@ -84,4 +84,15 @@ class CodeServiceTest {
         Assertions.assertEquals("N", result.get().getUse_yn());
     }
 
+    @Test
+    void getCodeItemList() {
+        //given
+        String CodeGrpVal = "USE_YN";
+        //when
+        var result = codeRepository.findByCodeGrpVal(CodeGrpVal);
+        System.out.println("<<"+result);
+        //then
+        Assertions.assertEquals(2, result.size());
+    }
+
 }

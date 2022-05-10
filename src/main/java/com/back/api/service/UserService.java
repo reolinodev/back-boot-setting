@@ -1,11 +1,12 @@
 package com.back.api.service;
 
-import com.back.api.domain.User;
 import com.back.api.domain.UserAuth;
+import com.back.api.domain.UserEntity;
 import com.back.api.repository.UserAuthRepository;
 import com.back.api.repository.UserRepository;
 import com.back.support.CryptUtils;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +21,16 @@ public class UserService {
         return userRepository.countByLoginId(login_id);
     }
 
-    public int inputUser(User user) throws NoSuchAlgorithmException {
+    /**
+     * 사용자 등록
+     */
+    public int inputUser(UserEntity userEntity) throws NoSuchAlgorithmException {
         int result = 0;
 
-        user.setUser_pw(CryptUtils.encryptSha256(user.getUser_pw()));
-        userRepository.save(user);
+        userEntity.setUser_pw(CryptUtils.encryptSha256(userEntity.getUser_pw()));
+        userRepository.save(userEntity);
 
-        User userResult = userRepository.findByLoginId(user);
+        UserEntity userResult = userRepository.findByLoginId(userEntity);
         if(userResult.getUser_id() != 0){
             UserAuth userAuth = new UserAuth();
             userAuth.setUser_id(userResult.getUser_id());
@@ -37,18 +41,22 @@ public class UserService {
         return result;
     }
 
-    public int updateUserPw(User user) throws NoSuchAlgorithmException {
-        user.setUser_pw(CryptUtils.encryptSha256(user.getUser_pw()));
-        return userRepository.updateUserPw(user);
+    /**
+     * 사용자 비밀번호 변경
+     */
+    public int updateUserPw(UserEntity userEntity) throws NoSuchAlgorithmException {
+        userEntity.setUser_pw(CryptUtils.encryptSha256(userEntity.getUser_pw()));
+        return userRepository.updateUserPw(userEntity);
     }
 
 
-//    /**
-//     * 사용자를 전체조회 합니다.
-//     */
-//    public List<UserSample> findAll(UserSample user) {
-//        return userRepository.findAll(user);
-//    }
+    /**
+     * 사용자를 전체조회(검색 및 페이징 처리).
+     */
+    public List<UserEntity> findAll(UserEntity userEntity) {
+        userEntity.setStart_idx(userEntity.getPage_per(), userEntity.getCurrent_page());
+        return userRepository.findAll(userEntity);
+    }
 //
 //
 //    /**

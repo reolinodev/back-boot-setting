@@ -148,4 +148,21 @@ public class CodeController {
         return new ResponseEntity<>(responseMap, status);
     }
 
+    @ApiOperation(value = "코드 그룹 값에 해당하는 코드 리스트를 전체 조회한다.")
+    @GetMapping("/item/{code_grp_val}")
+    public ResponseEntity<Map<String,Object>> getCodeItemList(@PathVariable String code_grp_val, HttpServletRequest httpServletRequest){
+        Map <String,Object> responseMap = new HashMap<>();
+
+        List<Code> list = codeService.getCodeItemList(code_grp_val);
+        int listCount = list.size();
+
+        String message = listCount+"건이 조회되었습니다.";
+        String code = "ok";
+        Header header = ResponseUtils.setHeader(message, code, httpServletRequest);
+
+        responseMap.put("header", header);
+        responseMap.put("data", list);
+
+        return new ResponseEntity<> (responseMap, HttpStatus.OK);
+    }
 }
