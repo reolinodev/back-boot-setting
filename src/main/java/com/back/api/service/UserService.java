@@ -57,6 +57,15 @@ public class UserService {
         userEntity.setStart_idx(userEntity.getPage_per(), userEntity.getCurrent_page());
         return userRepository.findAll(userEntity);
     }
+
+    /**
+     * 사용자를 전체조회의 토탈 카운트 조회
+     */
+    public int countByAll(UserEntity userEntity) {
+        return userRepository.countByAll(userEntity);
+    }
+
+
 //
 //
 //    /**

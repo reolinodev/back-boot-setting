@@ -20,11 +20,15 @@ const signUpCheck = () => {
     $.ajax({
         url: '/api/user/'+$loginId.val(),
     }).then((data) => {
-        $('#msg').html(data.header.message);
         if (data.header.resultCode === 'ok') {
             $('#signUpChk').val('Y');
+            $('#msg').html(data.header.message);
         }
     }, (request, status, error) => {
+        if (request.responseJSON.header.resultCode === 'fail') {
+            $('#signUpChk').val('N');
+            $('#msg').html(request.responseJSON.header.message);
+        }
         console.log(
             `code:${request.status}\n` +
             `message:${request.responseText}\n` +

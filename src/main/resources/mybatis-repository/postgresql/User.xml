@@ -68,4 +68,18 @@
         OFFSET #{start_idx} limit #{page_per};
     </select>
 
+    <select id="countByAll" parameterType="string" resultType="int">
+        SELECT  COUNT(*)
+        FROM 	USER_TB
+        WHERE	1=1
+        <if test="search_str != null and search_str != ''">
+            AND (UPPER(LOGIN_ID) LIKE  '%'||UPPER(#{search_str})||'%'
+            OR UPPER(EMAIL) LIKE  '%'||UPPER(#{search_str})||'%'
+            OR UPPER(USER_NM) LIKE  '%'||UPPER(#{search_str})||'%')
+        </if>
+        <if test="use_yn != null and use_yn != ''">
+            AND USE_YN = #{use_yn}
+        </if>
+    </select>
+
 </mapper>

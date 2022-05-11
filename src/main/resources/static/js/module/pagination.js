@@ -14,6 +14,7 @@ export default class Page {
  * setPagination : 페이징 세팅
  */
 export function setPagination(page, callBackFunc) {
+
     const pagination = new Pagination('pagination', {
         totalItems: page.totalCount,
         itemsPerPage: page.perPage,

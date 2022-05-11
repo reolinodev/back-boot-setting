@@ -10,43 +10,95 @@
 </head>
 
 <div layout:fragment="content" id="container">
-        <form id="userMngViewFrm" name="userMngViewFrm">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-4">
-                            <label for="searchStr">아이디/이메일/이름</label>
-                            <input type="text" class="form-control" id="searchStr" name="search_str">
-                        </div>
-                        <div class="col-4">
-                            <label for="useYn">사용여부</label>
-                            <select class="custom-select rounded-0" id="useYn" name="use_yn"></select>
-                        </div>
+
+    <!-- 조회 화면 -->
+    <form id="userMngViewFrm" name="userMngViewFrm">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4">
+                        <label for="searchStr">아이디/이메일/이름</label>
+                        <input type="text" class="form-control" id="searchStr" name="search_str">
+                    </div>
+                    <div class="col-4">
+                        <label for="viewUseYn">사용여부</label>
+                        <select class="custom-select rounded-0" id="viewUseYn" name="use_yn"></select>
                     </div>
                 </div>
-                <div class="card-footer ">
-                    <div class="row justify-content-end">
-                        <div class="col-2">
-                            <button type="button" class="btn btn-block btn-secondary btn-sm" id="uploadBtn">엑셀업로드</button>
+            </div>
+            <div class="card-footer ">
+                <div class="row justify-content-end">
+                    <div class="col-2">
+                        <button type="button" class="btn btn-block btn-secondary btn-sm" id="uploadBtn">엑셀업로드</button>
+                    </div>
+                    <div class="col-2">
+                        <button type="button" class="btn btn-block btn-success btn-sm" id="writeBtn" data-toggle="modal" data-target="#userMngWrite">등록</button>
+                    </div>
+                    <div class="col-2 ">
+                        <button type="button" class="btn btn-block btn-primary btn-sm" id="searchBtn">검색</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- 입력화면 (modal) -->
+    <form id="userMngWriteFrm">
+        <div class="modal fade" id="userMngWrite">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">사용자 등록</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <div class="col-8">
+                                <input type="text" class="form-control" id="loginId" name="login_id" placeholder="아이디를 입력해주세요.">
+                                <input type="hidden" id="signUpChk" value ="N"  />
+                            </div>
+                            <div class="col-4 ">
+                                <button type="button" class="btn btn-success btn-block" id="signUpCheckBtn">아이디 체크</button>
+                            </div>
                         </div>
-                        <div class="col-2">
-                            <button type="button" class="btn btn-block btn-success btn-sm" id="writeBtn">등록</button>
+                        <div class="form-group row">
+                            <div class="col-4">
+                                <label for="userNm">이름</label>
+                                <input type="text" class="form-control" id="userNm" name="user_nm" placeholder="이름을 입력하세요.">
+                            </div>
+                            <div class="col-4">
+                                <label for="email">이메일</label>
+                                <input type="text" class="form-control" id="email" name="email" placeholder="이메일을 입력해주세요.">
+                            </div>
+                            <div class="col-4">
+                                <label for="cellPhone">휴대폰</label>
+                                <input type="number" class="form-control" id="cellPhone" name="cell_phone" placeholder="휴대폰을 입력해주세요.">
+                            </div>
                         </div>
-                        <div class="col-2 ">
-                            <button type="button" class="btn btn-block btn-primary btn-sm" id="searchBtn">검색</button>
+                        <div class="form-group row">
+                            <div class="col-6">
+                                <label for="userPw">패스워드</label>
+                                <input type="password" class="form-control" id="userPw" name="user_pw" placeholder="패스워드를 입력해주세요.">
+                            </div>
+                            <div class="col-6">
+                                <label for="userPwRe">패스워드 확인</label>
+                                <input type="password" class="form-control" id="userPwRe" placeholder="패스워드를 입력해주세요.">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12 text-lg-center" id="msg"></div>
+                        </div>
+                        <div class="modal-footer justify-content-end">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                            <button type="button" class="btn btn-primary" id="submitBtn">등록</button>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-            <!--        <script>-->
-            <!--            //셀렉트 박스(공통코드) : 사용구분 => page-->
-            <!--            setCodeSelBox('pagePer','G_PAGE','','' );-->
-            <!--        </script>-->
-        </form>
-
-
+        </div>
+    </form>
 
 
 

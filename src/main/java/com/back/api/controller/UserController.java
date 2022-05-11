@@ -138,7 +138,7 @@ public class UserController {
         Map <String,Object> responseMap = new HashMap<>();
 
         List<UserEntity> list = userService.findAll(userEntity);
-        int listCount = list.size();
+        int listCount = userService.countByAll(userEntity);
 
         String message = listCount+"건이 조회되었습니다.";
         String code = "ok";

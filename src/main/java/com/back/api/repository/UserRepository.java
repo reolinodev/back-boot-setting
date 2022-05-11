@@ -10,4 +10,6 @@ public interface UserRepository extends CommonRepository<UserEntity> {
     int updateUserPw(UserEntity userEntity);
 
     UserEntity findByLoginId(UserEntity userEntity);
+
+    int countByAll(UserEntity userEntity);
 }
