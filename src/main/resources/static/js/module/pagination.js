@@ -1,32 +1,33 @@
-// let current_page=1;
-// let pageInit = false;
+import Pagination from 'tui-pagination';
 
 export default class Page {
-    constructor(currentPage, pageInit) {
+    //현재페이지, 페이징 초기화, 페이지별 항목수, 총 카운트
+    constructor(currentPage, pageInit, pagePer, totalCount) {
         this.currentPage = currentPage;
         this.pageInit = pageInit;
+        this.pagePer = pagePer;
+        this.totalCount = totalCount;
     }
 }
 
 /**
  * setPagination : 페이징 세팅
- * total_count : 총 카운트, perPage : 페이지별 갯수, callBackFunc : 콜백
  */
-// const setPagination = (total_count, perPage, callBackFunc) => {
-//     const pagination = new tui.Pagination('pagination', {
-//         totalItems: total_count,
-//         itemsPerPage: perPage,
-//         visiblePages: 10
-//     });
-//
-//     pagination.on('beforeMove', function(eventData) {
-//         callBackFunc(eventData.page);
-//     });
-//
-//     pagination.on('afterMove', function(eventData) {
-//         callBackFunc(eventData.page);
-//     });
-//
-//     return pagination;
-// }
+export function setPagination(page, callBackFunc) {
+    const pagination = new Pagination('pagination', {
+        totalItems: page.totalCount,
+        itemsPerPage: page.perPage,
+        visiblePages: 10
+    });
+
+    pagination.on('beforeMove', function(eventData) {
+        callBackFunc(eventData.page);
+    });
+
+    pagination.on('afterMove', function(eventData) {
+        callBackFunc(eventData.page);
+    });
+
+    return pagination;
+}
 

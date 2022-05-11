@@ -19,10 +19,10 @@ export function setCodeSelBox(id,code_grp,type,selected_value ){
       const dataList = result.data;
 
       for (let i=0; i < dataList.length;i++) {
-         if(selected_value !==''){
-            str += `<option value="${dataList[i].code}" selected> ${dataList[i].code_val}</option>`;}
+         if(selected_value !=='' && selected_value === dataList[i].code_val){
+            str += `<option value="${dataList[i].code_val}" selected> ${dataList[i].code_nm}</option>`;}
          else{
-            str += `<option value="${dataList[i].code}"> ${dataList[i].code_val}</option>`;
+            str += `<option value="${dataList[i].code_val}"> ${dataList[i].code_nm}</option>`;
          }
       }
 

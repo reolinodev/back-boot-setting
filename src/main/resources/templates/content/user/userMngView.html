@@ -1,58 +1,56 @@
 <!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/gridContent}"
+>
 <head>
     <title>Content</title>
-    <script type="module" th:src="@{/dist/config.js}"></script>
-    <link rel="stylesheet" th:href="@{/lib/tmpl/dist/css/adminlte.min.css}"/>
     <script type="module" th:src="@{/dist/userMngView.js}"></script>
 </head>
 
-<div id="container">
-    <form id="userMngViewFrm" name="userMngViewFrm">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-4">
-                        <label for="searchStr">아이디/이메일/이름</label>
-                        <input type="text" class="form-control" id="searchStr" name="search_str">
+<div layout:fragment="content" id="container">
+        <form id="userMngViewFrm" name="userMngViewFrm">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="searchStr">아이디/이메일/이름</label>
+                            <input type="text" class="form-control" id="searchStr" name="search_str">
+                        </div>
+                        <div class="col-4">
+                            <label for="useYn">사용여부</label>
+                            <select class="custom-select rounded-0" id="useYn" name="use_yn"></select>
+                        </div>
                     </div>
-                    <div class="col-4">
-                        <label for="useYn">사용여부</label>
-                        <select class="custom-select rounded-0" id="useYn" name="use_yn"></select>
+                </div>
+                <div class="card-footer ">
+                    <div class="row justify-content-end">
+                        <div class="col-2">
+                            <button type="button" class="btn btn-block btn-secondary btn-sm" id="uploadBtn">엑셀업로드</button>
+                        </div>
+                        <div class="col-2">
+                            <button type="button" class="btn btn-block btn-success btn-sm" id="writeBtn">등록</button>
+                        </div>
+                        <div class="col-2 ">
+                            <button type="button" class="btn btn-block btn-primary btn-sm" id="searchBtn">검색</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="card-footer ">
-                <div class="row justify-content-end">
-                    <div class="col-2">
-                        <button type="button" class="btn btn-block btn-secondary btn-sm" id="uploadBtn">엑셀업로드</button>
-                    </div>
-                    <div class="col-2">
-                        <button type="button" class="btn btn-block btn-success btn-sm" id="writeBtn">등록</button>
-                    </div>
-                    <div class="col-2 ">
-                        <button type="button" class="btn btn-block btn-primary btn-sm" id="searchBtn">검색</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- 페이징 표시 개수 셀렉트 박스 -->
-        <div class="row justify-content-end" style="padding-bottom: 10px">
-            <div class="col-3 ">
-                <select class="custom-select rounded-0" id="pagePer" name="page_per"></select>
-            </div>
-        </div>
 
-        <!-- 그리드 영역-->
-        <div id="grid"></div>
+            <!--        <script>-->
+            <!--            //셀렉트 박스(공통코드) : 사용구분 => page-->
+            <!--            setCodeSelBox('pagePer','G_PAGE','','' );-->
+            <!--        </script>-->
+        </form>
 
-        <!-- 페이징 영역 -->
-        <div id="pagination" class="tui-pagination"></div>
 
-<!--        <script>-->
-<!--            //셀렉트 박스(공통코드) : 사용구분 => page-->
-<!--            setCodeSelBox('pagePer','G_PAGE','','' );-->
-<!--        </script>-->
-    </form>
+
+
+
 
 </div>
+
+</html>

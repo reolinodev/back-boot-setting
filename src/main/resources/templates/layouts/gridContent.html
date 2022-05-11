@@ -1,0 +1,30 @@
+<html
+    lang="ko"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+    <head>
+        <title>Content</title>
+        <script type="module" th:src="@{/dist/config.js}"></script>
+        <script type="module" th:src="@{/dist/gridContent.js}"></script>
+        <link rel="stylesheet" th:href="@{/lib/tmpl/dist/css/adminlte.min.css}"/>
+        <link rel="stylesheet" href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
+        <script src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
+    </head>
+    <body>
+        <div layout:fragment="content"></div>
+        <!-- 페이징 표시 개수 셀렉트 박스 -->
+        <div class="row justify-content-end">
+            <div class="col-3 ">
+                <select class="custom-select rounded-0" id="pagePer" name="page_per"></select>
+            </div>
+        </div>
+        <!-- 그리드 영역-->
+        <div id="grid"></div>
+
+        <!-- 페이징 영역 -->
+        <div id="pagination" class="tui-pagination"></div>
+    </body>
+
+
+</html>

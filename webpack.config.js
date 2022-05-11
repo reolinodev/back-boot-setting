@@ -19,6 +19,7 @@ module.exports = {
         signUp: '/src/main/resources/static/js/custom/signUp.js',
         pwChange: '/src/main/resources/static/js/custom/pwChange.js',
         main: '/src/main/resources/static/js/custom/main.js',
+        gridContent: '/src/main/resources/static/js/custom/gridContent.js',
         userMngView: '/src/main/resources/static/js/custom/user/userMngView.js',
         index: '/src/main/resources/static/js/index/index.js',
     },
