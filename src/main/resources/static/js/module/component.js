@@ -8,8 +8,8 @@ export function setCodeSelBox(id,code_grp,type,selected_value ){
 
    let str = '';
 
-   if(type==='ALL') str += `<option value="">-- 전체 --</option>`;
-   else if(type==='SEL') str += `<option value="">-- 선택 --</option>`;
+   if(type==='ALL') str += `<option value="">-- All --</option>`;
+   else if(type==='SEL') str += `<option value="">-- Sel --</option>`;
 
    $.ajax({
       url : `/api/code/item/${code_grp}`,

@@ -6,6 +6,8 @@ import com.back.api.domain.common.ValidationGroups;
 import com.back.api.service.UserService;
 import com.back.support.ResponseUtils;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import java.security.NoSuchAlgorithmException;
@@ -58,7 +60,7 @@ public class UserController {
 
     @ApiOperation(value = "사용자를 입력한다.")
     @PutMapping("/")
-    public ResponseEntity<Map<String,Object>> save(
+    public ResponseEntity<Map<String,Object>> inputUser(
         @ApiParam(
             value = "login_id : 아이디, 필수값, 50자 \n"
                 +"user_nm : 이름, 필수값, 15자  \n"
@@ -128,7 +130,7 @@ public class UserController {
 
     @ApiOperation(value = "사용자를 전체 조회한다.")
     @PostMapping("/")
-    public ResponseEntity<Map<String,Object>> findAll(
+    public ResponseEntity<Map<String,Object>> getUserList(
         @ApiParam(
             value = "search_str : 이름 / 이메일/ 아이디 , 널허용 \n"
                 +"page_per : 페이지당 항목 수, 필수값  \n"
@@ -150,77 +152,45 @@ public class UserController {
 
         return new ResponseEntity<> (responseMap, HttpStatus.OK);
     }
-//
-//
-//    @ApiOperation(value = "사용자를 상세 조회한다.")
-//    @ApiImplicitParams({
-//            @ApiImplicitParam(name = "id", value = "사용자 고유키", required = true, dataType = "Integer", paramType = "path", example = "1"),
-//    })
-//    @GetMapping("/{id}")
-//    public ResponseEntity <Map<String,Object>> findById(@PathVariable Integer id, HttpServletRequest httpServletRequest) {
-//        Map <String,Object> responseMap = new HashMap<>();
-//        Optional<UserSample> data = userService.findById(id);
-//
-//        String message = "1건이 조회되었습니다.";
-//        String code = "ok";
-//        Header header = ResponseUtils.setHeader(message, code, httpServletRequest);
-//
-//        responseMap.put("header", header);
-//        responseMap.put("data", data);
-//
-//        return new ResponseEntity<> (responseMap, HttpStatus.OK);
-//    }
-//
-//
-//
-//
-//
-//    @ApiOperation(value = "사용자를 수정한다.")
-//    @ApiImplicitParams({
-//            @ApiImplicitParam(name = "id", value = "사용자 고유키", required = true, dataType = "Integer", paramType = "path", example = "1"),
-//    })
-//    @PutMapping("/{id}")
-//    public ResponseEntity<Map<String,Object>> updateUser(
-//            @Valid @RequestBody UserSample user,
-//            @PathVariable Integer id, HttpServletRequest httpServletRequest) {
-//
-//        Map <String,Object> responseMap = new HashMap<>();
-//
-//        user.setId(id);
-//        int result = userService.update(user);
-//        String message = "사용자 정보가 수정이 되었습니다.";
-//        String code = "ok";
-//        if(result < 1){
-//            message ="정상적으로 수정이 되지 않았습니다.";
-//            code = "fail";
-//        }
-//
-//        Header header = ResponseUtils.setHeader(message, code, httpServletRequest);
-//        responseMap.put("header", header);
-//
-//        return new ResponseEntity<>(responseMap, HttpStatus.OK);
-//    }
-//
-//
-//    @ApiOperation(value = "사용자를 삭제한다.")
-//    @ApiImplicitParams({
-//            @ApiImplicitParam(name = "id", value = "사용자 고유키", required = true, dataType = "Integer", paramType = "path", example = "1"),
-//    })
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Map<String,Object>> deleteUser(@PathVariable Integer id, HttpServletRequest httpServletRequest) {
-//        Map <String,Object> responseMap = new HashMap<>();
-//
-//        int result = userService.deleteById(id);
-//        String message = "사용자가 삭제 되었습니다.";
-//        String code = "ok";
-//        if(result < 1){
-//            message ="정상적으로 삭제 되지 않았습니다.";
-//            code = "fail";
-//        }
-//
-//        Header header = ResponseUtils.setHeader(message, code, httpServletRequest);
-//        responseMap.put("header", header);
-//
-//        return new ResponseEntity<>(responseMap, HttpStatus.OK);
-//    }
+
+
+    @ApiOperation(value = "사용자를 상세 조회한다.")
+    @GetMapping("/info/{user_id}")
+    public ResponseEntity <Map<String,Object>> getUserInfo(@PathVariable Integer user_id, HttpServletRequest httpServletRequest) {
+        Map <String,Object> responseMap = new HashMap<>();
+        UserEntity data = userService.findByUserId(user_id);
+
+        String message = "1건이 조회되었습니다.";
+        String code = "ok";
+        Header header = ResponseUtils.setHeader(message, code, httpServletRequest);
+
+        responseMap.put("header", header);
+        responseMap.put("data", data);
+
+        return new ResponseEntity<> (responseMap, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "사용자를 수정한다.")
+    @PutMapping("/info/{user_id}")
+    public ResponseEntity<Map<String,Object>> updateUser(
+        @RequestBody UserEntity userEntity,
+        HttpServletRequest httpServletRequest) throws NoSuchAlgorithmException {
+        Map <String,Object> responseMap = new HashMap<>();
+        int result = userService.updateUser(userEntity);
+
+        String message = "User has been updated.";
+        String code = "ok";
+        HttpStatus status = HttpStatus.OK;
+
+        if(result < 1){
+            message ="User update failed.";
+            code = "fail";
+            status = HttpStatus.BAD_REQUEST;
+        }
+
+        Header header = ResponseUtils.setHeader(message, code, httpServletRequest);
+        responseMap.put("header", header);
+
+        return new ResponseEntity<>(responseMap, status);
+    }
 }

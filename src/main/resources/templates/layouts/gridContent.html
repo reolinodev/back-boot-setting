@@ -7,16 +7,17 @@
         <title>Content</title>
         <script type="module" th:src="@{/dist/config.js}"></script>
         <script type="module" th:src="@{/dist/gridContent.js}"></script>
+
         <link rel="stylesheet" th:href="@{/lib/tmpl/dist/css/adminlte.min.css}"/>
-        <link rel="stylesheet" href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
-        <script src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
+        <link rel="stylesheet" th:href="@{/lib/tuiComp/tui-grid.css}">
+        <link rel="stylesheet" th:href="@{/lib/tuiComp/tui-pagination.css}">
     </head>
     <body>
         <div layout:fragment="content"></div>
         <!-- 페이징 표시 개수 셀렉트 박스 -->
         <div class="row justify-content-end">
             <div class="col-3 ">
-                <select class="custom-select rounded-0" id="pagePer" name="page_per"></select>
+                <select class="custom-select rounded-0" id="pagePer" name="page_per" style="margin-bottom: 10px"></select>
             </div>
         </div>
         <!-- 그리드 영역-->
@@ -24,7 +25,7 @@
 
         <!-- 페이징 영역 -->
         <div id="pagination" class="tui-pagination"></div>
+
+        <div id="pagination1" class="tui-pagination"></div>
     </body>
-
-
 </html>

@@ -17,7 +17,7 @@ export function setPagination(page, callBackFunc) {
 
     const pagination = new Pagination('pagination', {
         totalItems: page.totalCount,
-        itemsPerPage: page.perPage,
+        itemsPerPage: page.pagePer,
         visiblePages: 10
     });
 

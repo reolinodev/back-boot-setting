@@ -77,4 +77,36 @@ class UserServiceTest {
         Assertions.assertEquals(1, result.size());
     }
 
+    @Test
+    void findByUserId() {
+        //when
+        int userId = 3;
+
+        //given
+        var result = userRepository.findByUserId(userId);
+        System.out.println("<<"+ result);
+
+        //then
+        Assertions.assertEquals("kychoi83", result.getLogin_id());
+
+    }
+
+    @Test
+    void updateUser() throws NoSuchAlgorithmException {
+        //when
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUser_id(3);
+        userEntity.setUser_pw("1111");
+        userEntity.setUser_pw(CryptUtils.encryptSha256(userEntity.getUser_pw()));
+
+        //given
+        userRepository.updateUser(userEntity);
+
+        //then
+//        String dbData = "0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c";
+//        Assertions.assertEquals(ecnryptStr, dbData);
+    }
+
+
+
 }

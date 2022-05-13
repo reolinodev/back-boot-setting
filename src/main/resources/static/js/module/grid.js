@@ -5,19 +5,7 @@ import Grid from 'tui-grid';
  * columns: 컬럼, gridData : 데이터
  */
 export function setBasicGrid (columns, gridData) {
-    // const grid = new tui.Grid({
-    //     el: document.getElementById('grid'),
-    //     data: gridData,
-    //     scrollX: false,
-    //     scrollY: false,
-    //     columns: columns
-    // });
-    //
-    // tui.Grid.applyTheme('striped');
-    //
-    // grid.resetData(gridData);
-    //
-    // return grid;
+
     const grid = new Grid({
         el: document.getElementById('grid'),
         data: gridData,
@@ -36,7 +24,7 @@ export function setBasicGrid (columns, gridData) {
  * setGridClickEvent : 그리드 클릭 이벤트
  * grid: 그리드, select_column : 선택할 컬럼, return_column: 반환할 컬럼, callbackFunc: 콜백
  */
-const setGridClickEvent = (grid, select_column, return_column, callbackFunc) => {
+export function setGridClickEvent(grid, select_column, return_column, callbackFunc) {
 
     grid.getData().forEach(row => {
         grid.addCellClassName(row.rowKey, select_column, 'cell-click');

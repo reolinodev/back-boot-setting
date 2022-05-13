@@ -17,11 +17,11 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-4">
-                        <label for="searchStr">아이디/이메일/이름</label>
+                        <label for="searchStr">Login ID/ Email/ Name</label>
                         <input type="text" class="form-control" id="searchStr" name="search_str">
                     </div>
                     <div class="col-4">
-                        <label for="viewUseYn">사용여부</label>
+                        <label for="viewUseYn">UseYn</label>
                         <select class="custom-select rounded-0" id="viewUseYn" name="use_yn"></select>
                     </div>
                 </div>
@@ -29,13 +29,13 @@
             <div class="card-footer ">
                 <div class="row justify-content-end">
                     <div class="col-2">
-                        <button type="button" class="btn btn-block btn-secondary btn-sm" id="uploadBtn">엑셀업로드</button>
+                        <button type="button" class="btn btn-block btn-secondary btn-sm" id="uploadBtn">Excel Upload</button>
                     </div>
                     <div class="col-2">
-                        <button type="button" class="btn btn-block btn-success btn-sm" id="writeBtn" data-toggle="modal" data-target="#userMngWrite">등록</button>
+                        <button type="button" class="btn btn-block btn-success btn-sm" id="writeBtn" data-toggle="modal" data-target="#userMngWrite">Add</button>
                     </div>
                     <div class="col-2 ">
-                        <button type="button" class="btn btn-block btn-primary btn-sm" id="searchBtn">검색</button>
+                        <button type="button" class="btn btn-block btn-primary btn-sm" id="searchBtn">Search</button>
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">사용자 등록</h4>
+                        <h4 class="modal-title">ADD USER</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -56,43 +56,43 @@
                     <div class="modal-body">
                         <div class="form-group row">
                             <div class="col-8">
-                                <input type="text" class="form-control" id="loginId" name="login_id" placeholder="아이디를 입력해주세요.">
+                                <input type="text" class="form-control" id="writeLoginId" name="login_id" placeholder="Please enter your ID">
                                 <input type="hidden" id="signUpChk" value ="N"  />
                             </div>
                             <div class="col-4 ">
-                                <button type="button" class="btn btn-success btn-block" id="signUpCheckBtn">아이디 체크</button>
+                                <button type="button" class="btn btn-success btn-block" id="signUpCheckBtn">Check ID</button>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-4">
-                                <label for="userNm">이름</label>
-                                <input type="text" class="form-control" id="userNm" name="user_nm" placeholder="이름을 입력하세요.">
+                                <label for="writeUserNm">Name</label>
+                                <input type="text" class="form-control" id="writeUserNm" name="user_nm" placeholder="Please enter your Name">
                             </div>
                             <div class="col-4">
-                                <label for="email">이메일</label>
-                                <input type="text" class="form-control" id="email" name="email" placeholder="이메일을 입력해주세요.">
+                                <label for="writeEmail">Email</label>
+                                <input type="text" class="form-control" id="writeEmail" name="email" placeholder="Please enter your Email">
                             </div>
                             <div class="col-4">
-                                <label for="cellPhone">휴대폰</label>
-                                <input type="number" class="form-control" id="cellPhone" name="cell_phone" placeholder="휴대폰을 입력해주세요.">
+                                <label for="writeCellPhone">Cell Phone</label>
+                                <input type="number" class="form-control" id="writeCellPhone" name="cell_phone" placeholder="Please enter your Cell Phone">
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-6">
-                                <label for="userPw">패스워드</label>
-                                <input type="password" class="form-control" id="userPw" name="user_pw" placeholder="패스워드를 입력해주세요.">
+                                <label for="writeUserPw">Password</label>
+                                <input type="password" class="form-control" id="writeUserPw" name="user_pw" placeholder="Please enter your password">
                             </div>
                             <div class="col-6">
-                                <label for="userPwRe">패스워드 확인</label>
-                                <input type="password" class="form-control" id="userPwRe" placeholder="패스워드를 입력해주세요.">
+                                <label for="writeUserPwRe">Password Confirm</label>
+                                <input type="password" class="form-control" id="writeUserPwRe" placeholder="Please enter your password">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-12 text-lg-center" id="msg"></div>
+                            <div class="col-12 text-lg-center" id="writeMsg"></div>
                         </div>
                         <div class="modal-footer justify-content-end">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-                            <button type="button" class="btn btn-primary" id="submitBtn">등록</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="submitBtn">Save</button>
                         </div>
                     </div>
                 </div>
@@ -100,9 +100,65 @@
         </div>
     </form>
 
-
-
-
+    <!-- 수정화면 (modal) -->
+    <form id="userMngEditFrm">
+        <div class="modal fade" id="userMngEdit">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">EDIT USER</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <div class="col-8">
+                                <label for="editLoginId">Login ID</label>
+                                <input type="text" class="form-control" id="editLoginId" name="login_id" readonly>
+                                <input type="hidden" class="form-control" id="editUserid" name="user_id" readonly>
+                            </div>
+                            <div class="col-4 ">
+                                <label for="editUseYn">UseYn</label>
+                                <select class="custom-select rounded-0" id="editUseYn" name="use_yn"></select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-4">
+                                <label for="editUserNm">Name</label>
+                                <input type="text" class="form-control" id="editUserNm" name="user_nm" placeholder="Please enter your Name">
+                            </div>
+                            <div class="col-4">
+                                <label for="editEmail">Email</label>
+                                <input type="text" class="form-control" id="editEmail" name="email" placeholder="Please enter your Email">
+                            </div>
+                            <div class="col-4">
+                                <label for="editCellPhone">Cell Phone</label>
+                                <input type="number" class="form-control" id="editCellPhone" name="cell_phone" placeholder="Please enter your Cell Phone">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-6">
+                                <label for="editUserPw">Password</label>
+                                <input type="password" class="form-control" id="editUserPw" name="user_pw" placeholder="Please enter your password">
+                            </div>
+                            <div class="col-6">
+                                <label for="editUserPwRe">Password Confirm</label>
+                                <input type="password" class="form-control" id="editUserPwRe" placeholder="Please enter your password">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12 text-lg-center" id="editMsg"></div>
+                        </div>
+                        <div class="modal-footer justify-content-end">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="editBtn">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
 </html>

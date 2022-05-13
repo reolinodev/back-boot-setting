@@ -65,38 +65,18 @@ public class UserService {
         return userRepository.countByAll(userEntity);
     }
 
+    /**
+     * 사용자를 상세조회
+     */
+    public UserEntity findByUserId(int userId) {
+        return userRepository.findByUserId(userId);
+    }
 
-//
-//
-//    /**
-//     * 사용자를 상세 조회 합니다.
-//     */
-//    public Optional<UserSample> findById(int id) {
-//        return userRepository.findById(id);
-//    }
-//
-//
-//    /**
-//     * 사용자를 생성합니다.
-//     */
-//    public int save(UserSample user) {
-//        return userRepository.save(user);
-//    }
-//
-//
-//    /**
-//     * 사용자 정보를 수정합니다.
-//     */
-//    public int update(UserSample user) {
-//        return userRepository.update(user);
-//    }
-//
-//
-//    /**
-//     * 사용자를 삭제 합니다.
-//     */
-//    public int deleteById(int id) {
-//        return userRepository.deleteById(id);
-//    }
-
+    /**
+     * 사용자 정보 변경
+     */
+    public int updateUser(UserEntity userEntity) throws NoSuchAlgorithmException {
+        userEntity.setUser_pw(CryptUtils.encryptSha256(userEntity.getUser_pw()));
+        return userRepository.updateUser(userEntity);
+    }
 }

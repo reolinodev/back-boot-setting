@@ -82,4 +82,28 @@
         </if>
     </select>
 
+    <select id="findByUserId" parameterType="int" resultType="userEntity">
+        SELECT  *
+        FROM 	USER_TB
+        WHERE	USER_ID = #{user_id}
+    </select>
+
+    <update id="updateUser" parameterType="userEntity">
+        UPDATE USER_TB
+        SET UPDATED_AT = now()
+        <if test="email != null and email != ''">
+            , EMAIL = #{email}
+        </if>
+        <if test="user_nm != null and user_nm != ''">
+            , USER_NM = #{user_nm}
+        </if>
+        <if test="user_pw != null and user_pw != ''">
+            , USER_PW = #{user_pw}
+        </if>
+        <if test="cell_phone != null and cell_phone != ''">
+            , CELL_PHONE = #{cell_phone}
+        </if>
+        WHERE USER_ID = #{user_id}
+    </update>
+
 </mapper>
