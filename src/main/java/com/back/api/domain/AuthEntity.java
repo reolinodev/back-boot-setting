@@ -9,12 +9,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@ApiModel(description = "사용자 엔티티")
-public class UserEntity extends User {
+@ApiModel(description = "권한 엔티티")
+public class AuthEntity extends Auth {
 
     @ApiModelProperty(example = "순서")
     public int rnum;
 
     @ApiModelProperty(example = "사용여부")
     private String use_yn_nm;
+
+    @ApiModelProperty(example = "권한 구분")
+    private String auth_role_nm;
+
 }

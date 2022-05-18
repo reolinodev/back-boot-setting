@@ -54,47 +54,47 @@ export function setCodeSelBox(id,code_grp,type,selected_value ){
  * setCommSelBox : 공통코드를 사용하지 않는 경우 셀렉트 박스 생성
  * 생성할 아이디, url ,타입(전체, 선택, ''), 선택된 값(''), 파라미터(''), option(옵션안에 넣을 텍스트와 value의 값을 추출)
  */
-// export function setCommSelBox(id,url,type,selected_value, param, option ){
-//    let str = '';
-//
-//    if(type==='ALL') str += `<option value="">-- 전체 --</option>`;
-//    else if(type==='SEL') str += `<option value="">-- 선택 --</option>`;
-//
-//    if(param === ''){
-//       param = {}
-//    }
-//
-//    if(url === ''){
-//       str += '</select>';
-//       $("#"+id).html(str);
-//    }else {
-//       $.ajax({
-//          url : url,
-//          dataType : 'json',
-//          data : param,
-//          success : function (result){
-//
-//             for (let i=0; i < result.list.length;i++) {
-//                if(option !== ''){
-//                   let oTxt = option.oTxt;
-//                   let oVal = option.oVal;
-//
-//                   if(selected_value !==''){
-//                      str += `<option value="${result.list[i][oVal]}" selected> ${result.list[i][oTxt]}</option>`;
-//                   }else{
-//                      str += `<option value="${result.list[i][oVal]}"> ${result.list[i][oTxt]}</option>`;
-//                   }
-//                }
-//             }
-//
-//             $("#"+id).html(str);
-//          },
-//          error : function (request, status, error){
-//             console.log('code:'+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-//          }
-//       });
-//    }
-// }
+export function setCommSelBox(id,url,type,selected_value, param, option ){
+   let str = '';
+
+   if(type==='ALL') str += `<option value="">-- 전체 --</option>`;
+   else if(type==='SEL') str += `<option value="">-- 선택 --</option>`;
+
+   if(param === ''){
+      param = {}
+   }
+
+   if(url === ''){
+      str += '</select>';
+      $("#"+id).html(str);
+   }else {
+      $.ajax({
+         url : url,
+         dataType : 'json',
+         data : param,
+         success : function (result){
+
+            for (let i=0; i < result.list.length;i++) {
+               if(option !== ''){
+                  let oTxt = option.oTxt;
+                  let oVal = option.oVal;
+
+                  if(selected_value !==''){
+                     str += `<option value="${result.list[i][oVal]}" selected> ${result.list[i][oTxt]}</option>`;
+                  }else{
+                     str += `<option value="${result.list[i][oVal]}"> ${result.list[i][oTxt]}</option>`;
+                  }
+               }
+            }
+
+            $("#"+id).html(str);
+         },
+         error : function (request, status, error){
+            console.log('code:'+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+         }
+      });
+   }
+}
 //
 // const setAutoData = (url, params) => {
 //    let data = [ "c++", "java", "php", "coldfusion", "javascript", "asp", "ruby" ];

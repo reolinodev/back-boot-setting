@@ -19,11 +19,11 @@ class CodeServiceTest {
         //given
         int result = 0;
         Code code = new Code();
-        code.setCode_grp_id(7);
-        code.setCode_nm("미사용");
-        code.setCode_val("N");
-        code.setOrd("11");
-        code.setBigo("미사용 처리");
+        code.setCode_grp_id(5);
+        code.setCode_nm("사용자");
+        code.setCode_val("USER");
+        code.setOrd("2");
+        code.setBigo("");
 
         //when
         int count = codeRepository.countByCodeGrpIdAndCodeVal(code);

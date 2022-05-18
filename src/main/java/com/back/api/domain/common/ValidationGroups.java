@@ -7,4 +7,6 @@ public class ValidationGroups {
     public interface CodeGroup2 {};
     public interface UserGroup1 {};
     public interface UserGroup2 {};
+    public interface AuthGroup1 {};
+    public interface AuthGroup2 {};
 }

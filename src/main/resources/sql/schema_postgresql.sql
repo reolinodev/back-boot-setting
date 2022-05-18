@@ -29,6 +29,7 @@ CREATE TABLE AUTH_TB
 (
     auth_id int NOT NULL,
     auth_nm varchar(50) not null,
+    auth_val varchar(20) not null,
     auth_role varchar(20) not null,
     ord varchar(10),
     bigo varchar(500),
@@ -42,6 +43,7 @@ CREATE TABLE AUTH_TB
 COMMENT ON TABLE public.auth_tb IS '권한';
 COMMENT ON COLUMN public.auth_tb.auth_id IS '권한 아이디';
 COMMENT ON COLUMN public.auth_tb.auth_nm IS '권한 명';
+COMMENT ON COLUMN public.auth_tb.auth_val IS '권한 값';
 COMMENT ON COLUMN public.auth_tb.auth_role IS '권한 구분';
 COMMENT ON COLUMN public.auth_tb.ord IS '순서';
 COMMENT ON COLUMN public.auth_tb.bigo IS '비고';

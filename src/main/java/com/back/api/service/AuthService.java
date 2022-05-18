@@ -1,11 +1,8 @@
 package com.back.api.service;
 
-import com.back.api.domain.Auth;
-import com.back.api.domain.User;
+import com.back.api.domain.AuthEntity;
 import com.back.api.repository.AuthRepository;
-import com.back.api.repository.UserRepository;
-import com.back.support.CryptUtils;
-import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,50 +12,41 @@ public class AuthService {
 
     private final AuthRepository authRepository;
 
+    /**
+     * 권한을 전체조회 합니다.
+     */
+    public List<AuthEntity> getAuthList(AuthEntity authEntity) {
+        authEntity.setStart_idx(authEntity.getPage_per(), authEntity.getCurrent_page());
+        return authRepository.findAll(authEntity);
+    }
 
-    public int inputAuth(Auth auth) {
-        return authRepository.save(auth);
+    /**
+     * 동일 권한 값을 가지고 있는지 확인 합니다.
+     */
+    public int checkAuthVal(AuthEntity authEntity) {
+        return authRepository.countByAuthVal(authEntity);
+    }
+
+    /**
+     * 권한을 등록합니다.
+     */
+    public int inputAuth(AuthEntity authEntity) {
+        return authRepository.save(authEntity);
     }
 
 
+    /**
+     * 권한의 상세 정보릊 조회합니다.
+     */
+    public AuthEntity getAuthInfo(int auth_id) {
+        return authRepository.findByAuthId(auth_id);
+    }
 
-//    /**
-//     * 사용자를 전체조회 합니다.
-//     */
-//    public List<UserSample> findAll(UserSample user) {
-//        return userRepository.findAll(user);
-//    }
-//
-//
-//    /**
-//     * 사용자를 상세 조회 합니다.
-//     */
-//    public Optional<UserSample> findById(int id) {
-//        return userRepository.findById(id);
-//    }
-//
-//
-//    /**
-//     * 사용자를 생성합니다.
-//     */
-//    public int save(UserSample user) {
-//        return userRepository.save(user);
-//    }
-//
-//
-//    /**
-//     * 사용자 정보를 수정합니다.
-//     */
-//    public int update(UserSample user) {
-//        return userRepository.update(user);
-//    }
-//
-//
-//    /**
-//     * 사용자를 삭제 합니다.
-//     */
-//    public int deleteById(int id) {
-//        return userRepository.deleteById(id);
-//    }
 
+    /**
+     *  권한 정보를 수정합니다.
+     */
+    public int updateAuth(AuthEntity authEntity) {
+        return authRepository.updateAuth(authEntity);
+    }
 }

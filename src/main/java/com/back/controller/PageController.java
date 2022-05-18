@@ -73,7 +73,7 @@ public class PageController {
     }
 
     /**
-     * 비밀번호 변경 화면
+     * 사용자 관리 화면
      */
     @RequestMapping(value = "/user/userMng", method= RequestMethod.GET)
     public ModelAndView  userMngView() {
@@ -81,4 +81,26 @@ public class PageController {
         mav.setViewName("content/user/userMngView");
         return mav;
     }
+
+    /**
+     * 권한 관리
+     */
+    @RequestMapping(value = "/user/authMng", method= RequestMethod.GET)
+    public ModelAndView  authMngView() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("content/user/authMngView");
+        return mav;
+    }
+
+
+    /**
+     * 사용자 권한 관리
+     */
+    @RequestMapping(value = "/user/authUserMng", method= RequestMethod.GET)
+    public ModelAndView  authUserMngView() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("content/user/authUserMngView");
+        return mav;
+    }
+
 }

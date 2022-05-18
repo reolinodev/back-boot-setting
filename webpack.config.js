@@ -21,6 +21,8 @@ module.exports = {
         main: '/src/main/resources/static/js/custom/main.js',
         gridContent: '/src/main/resources/static/js/custom/gridContent.js',
         userMngView: '/src/main/resources/static/js/custom/user/userMngView.js',
+        authMngView: '/src/main/resources/static/js/custom/user/authMngView.js',
+        authUserMngView: '/src/main/resources/static/js/custom/user/authUserMngView.js',
         index: '/src/main/resources/static/js/index/index.js',
     },
     output: {

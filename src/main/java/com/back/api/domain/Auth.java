@@ -1,7 +1,12 @@
 package com.back.api.domain;
 
+import com.back.api.domain.common.Param;
+import com.back.api.domain.common.ValidationGroups.AuthGroup1;
+import com.back.api.domain.common.ValidationGroups.AuthGroup2;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,15 +15,23 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @ApiModel(description = "권한")
-public class Auth {
+public class Auth extends Param {
 
     @ApiModelProperty(example = "권한 아이디")
     public int auth_id;
 
     @ApiModelProperty(example = "권한 명")
+    @NotEmpty(groups = { AuthGroup1.class, AuthGroup2.class}, message = "Please enter Auth Name.")
+    @Size(groups = { AuthGroup1.class, AuthGroup2.class }, max=16, message = "Please enter up to 16 characters.")
     public String auth_nm;
 
+    @ApiModelProperty(example = "권한 값")
+    @NotEmpty(groups = { AuthGroup1.class}, message = "Please enter Auth Value.")
+    @Size(groups = { AuthGroup1.class }, max=20, message = "Please enter up to 20 characters.")
+    public String auth_val;
+
     @ApiModelProperty(example = "권한 구분")
+    @NotEmpty(groups = { AuthGroup1.class}, message = "Please enter Auth Role.")
     public String auth_role;
 
     @ApiModelProperty(example = "순서")

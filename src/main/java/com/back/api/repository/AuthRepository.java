@@ -1,13 +1,18 @@
 package com.back.api.repository;
 
 import com.back.api.domain.Auth;
-import com.back.api.domain.CodeGrp;
-import com.back.api.domain.User;
+import com.back.api.domain.AuthEntity;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AuthRepository extends CommonRepository<Auth> {
+public interface AuthRepository extends CommonRepository<AuthEntity> {
 
-    List<Auth> findByUseYn();
+    List<AuthEntity> findByUseYn();
+
+    int updateAuth(AuthEntity authEntity);
+
+    AuthEntity findByAuthId(int authId);
+
+    int countByAuthVal(AuthEntity authEntity);
 }
