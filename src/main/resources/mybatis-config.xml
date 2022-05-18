@@ -3,6 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <typeAliases>
+    <typeAlias type="com.back.api.domain.User" alias="user"/>
     <typeAlias type="com.back.api.domain.UserEntity" alias="userEntity"/>
     <typeAlias type="com.back.api.domain.LoginEntity" alias="loginEntity"/>
     <typeAlias type="com.back.api.domain.AuthEntity" alias="authEntity"/>
