@@ -83,6 +83,7 @@ const search = () => {
             grid.resetData(gridData);
 
             setGridClickEvent(grid, "login_id", "user_id", userMngEdit);
+            setGridClickEvent(grid, "user_nm", "user_id", userMngEdit);
 
             if(page.pageInit === false){
                 pagination.reset(result.total);
@@ -103,10 +104,10 @@ const setGridLayout = () => {
     const columns = [
         {header: 'No', name: 'rnum', width :100, align : 'center'},
         {header: 'SEQ', name: 'user_id', width :100, align : 'center', hidden : true},
-        {header: '아이디', name: 'login_id', align : 'center'},
-        {header: '이름', name: 'user_nm', align : 'center'},
-        {header: '이메일', name: 'email'},
-        {header: '사용여부', name: 'use_yn_nm', width :150, align : 'center'}
+        {header: 'Login Id', name: 'login_id', align : 'center'},
+        {header: 'Name', name: 'user_nm', align : 'center'},
+        {header: 'Email', name: 'email'},
+        {header: 'Use', name: 'use_yn_nm', width :150, align : 'center'}
     ];
     //데이터
     const gridData = [];
@@ -251,7 +252,7 @@ const signUpProc = () => {
             search();
             closeModal();
         } else {
-            $('#msg').html(data.header.message);
+            $('#writeMsg').html(data.header.message);
         }
     }, (request, status, error) => {
         if(request.status === 500){
@@ -265,11 +266,11 @@ const signUpProc = () => {
             if(errorList !== undefined){
                 if(errorList.lengh !==0){
                     const message = errorList[0].message;
-                    $('#msg').html(message);
+                    $('#writeMsg').html(message);
                 }
             }else {
                 const data = request.responseJSON.header;
-                $('#msg').html(data.message);
+                $('#writeMsg').html(data.message);
             }
         }
     });

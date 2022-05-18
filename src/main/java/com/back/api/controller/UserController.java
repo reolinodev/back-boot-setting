@@ -139,8 +139,8 @@ public class UserController {
         @RequestBody UserEntity userEntity, HttpServletRequest httpServletRequest){
         Map <String,Object> responseMap = new HashMap<>();
 
-        List<UserEntity> list = userService.findAll(userEntity);
-        int listCount = userService.countByAll(userEntity);
+        List<UserEntity> list = userService.getUserList(userEntity);
+        int listCount = userService.getUserCount(userEntity);
 
         String message = listCount+"건이 조회되었습니다.";
         String code = "ok";
@@ -158,7 +158,7 @@ public class UserController {
     @GetMapping("/info/{user_id}")
     public ResponseEntity <Map<String,Object>> getUserInfo(@PathVariable Integer user_id, HttpServletRequest httpServletRequest) {
         Map <String,Object> responseMap = new HashMap<>();
-        UserEntity data = userService.findByUserId(user_id);
+        UserEntity data = userService.getUserInfo(user_id);
 
         String message = "1건이 조회되었습니다.";
         String code = "ok";

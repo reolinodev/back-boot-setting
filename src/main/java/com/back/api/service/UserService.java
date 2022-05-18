@@ -53,7 +53,7 @@ public class UserService {
     /**
      * 사용자를 전체조회(검색 및 페이징 처리).
      */
-    public List<UserEntity> findAll(UserEntity userEntity) {
+    public List<UserEntity> getUserList(UserEntity userEntity) {
         userEntity.setStart_idx(userEntity.getPage_per(), userEntity.getCurrent_page());
         return userRepository.findAll(userEntity);
     }
@@ -61,14 +61,14 @@ public class UserService {
     /**
      * 사용자를 전체조회의 토탈 카운트 조회
      */
-    public int countByAll(UserEntity userEntity) {
+    public int getUserCount(UserEntity userEntity) {
         return userRepository.countByAll(userEntity);
     }
 
     /**
      * 사용자를 상세조회
      */
-    public UserEntity findByUserId(int userId) {
+    public UserEntity getUserInfo(int userId) {
         return userRepository.findByUserId(userId);
     }
 

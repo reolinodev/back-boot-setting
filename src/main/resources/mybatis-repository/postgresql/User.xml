@@ -46,7 +46,7 @@
     </update>
 
     <select id="findAll" parameterType="userEntity" resultType="userEntity">
-        SELECT  ROW_NUMBER() OVER (ORDER BY USER_ID ASC) RNUM,
+        SELECT  ROW_NUMBER() OVER (ORDER BY USER_ID DESC) RNUM,
                 USER_ID,
                 LOGIN_ID,
                 EMAIL,
@@ -64,7 +64,7 @@
         <if test="use_yn != null and use_yn != ''">
             AND USE_YN = #{use_yn}
         </if>
-        ORDER BY USER_ID
+        ORDER BY USER_ID DESC
         OFFSET #{start_idx} limit #{page_per};
     </select>
 
@@ -102,6 +102,9 @@
         </if>
         <if test="cell_phone != null and cell_phone != ''">
             , CELL_PHONE = #{cell_phone}
+        </if>
+        <if test="use_yn != null and use_yn != ''">
+            , USE_YN = #{use_yn}
         </if>
         WHERE USER_ID = #{user_id}
     </update>
