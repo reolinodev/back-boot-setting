@@ -1,8 +1,6 @@
 package com.back.api.controller;
 
-import com.back.api.domain.Auth;
 import com.back.api.domain.AuthEntity;
-import com.back.api.domain.UserEntity;
 import com.back.api.domain.common.Header;
 import com.back.api.domain.common.ValidationGroups;
 import com.back.api.service.AuthService;
@@ -10,7 +8,6 @@ import com.back.support.ResponseUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
