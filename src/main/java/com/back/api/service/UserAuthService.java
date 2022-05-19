@@ -1,9 +1,8 @@
 package com.back.api.service;
 
-import com.back.api.domain.Auth;
-import com.back.api.domain.UserAuth;
-import com.back.api.repository.AuthRepository;
+import com.back.api.domain.UserAuthEntity;
 import com.back.api.repository.UserAuthRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,18 +13,34 @@ public class UserAuthService {
     private final UserAuthRepository userAuthRepository;
 
 
-    public int inputUserAuth(UserAuth userAuth) {
-        return userAuthRepository.save(userAuth);
+    /**
+     * 권한을 적용할 사용자를 조회합니다.
+     */
+    public List<UserAuthEntity> getInputAuthUserList(UserAuthEntity userAuthEntity) {
+        userAuthEntity.setStart_idx(userAuthEntity.getPage_per(), userAuthEntity.getCurrent_page());
+        return userAuthRepository.findByAuthIdNotAndUseYn(userAuthEntity);
+    }
+
+    /**
+     * 권한을 적용할 사용자의 총 수를 조회합니다.
+     */
+    public int getInputAuthUserCount(UserAuthEntity userAuthEntity) {
+        return userAuthRepository.countByAuthIdNotAndUseYn(userAuthEntity);
     }
 
 
+    public int inputUserAuth(UserAuthEntity userAuthEntity) {
+        int result = 0;
+        int[] arr = userAuthEntity.user_arr;
+        for (int j : arr) {
+            userAuthEntity.user_id = j;
+            result = userAuthRepository.save(userAuthEntity);
+        }
 
-//    /**
-//     * 사용자를 전체조회 합니다.
-//     */
-//    public List<UserSample> findAll(UserSample user) {
-//        return userRepository.findAll(user);
-//    }
+        return result;
+    }
+
+
 //
 //
 //    /**

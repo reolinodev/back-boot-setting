@@ -64,6 +64,18 @@ class AuthServiceTest {
         Assertions.assertEquals(2, result.size());
     }
 
+    @Test
+    void findByAuthRoleAndUseYn(){
+        //when
+        AuthEntity authEntity = new AuthEntity();
+        authEntity.auth_role = "ADMIN";
+
+        //given
+        var result = authRepository.findByAuthRoleAndUseYn(authEntity);
+
+        //then
+        Assertions.assertEquals(3, result.size());
+    }
 
 
 }

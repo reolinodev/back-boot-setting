@@ -49,4 +49,13 @@ public class AuthService {
     public int updateAuth(AuthEntity authEntity) {
         return authRepository.updateAuth(authEntity);
     }
+
+    /**
+     * 권한 구분에 속한 권한을 조회합니다.
+     */
+    public List<AuthEntity> getAuthRoleList(AuthEntity authEntity) {
+        return authRepository.findByAuthRoleAndUseYn(authEntity);
+    }
+
+
 }

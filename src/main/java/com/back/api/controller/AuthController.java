@@ -37,15 +37,14 @@ public class AuthController {
     public ResponseEntity<Map<String,Object>> getAuthList(
         @ApiParam(
             value = "auth_role : 권한구분 , 널허용 \n"
-                +   "use_yn : 사용여부 ,널허용",
-            example = "{\n  auth_role : 권한구분,\n  use_yn : 사용여부\n}")
+                +   "use_yn : 사용여부 ,널허용")
         @RequestBody AuthEntity authEntity, HttpServletRequest httpServletRequest){
         Map <String,Object> responseMap = new HashMap<>();
 
+        //todo 페이징 정상작동 되는지 획인해볼것
         List<AuthEntity> list = authService.getAuthList(authEntity);
-        int listCount = list.size();
 
-        String message = listCount+"건이 조회되었습니다.";
+        String message = list.size()+"건이 조회되었습니다.";
         String code = "ok";
         Header header = ResponseUtils.setHeader(message, code, httpServletRequest);
 
@@ -132,6 +131,22 @@ public class AuthController {
         responseMap.put("header", header);
 
         return new ResponseEntity<>(responseMap, status);
+    }
+
+    @ApiOperation(value = "권한 구분에 해당되는 권한의 리스트를 조회한다.")
+    @PostMapping("/role")
+    public ResponseEntity <Map<String,Object>> getAuthRoleList(@RequestBody AuthEntity authEntity, HttpServletRequest httpServletRequest) {
+        Map <String,Object> responseMap = new HashMap<>();
+        List<AuthEntity> list = authService.getAuthRoleList(authEntity);
+
+        String message = list.size()+"건이 조회되었습니다.";
+        String code = "ok";
+        Header header = ResponseUtils.setHeader(message, code, httpServletRequest);
+
+        responseMap.put("header", header);
+        responseMap.put("data", list);
+
+        return new ResponseEntity<> (responseMap, HttpStatus.OK);
     }
 
 }

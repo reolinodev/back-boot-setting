@@ -111,4 +111,14 @@
         WHERE AUTH_VAL = #{auth_val}
     </select>
 
+    <select id="findByAuthRoleAndUseYn" parameterType="authEntity" resultType="authEntity">
+        SELECT  AUTH_ID,
+                AUTH_NM,
+                AUTH_VAL,
+                AUTH_ROLE
+        FROM AUTH_TB
+        WHERE AUTH_ROLE = #{auth_role}
+        AND USE_YN = 'Y'
+    </select>
+
 </mapper>

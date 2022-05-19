@@ -1,5 +1,6 @@
 package com.back.api.domain;
 
+import com.back.api.domain.common.Param;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @ApiModel(description = "사용자 권한")
-public class UserAuth {
+public class UserAuth extends Param {
 
     @ApiModelProperty(example = "사용자 아이디")
     public int user_id;
@@ -25,7 +26,7 @@ public class UserAuth {
     public String updated_at;
 
     @ApiModelProperty(example = "수정자")
-    public String updated_id;
+    public int updated_id;
 
     @ApiModelProperty(example = "사용여부")
     public String use_yn;

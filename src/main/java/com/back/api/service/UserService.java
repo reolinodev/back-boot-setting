@@ -1,6 +1,7 @@
 package com.back.api.service;
 
 import com.back.api.domain.UserAuth;
+import com.back.api.domain.UserAuthEntity;
 import com.back.api.domain.UserEntity;
 import com.back.api.repository.UserAuthRepository;
 import com.back.api.repository.UserRepository;
@@ -32,11 +33,11 @@ public class UserService {
 
         UserEntity userResult = userRepository.findByLoginId(userEntity);
         if(userResult.getUser_id() != 0){
-            UserAuth userAuth = new UserAuth();
-            userAuth.setUser_id(userResult.getUser_id());
+            UserAuthEntity userAuthEntity = new UserAuthEntity();
+            userAuthEntity.setUser_id(userResult.getUser_id());
             //todo 프로퍼티로 처리 (어드민/슈퍼 관리자 권한 부여)
-            userAuth.setAuth_id(1);
-            result = userAuthRepository.save(userAuth);
+            userAuthEntity.setAuth_id(1);
+            result = userAuthRepository.save(userAuthEntity);
         }
         return result;
     }

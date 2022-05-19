@@ -103,4 +103,15 @@ public class PageController {
         return mav;
     }
 
+
+    /**
+     * 사용자 권한 관리 등록
+     */
+    @RequestMapping(value = "/user/authUserMng/write", method= RequestMethod.GET)
+    public ModelAndView  authUserMng() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("content/user/authUserMngWrite");
+        return mav;
+    }
+
 }

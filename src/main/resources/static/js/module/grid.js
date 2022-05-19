@@ -20,6 +20,74 @@ export function setBasicGrid (columns, gridData) {
 
     return grid;
 }
+
+/**
+ * setBasicGridId : 기본 그리드 생성
+ * columns: 컬럼, gridData : 데이터, gridId : 그리드 아이디
+ */
+export function setBasicGridId (columns, gridData, gridId) {
+
+    const grid = new Grid({
+        el: document.getElementById(`${gridId}`),
+        data: gridData,
+        scrollX: false,
+        scrollY: false,
+        columns: columns
+    });
+
+    Grid.applyTheme('striped');
+
+    grid.resetData(gridData);
+
+    return grid;
+}
+
+
+/**
+ * setCheckBoxGrid : 체크박스가 있는 그리드 생성(해당 아이디에 생성)
+ * columns: 컬럼, gridData : 데이터
+ */
+export function setCheckBoxGridId (columns, gridData, gridId) {
+
+    const grid = new Grid({
+        el: document.getElementById(`${gridId}`),
+        rowHeaders: ['checkbox'],
+        data: gridData,
+        scrollX: false,
+        scrollY: false,
+        columns: columns
+    });
+
+    Grid.applyTheme('striped');
+
+    grid.resetData(gridData);
+
+    return grid;
+}
+
+
+/**
+ * setCheckBoxGrid : 체크박스가 있는 그리드 생성
+ * columns: 컬럼, gridData : 데이터
+ */
+export function setCheckBoxGrid (columns, gridData) {
+
+    const grid = new Grid({
+        el: document.getElementById('grid'),
+        rowHeaders: ['checkbox'],
+        data: gridData,
+        scrollX: false,
+        scrollY: false,
+        columns: columns
+    });
+
+    Grid.applyTheme('striped');
+
+    grid.resetData(gridData);
+
+    return grid;
+}
+
 /**
  * setGridClickEvent : 그리드 클릭 이벤트
  * grid: 그리드, select_column : 선택할 컬럼, return_column: 반환할 컬럼, callbackFunc: 콜백
@@ -35,4 +103,14 @@ export function setGridClickEvent(grid, select_column, return_column, callbackFu
             callbackFunc(grid.getValue(ev.rowKey, return_column));
         }
     });
+}
+
+
+/**
+ * getCheckedRows : 그리드 클릭 이벤트
+ * grid: 그리드
+ */
+export function getCheckedRows(grid) {
+
+    return grid.getCheckedRows();
 }

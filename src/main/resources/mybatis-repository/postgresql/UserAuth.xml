@@ -3,19 +3,82 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.back.api.repository.UserAuthRepository">
 
-    <insert id="save" parameterType="userAuth">
-        INSERT INTO USER_AUTH_TB
-        (
-            USER_ID,
-            AUTH_ID,
-            CREATED_AT
+    <select id="findByAuthIdNotAndUseYn" parameterType="userAuthEntity" resultType="userAuthEntity">
+        SELECT ROW_NUMBER() OVER (ORDER BY USER_ID DESC) RNUM,
+               USER_ID,
+               LOGIN_ID,
+               EMAIL,
+               USER_NM
+        FROM USER_TB A
+        WHERE A.USE_YN = 'Y'
+        AND USER_ID NOT IN (
+            SELECT USER_ID
+            FROM USER_AUTH_TB
+            WHERE AUTH_ID =  #{auth_id}
+              AND USE_YN = 'Y'
         )
-        VALUES
-        (
-            #{user_id},
-            #{auth_id},
-            now()
+        <if test="search_str != null and search_str != ''">
+            AND (UPPER(LOGIN_ID) LIKE  '%'||UPPER(#{search_str})||'%'
+            OR UPPER(EMAIL) LIKE  '%'||UPPER(#{search_str})||'%'
+            OR UPPER(USER_NM) LIKE  '%'||UPPER(#{search_str})||'%')
+        </if>
+        ORDER BY USER_ID DESC
+        OFFSET #{start_idx} limit #{page_per};
+    </select>
+
+    <select id="countByAuthIdNotAndUseYn" parameterType="userAuthEntity" resultType="int">
+        SELECT COUNT(*)
+        FROM USER_TB A
+        WHERE A.USE_YN = 'Y'
+        AND USER_ID NOT IN (
+            SELECT USER_ID
+            FROM USER_AUTH_TB
+            WHERE AUTH_ID =  #{auth_id}
+            AND USE_YN = 'Y'
         )
+        <if test="search_str != null and search_str != ''">
+            AND (UPPER(LOGIN_ID) LIKE  '%'||UPPER(#{search_str})||'%'
+            OR UPPER(EMAIL) LIKE  '%'||UPPER(#{search_str})||'%'
+            OR UPPER(USER_NM) LIKE  '%'||UPPER(#{search_str})||'%')
+        </if>
+    </select>
+
+    <insert id="save" parameterType="userAuthEntity">
+        WITH UPSERT AS(
+            UPDATE USER_AUTH_TB
+            SET USE_YN = 'Y'
+            ,UPDATED_AT = now()
+            <if test="updated_id != null and updated_id != ''">
+                ,UPDATED_ID = #{updated_id}
+            </if>
+            WHERE USER_ID = #{user_id}
+              AND AUTH_ID = #{auth_id}
+        RETURNING *
+        )
+        INSERT INTO USER_AUTH_TB (USER_ID, AUTH_ID, CREATED_AT)
+        SELECT  #{user_id}, #{auth_id}, now()
+        WHERE NOT EXISTS(SELECT * FROM UPSERT);
     </insert>
+
+<!--    <update id="updateUser" parameterType="userEntity">-->
+<!--        UPDATE USER_TB-->
+<!--        SET UPDATED_AT = now()-->
+<!--        <if test="email != null and email != ''">-->
+<!--            , EMAIL = #{email}-->
+<!--        </if>-->
+<!--        <if test="user_nm != null and user_nm != ''">-->
+<!--            , USER_NM = #{user_nm}-->
+<!--        </if>-->
+<!--        <if test="user_pw != null and user_pw != ''">-->
+<!--            , USER_PW = #{user_pw}-->
+<!--        </if>-->
+<!--        <if test="cell_phone != null and cell_phone != ''">-->
+<!--            , CELL_PHONE = #{cell_phone}-->
+<!--        </if>-->
+<!--        <if test="use_yn != null and use_yn != ''">-->
+<!--            , USE_YN = #{use_yn}-->
+<!--        </if>-->
+<!--        WHERE USER_ID = #{user_id}-->
+<!--    </update>-->
 
 </mapper>
