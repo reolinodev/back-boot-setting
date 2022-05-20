@@ -10,7 +10,7 @@
 </head>
 
 <div layout:fragment="content" id="container">
-    <form id="authUserMngFrm">
+    <form name="authUserMngViewFrm">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -23,7 +23,7 @@
                         <select class="custom-select rounded-0" id="viewAuthId" name="auth_id"></select>
                     </div>
                     <div class="col-4">
-                        <label for="searchStr">Login Id/Email/Name</label>
+                        <label for="searchStr">Id/Email/Name</label>
                         <input type="text" class="form-control" id="searchStr" name="search_str">
                     </div>
                 </div>
@@ -31,15 +31,18 @@
             <div class="card-footer ">
                 <div class="row justify-content-end">
                     <div class="col-2">
-                        <button type="button" class="btn btn-block btn-success btn-sm" id="writeBtn">ADD</button>
+                        <button type="button" class="btn btn-block btn-danger btn-sm" id="deleteBtn" style="display: none">DEL</button>
                     </div>
                     <div class="col-2">
-                        <button type="button" class="btn btn-block btn-danger btn-sm" id="deleteBtn">DEL</button>
+                        <button type="button" class="btn btn-block btn-success btn-sm" id="writeBtn">ADD</button>
                     </div>
                     <div class="col-2 ">
                         <button type="button" class="btn btn-block btn-primary btn-sm" id="searchBtn">SEARCH</button>
                     </div>
                 </div>
+            </div>
+            <div class="row justify-content-end" style="padding: 10px 20px; color: red">
+                * To delete permission, select the select box and search.
             </div>
         </div>
     </form>

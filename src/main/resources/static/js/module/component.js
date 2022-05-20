@@ -76,7 +76,7 @@ export function setCommSelBox(id,url, url_type,type,selected_value, params, opti
          success : function (result){
             const list = result.data;
 
-            if(list.length === 0){
+            if(list.length === 0 && type!=='ALL'){
                str += `<option value="">-- None --</option>`;
             }
 

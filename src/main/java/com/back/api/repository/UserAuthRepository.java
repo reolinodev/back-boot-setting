@@ -10,4 +10,7 @@ public interface UserAuthRepository extends CommonRepository<UserAuthEntity> {
     List<UserAuthEntity> findByAuthIdNotAndUseYn(UserAuthEntity userAuthEntity);
 
     int countByAuthIdNotAndUseYn(UserAuthEntity userAuthEntity);
+
+    int deleteUserAuth(UserAuthEntity userAuthEntity);
+
 }

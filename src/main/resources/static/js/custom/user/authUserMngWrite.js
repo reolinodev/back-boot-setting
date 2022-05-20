@@ -249,7 +249,6 @@ const insertProc = () => {
         data: JSON.stringify(params),
         headers: {'Content-Type': 'application/json'},
     }).then((data) => {
-        console.log('aaa', data);
         if (data.header.resultCode === 'ok') {
             Alert(data.header.message);
             refreshSearch();

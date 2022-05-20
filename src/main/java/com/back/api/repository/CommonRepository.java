@@ -19,4 +19,5 @@ public interface CommonRepository<T> {
 
     int deleteById(int id);
 
+    int countAll(T entity);
 }

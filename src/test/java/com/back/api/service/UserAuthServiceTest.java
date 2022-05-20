@@ -64,4 +64,57 @@ class UserAuthServiceTest {
         //then
     }
 
+    @Test
+    void getAuthUserList() {
+        //when
+        UserAuthEntity userAuthEntity = new UserAuthEntity();
+//        userAuthEntity.auth_id = 2;
+        userAuthEntity.page_per = 10;
+        userAuthEntity.current_page = 1;
+        userAuthEntity.auth_role = "ADMIN";
+//        userAuthEntity.setSearch_str("kychoi83");
+        userAuthEntity.setStart_idx(userAuthEntity.page_per, userAuthEntity.current_page);
+
+        //given
+        var result = userAuthRepository.findAll(userAuthEntity);
+        System.out.println("<<"+result);
+
+        //then
+        Assertions.assertEquals(10, result.size());
+    }
+
+    @Test
+    void getAuthUserCount() {
+        //when
+        UserAuthEntity userAuthEntity = new UserAuthEntity();
+        userAuthEntity.auth_role = "ADMIN";
+        userAuthEntity.setSearch_str("kychoi83");
+
+        //given
+        var result = userAuthRepository.countAll(userAuthEntity);
+        System.out.println("<<"+result);
+
+        //then
+        Assertions.assertEquals(20, result);
+    }
+
+
+    /**
+     * 사용자의 권한을 삭제합니다.
+     */
+    @Test
+    void deleteUserAuth() {
+        //when
+        UserAuthEntity userAuthEntity = new UserAuthEntity();
+        userAuthEntity.auth_id = 2;
+        userAuthEntity.updated_id = 3;
+        userAuthEntity.user_arr = new int[]{16, 17};
+
+        //given
+        var result = userAuthRepository.deleteUserAuth(userAuthEntity);
+
+        //then
+//        Assertions.assertEquals(20, result);
+    }
+
 }

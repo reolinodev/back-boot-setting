@@ -111,6 +111,5 @@ export function setGridClickEvent(grid, select_column, return_column, callbackFu
  * grid: 그리드
  */
 export function getCheckedRows(grid) {
-
     return grid.getCheckedRows();
 }
