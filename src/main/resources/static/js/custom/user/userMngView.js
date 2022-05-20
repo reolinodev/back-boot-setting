@@ -57,6 +57,8 @@ $(document).ready(function() {
     $("#editBtn").click(function(){
         editProc();
     });
+
+    search();
 });
 
 const pageInit = () => {
