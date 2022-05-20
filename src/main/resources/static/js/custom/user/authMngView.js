@@ -63,6 +63,7 @@ $(document).ready(function() {
         editProc();
     });
 
+    search();
 });
 
 const pageInit = () => {
@@ -88,7 +89,9 @@ const search = () => {
             page.totalCount = result.total;
             grid.resetData(gridData);
 
+            setGridClickEvent(grid, "auth_role_nm", "auth_id", authMngEdit);
             setGridClickEvent(grid, "auth_nm", "auth_id", authMngEdit);
+            setGridClickEvent(grid, "auth_val", "auth_id", authMngEdit);
 
             if(page.pageInit === false){
                 pagination.reset(result.total);

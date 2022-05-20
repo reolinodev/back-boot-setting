@@ -21,6 +21,13 @@ public class AuthService {
     }
 
     /**
+     * 권한을 전체 카운트롤 조회합니다.
+     */
+    public int getAuthCount(AuthEntity authEntity) {
+        return authRepository.countAll(authEntity);
+    }
+
+    /**
      * 동일 권한 값을 가지고 있는지 확인 합니다.
      */
     public int checkAuthVal(AuthEntity authEntity) {

@@ -41,15 +41,16 @@ public class AuthController {
         @RequestBody AuthEntity authEntity, HttpServletRequest httpServletRequest){
         Map <String,Object> responseMap = new HashMap<>();
 
-        //todo 페이징 정상작동 되는지 획인해볼것
         List<AuthEntity> list = authService.getAuthList(authEntity);
+        int listCount = authService.getAuthCount(authEntity);
 
-        String message = list.size()+"건이 조회되었습니다.";
+        String message = listCount+"건이 조회되었습니다.";
         String code = "ok";
         Header header = ResponseUtils.setHeader(message, code, httpServletRequest);
 
         responseMap.put("header", header);
         responseMap.put("data", list);
+        responseMap.put("total", listCount);
 
         return new ResponseEntity<> (responseMap, HttpStatus.OK);
     }

@@ -28,6 +28,18 @@
         OFFSET #{start_idx} limit #{page_per};
     </select>
 
+    <select id="countAll" parameterType="authEntity" resultType="int">
+        SELECT  COUNT(*)
+        FROM AUTH_TB
+        WHERE 1=1
+        <if test="use_yn != null and use_yn != ''">
+            AND USE_YN = #{use_yn}
+        </if>
+        <if test="auth_role != null and auth_role != ''">
+            AND AUTH_ROLE = #{auth_role}
+        </if>
+    </select>
+
     <insert id="save" parameterType="authEntity">
         INSERT INTO AUTH_TB
         (
