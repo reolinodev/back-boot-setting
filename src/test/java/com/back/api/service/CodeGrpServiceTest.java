@@ -33,17 +33,6 @@ class CodeGrpServiceTest {
         Assertions.assertEquals(-1, result);
     }
 
-    @Test
-    void getCodeGrpList() {
-        //given
-
-        //when
-        var result = codeGrpRepository.findByUseYn();
-        System.out.println("result << " + result);
-        //then
-        Assertions.assertEquals(1, result.size());
-    }
-
 
     @Test
     void updateCodeGrp() {
@@ -56,11 +45,11 @@ class CodeGrpServiceTest {
         //when
         codeGrpRepository.update(codeGrp);
 
-        var result = codeGrpRepository.findById(5);
+        var result = codeGrpRepository.findByCodeGrpId(5);
         System.out.println("result << " + result);
 
         //then
-        Assertions.assertEquals("권한 구분", result.get().getCode_grp_nm());
+        Assertions.assertEquals("권한 구분", result.getUse_yn());
     }
 
 
@@ -75,10 +64,10 @@ class CodeGrpServiceTest {
         //when
         codeGrpRepository.updateUseYnById(codeGrp);
 
-        var result = codeGrpRepository.findById(5);
+        var result = codeGrpRepository.findByCodeGrpId(5);
         System.out.println("result << " + result);
         //then
-        Assertions.assertEquals("N", result.get().getUse_yn());
+        Assertions.assertEquals("N", result.getUse_yn());
     }
 
 }

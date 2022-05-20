@@ -114,4 +114,16 @@ public class PageController {
         return mav;
     }
 
+
+    /**
+     * 코드 관리
+     */
+    @RequestMapping(value = "/etc/codeMng", method= RequestMethod.GET)
+    public ModelAndView  codeMngView() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("content/etc/codeMngView");
+        return mav;
+    }
+
+
 }

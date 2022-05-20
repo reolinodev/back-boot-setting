@@ -24,6 +24,8 @@ module.exports = {
         authMngView: '/src/main/resources/static/js/custom/user/authMngView.js',
         authUserMngView: '/src/main/resources/static/js/custom/user/authUserMngView.js',
         authUserMngWrite: '/src/main/resources/static/js/custom/user/authUserMngWrite.js',
+        authUserMngWrite: '/src/main/resources/static/js/custom/user/authUserMngWrite.js',
+        codeMngView: '/src/main/resources/static/js/custom/etc/codeMngView.js',
         index: '/src/main/resources/static/js/index/index.js',
     },
     output: {

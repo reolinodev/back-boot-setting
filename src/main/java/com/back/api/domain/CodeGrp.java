@@ -1,5 +1,6 @@
 package com.back.api.domain;
 
+import com.back.api.domain.common.Param;
 import com.back.api.domain.common.ValidationGroups.CodeGrpGroup1;
 import com.back.api.domain.common.ValidationGroups.CodeGrpGroup2;
 import io.swagger.annotations.ApiModel;
@@ -14,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @ApiModel(description = "코드 그룹")
-public class CodeGrp {
+public class CodeGrp extends Param {
 
     @ApiModelProperty(example = "코드 그룹 아이디")
     @NotEmpty(groups = { CodeGrpGroup2.class }, message = "Please enter your code group ID.")
