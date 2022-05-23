@@ -55,7 +55,6 @@
         )
     </insert>
 
-
     <update id="update" parameterType="code">
         UPDATE CODE_TB
         SET UPDATED_AT = now()
@@ -65,6 +64,9 @@
         <if test="code_nm != null and code_nm != ''">
             , CODE_NM = #{code_nm}
         </if>
+        <if test="code_val != null and code_val != ''">
+            , CODE_VAL = #{code_val}
+        </if>
         <if test="bigo != null and bigo != ''">
             , BIGO = #{bigo}
         </if>
@@ -73,7 +75,6 @@
         </if>
         WHERE CODE_ID = #{code_id}
     </update>
-
 
     <delete id="deleteById" parameterType="int">
         DELETE FROM CODE_TB
