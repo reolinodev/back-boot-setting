@@ -1,4 +1,4 @@
-import {setCodeSelBox, setCommSelBox} from "../../module/component";
+import {setCodeSelBox} from "../../module/component";
 import Page, { setPagination } from "../../module/pagination"
 import { serializeFormJson } from "../../module/json";
 import {
@@ -7,11 +7,15 @@ import {
     setCheckBoxGridId, setGridClickEvent,
 } from "../../module/grid";
 import { Alert } from "../../module/alert";
+import { checkDuplicateList, checkNullList } from "../../module/validation";
 
 let page = new Page(1, false, 10, 0);
 let grid;
 let grid2;
 let pagination;
+let selectedCodeGrpId = 0;
+
+
 let selectedData = [];
 
 $(document).ready(function() {
@@ -64,20 +68,96 @@ $(document).ready(function() {
     });
 
 
+    //추가 버튼 클릭 이벤트
+    $("#addBtn").click(function(){
 
+        if(selectedCodeGrpId === 0){
+            Alert('Please choose a code group.');
+            return;
+        }
 
+        const row = {code_id : '', code_grp_id : selectedCodeGrpId, code_nm: '', code_val: '', ord : '', bigo : '', use_yn: 'Y' };
+        grid2.appendRow(row);
+    });
 
     //삭제 버튼 클릭 이벤트
     $("#delBtn").click(function(){
-        deleteAuthUser();
+        const checkedRows = grid2.getCheckedRows();
+        if(checkedRows.length === 0){
+            Alert('The checked value does not exist.');
+            return;
+        }
+        grid2.removeCheckedRows();
     });
-
 
     //저장 버튼 클릭 이벤트
     $("#saveBtn").click(function(){
-        // insertProc();
-    });
+        const rows = grid2.getModifiedRows();
+        const data = grid2.getData();
 
+        const createdRows = rows.createdRows;
+        const updatedRows = rows.updatedRows;
+        const deletedRows = rows.deletedRows;
+
+        if(createdRows.length===0 && updatedRows.length === 0 && deletedRows.length ===0){
+            Alert('No changes have been made.');
+            return;
+        }
+
+        if(!checkNullList(data, 'code_nm')){
+            Alert('Code name is null.');
+            return;
+        }
+
+        if(!checkNullList(data, 'code_val')){
+            Alert('Code value is null.');
+            return;
+        }
+
+        if(!checkDuplicateList(data, 'code_val')){
+            Alert('Duplicate code values exist..');
+            return;
+        }
+
+        const params =  {
+            code_grp_id : selectedCodeGrpId,
+            created_rows : createdRows,
+            updated_rows : updatedRows,
+            deleted_rows : deletedRows,
+        }
+
+        $.ajax({
+            url: '/api/code/'+selectedCodeGrpId,
+            type: 'POST',
+            data: JSON.stringify(params),
+            headers: {'Content-Type': 'application/json'},
+            success : function (result){
+                if (result.header.resultCode === 'ok') {
+                    Alert(result.header.message);
+                }
+            },
+            error : function (request, status, error){
+                if (request.status === 500) {
+                    console.log(
+                        `code:${request.status}\n` +
+                        `message:${request.responseText}\n` +
+                        `error:${error}`
+                    );
+                } else if (request.status === 400) {
+                    const errorList = request.responseJSON.errorList;
+                    if (errorList !== undefined) {
+                        if (errorList.lengh !== 0) {
+                            const message = errorList[0].message;
+                            Alert(message);
+                        }
+                    } else {
+                        const data = request.responseJSON.header;
+                        Alert(data.message);
+                    }
+                }
+            }
+        });
+    });
 });
 
 //페이징 초기화
@@ -137,10 +217,23 @@ const setGridLayout = () => {
  */
 const setGridLayout2 = () => {
     const columns = [
-        {header: 'SEQ', name: 'user_id', align : 'center', hidden : true},
-        {header: 'ID', name: 'login_id', align : 'center'},
-        {header: 'Name', name: 'user_nm', align : 'center'},
-        {header: 'Email', name: 'email', align : 'center'},
+        {header: 'Code Id', name: 'code_id', align : 'center', hidden : true},
+        {header: 'Code Grp Id', name: 'code_grp_id', align : 'center', hidden : true},
+        {header: 'Name', name: 'code_nm', align : 'left', editor: 'text', validation: { required: true }},
+        {header: 'Value', name: 'code_val', align : 'left', editor: 'text', validation: { required: true }},
+        {header: 'Ord', name: 'ord', align : 'center', width: 50, editor: 'text'},
+        {header: 'Bigo', name: 'bigo', align : 'left', editor: 'text'},
+        {header: 'Use', name: 'use_yn', align : 'center', formatter: 'listItemText',
+            editor: {
+                type: 'select',
+                options: {
+                    listItems: [
+                        { text: '사용', value: 'Y' },
+                        { text: '미사용', value: 'N' },
+                    ]
+                }
+            },
+        }
     ];
     const gridData = [];
     return setCheckBoxGridId(columns,gridData, 'grid2');
@@ -310,101 +403,19 @@ const editGrpProc = () => {
  * search : 조회
  */
 const search = (code_grp_id) => {
-    alert(code_grp_id);
-    // let params = serializeFormJson('codeGrpFrm');
-    // params.current_page = page.currentPage;
-    // params.page_per = page.pagePer;
-    //
-    // $.ajax({
-    //     url : '/api/codeGrp/',
-    //     type: 'POST',
-    //     data: JSON.stringify(params),
-    //     headers: {'Content-Type': 'application/json'},
-    //     success : function (result){
-    //         const gridData = result.data;
-    //         page.totalCount = result.total;
-    //         grid.resetData(gridData);
-    //
-    //         if(page.pageInit === false){
-    //             pagination.reset(result.total);
-    //             page.pageInit = true;
-    //         }
-    //
-    //         setGridClickEvent(grid, "code_grp_nm", "code_grp_id", search);
-    //         setGridClickEvent(grid, "code_grp_val", "code_grp_id", codeMngEdit);
-    //     },
-    //     error : function (request, status, error){
-    //         console.log('code:'+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-    //     }
-    // });
-}
 
+    selectedCodeGrpId = code_grp_id;
 
-
-
-
-
-
-/**
- * setAuthUser : 사용자 선택
- */
-const setAuthUser = () => {
-    if($("#authId").val() === ''){
-        Alert('Please Choose auth');
-        return;
-    }
-
-    const checkedRows =  getCheckedRows(grid);
-    if(checkedRows.length === 0 ){
-        Alert('Please Check Row');
-        return;
-    }
-
-    setSelectedUser(checkedRows);
-}
-
-/**
- * setSelectedUser : Selected User 그리드에 데이터 매핑핑
- */
-const setSelectedUser = (list) => {
-
-    for (const obj of list) {
-        selectedData.push(obj);
-    }
-
-    selectedData = removeDuplicateItem(selectedData);
-
-    grid2.resetData(selectedData);
-}
-/**
- * removeDuplicateItem : 사용자 아이디 중복 항목 제거
- */
-const removeDuplicateItem = (data) => {
-    let uniqueData;
-    uniqueData = data.filter((character, idx, arr) => {
-        return arr.findIndex((item) => item.user_id === character.user_id) === idx
+    $.ajax({
+        url: "/api/code/"+code_grp_id,
+        type: 'GET',
+        headers: {'Content-Type': 'application/json'},
+        success : function (result){
+            const gridData = result.data;
+            grid2.resetData(gridData);
+        },
+        error : function (request, status, error){
+            console.log('code:'+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        }
     });
-
-    return uniqueData;
-}
-
-/**
- * deleteAuthUser : 사용자 삭제
- */
-const deleteAuthUser = () => {
-    grid2.removeCheckedRows();
-    selectedData = grid2.getData();
-}
-
-
-/**
- *  refreshSearch :  재검색하기
- */
-
-const refreshSearch = () => {
-    pageInit();
-    $("#searchStr").val("");
-    selectedData = [];
-    grid2.resetData(selectedData);
-    search_grp();
 }

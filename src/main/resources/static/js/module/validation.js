@@ -40,3 +40,37 @@ export function checkKr(str) {
 
     return !reg.test(str) ? false : true;
 }
+
+/**
+ * checkDuplicateList : 리스트 내에서 중복된 값이 존재 여부 체크
+ * list : 데이터, key : 검증할 오브젝트의 키
+ */
+export function checkDuplicateList(list, key) {
+    let result = true;
+    const arr = [];
+    for (let obj of list){
+        arr.push(obj[key]);
+    }
+    const set = new Set(arr);
+    if(arr.length !== set.size){
+        result = false;
+    }
+
+    return result;
+}
+
+/**
+ * checkNullList : 리스트 내에서 널값이 있는지를 체크한다.
+ * list : 데이터, key : 검증할 오브젝트의 키
+ */
+export function checkNullList(list, key) {
+    let result = true;
+    for (let obj of list){
+        if(obj[key] === ''){
+            result = false;
+        }
+    }
+
+    return result;
+}
+

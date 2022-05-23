@@ -1,6 +1,7 @@
 package com.back.api.domain;
 
 
+import com.back.api.domain.common.Param;
 import com.back.api.domain.common.ValidationGroups.CodeGroup1;
 import com.back.api.domain.common.ValidationGroups.CodeGroup2;
 import io.swagger.annotations.ApiModel;
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @ApiModel(description = "코드")
-public class Code {
+public class Code extends Param {
 
     @ApiModelProperty(example = "코드 아이디")
     public int code_id;

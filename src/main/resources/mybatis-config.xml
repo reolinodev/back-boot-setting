@@ -9,6 +9,7 @@
     <typeAlias type="com.back.api.domain.AuthEntity" alias="authEntity"/>
     <typeAlias type="com.back.api.domain.UserAuthEntity" alias="userAuthEntity"/>
     <typeAlias type="com.back.api.domain.Code" alias="code"/>
+    <typeAlias type="com.back.api.domain.CodeEntity" alias="codeEntity"/>
     <typeAlias type="com.back.api.domain.CodeGrp" alias="codeGrp"/>
   </typeAliases>
 </configuration>

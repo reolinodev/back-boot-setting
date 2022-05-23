@@ -1,6 +1,3 @@
-import {AlertMove} from "./alert";
-import {setGridClickEvent} from "./grid";
-
 /**
  * setCommonSelectBox : 공통코드를 사용한 셀렉트 박스 생성
  * 생성할 아이디, 코드, 타입(전체, 선택, ''), 선택된 값('')

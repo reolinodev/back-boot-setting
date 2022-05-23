@@ -1,7 +1,10 @@
 package com.back.api.service;
 
 import com.back.api.domain.Code;
+import com.back.api.domain.CodeEntity;
 import com.back.api.repository.CodeRepository;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,85 +17,59 @@ class CodeServiceTest {
     CodeRepository codeRepository;
 
     @Test
-    void inputCode() {
-
-        //given
-        int result = 0;
-        Code code = new Code();
-        code.setCode_grp_id(5);
-        code.setCode_nm("사용자");
-        code.setCode_val("USER");
-        code.setOrd("2");
-        code.setBigo("");
-
-        //when
-        int count = codeRepository.countByCodeGrpIdAndCodeVal(code);
-        if(count > 0){
-            result = -1;
-        }else {
-            result = codeRepository.save(code);
-        }
-
-        //then
-        Assertions.assertEquals(1, result);
-    }
-
-
-    @Test
     void getCodeList() {
         //given
-
+        int code_grp_id = 7;
         //when
-        var result = codeRepository.findByUseYn(7);
-        System.out.println("result << " + result);
+        var result = codeRepository.findByCodeGrpId(code_grp_id);
 
         //then
         Assertions.assertEquals(2, result.size());
-    }
-
-    @Test
-    void updateCode() {
-        //given
-        Code code = new Code();
-        code.setCode_id(6);
-        code.setCode_grp_id(7);
-        code.setCode_nm("사용");
-        code.setOrd("2");
-        code.setUpdated_id(1);
-
-        //when
-        codeRepository.update(code);
-        var result = codeRepository.findById(6);
-        System.out.println("result << " + result);
-
-        //then
-        Assertions.assertEquals("사용", result.get().getCode_nm());
-    }
-
-    @Test
-    void deleteCode() {
-        //given
-        Code code = new Code();
-        code.setUpdated_id(1);
-        code.setCode_id(6);
-        code.setUse_yn("N");
-        //when
-        codeRepository.updateUseYnById(code);
-        var result = codeRepository.findById(6);
-        System.out.println("result << " + result);
-        //then
-        Assertions.assertEquals("N", result.get().getUse_yn());
     }
 
     @Test
     void getCodeItemList() {
         //given
-        String CodeGrpVal = "USE_YN";
+        String code_grp_val = "PAGE_PER";
         //when
-        var result = codeRepository.findByCodeGrpVal(CodeGrpVal);
-        System.out.println("<<"+result);
+        var result = codeRepository.findByCodeGrpVal(code_grp_val);
+
         //then
-        Assertions.assertEquals(2, result.size());
+        Assertions.assertEquals(5, result.size());
     }
 
+    @Test
+    void inputCode() {
+
+        //given
+        int result = 1;
+        List<Code> createdRows = new ArrayList<Code>();
+
+        Code code = new Code();
+        code.setCode_grp_id(13);
+        code.setCode_nm("테스트1");
+        code.setCode_val("TEST1");
+        code.setOrd("1");
+        code.setBigo("비고");
+
+        createdRows.add(code);
+
+        Code code2 = new Code();
+        code2.setCode_grp_id(13);
+        code2.setCode_nm("테스트2");
+        code2.setCode_val("TEST2");
+        code2.setOrd("2");
+        code2.setBigo("비고2");
+
+        createdRows.add(code2);
+
+        //when
+        for (Code param : createdRows ) {
+            int result2 = codeRepository.save(param);
+            if(result2 <= 0) result = 0;
+        }
+
+        //then
+        Assertions.assertEquals(-1, result);
+    }
 }

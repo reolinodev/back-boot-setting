@@ -25,5 +25,4 @@ public class Param {
     public void setStart_idx(int page_per, int current_page) {
         this.start_idx = page_per * (current_page - 1);
     }
-
 }

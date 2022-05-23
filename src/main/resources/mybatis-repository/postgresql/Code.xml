@@ -3,13 +3,34 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.back.api.repository.CodeRepository">
 
-    <select id="countByCodeGrpIdAndCodeVal" parameterType="code" resultType="int">
-        SELECT COUNT(*)
+    <select id="findByCodeGrpId" parameterType="int" resultType="codeEntity">
+        SELECT  CODE_ID,
+                CODE_GRP_ID,
+                CODE_NM,
+                CODE_VAL,
+                BIGO,
+                ORD,
+                CREATED_AT,
+                UPDATED_AT,
+                UPDATED_ID,
+                USE_YN
         FROM CODE_TB
-        WHERE CODE_GRP_ID = #{code_grp_id}
-        AND CODE_VAL = #{code_val}
-        AND USE_YN = 'Y'
+        WHERE CODE_GRP_ID = #{code_id}
     </select>
+
+
+    <select id="findByCodeGrpVal" parameterType="string" resultType="codeEntity">
+        SELECT A.CODE_ID,
+               A.CODE_NM,
+               A.CODE_VAL,
+               A.CODE_GRP_ID
+        FROM CODE_TB A, CODE_GRP_TB B
+        WHERE A.CODE_GRP_ID = B.CODE_GRP_ID
+          AND B.CODE_GRP_VAL = #{code_grp_val}
+          AND A.USE_YN = 'Y'
+        ORDER BY CAST(A.ORD AS INTEGER) ASC
+    </select>
+
 
     <insert id="save" parameterType="code">
         INSERT INTO CODE_TB
@@ -34,68 +55,29 @@
         )
     </insert>
 
-    <select id="findByUseYn" parameterType="int" resultType="code">
-        SELECT  CODE_ID,
-                CODE_GRP_ID,
-                CODE_NM,
-                CODE_VAL,
-                BIGO,
-                ORD,
-                CREATED_AT,
-                UPDATED_AT,
-                UPDATED_ID,
-                USE_YN
-        FROM CODE_TB
-        WHERE CODE_GRP_ID = #{code_grp_id}
-          AND USE_YN = 'Y'
-        ORDER BY CAST(ORD AS INTEGER) ASC
-    </select>
 
     <update id="update" parameterType="code">
         UPDATE CODE_TB
         SET UPDATED_AT = now()
-            ,UPDATED_ID = #{updated_id}
-            ,CODE_NM = #{code_nm}
-            ,BIGO = #{bigo}
-            ,ORD = #{ord}
+        <if test="updated_id != null and updated_id != ''">
+            , UPDATED_ID = #{updated_id}
+        </if>
+        <if test="code_nm != null and code_nm != ''">
+            , CODE_NM = #{code_nm}
+        </if>
+        <if test="bigo != null and bigo != ''">
+            , BIGO = #{bigo}
+        </if>
+        <if test="ord != null and ord != ''">
+            , ORD = #{ord}
+        </if>
         WHERE CODE_ID = #{code_id}
     </update>
 
 
-    <update id="updateUseYnById" parameterType="code">
-        UPDATE CODE_TB
-        SET UPDATED_AT = now()
-          , UPDATED_ID = #{updated_id}
-          , USE_YN =  #{use_yn}
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM CODE_TB
         WHERE CODE_ID = #{code_id}
-    </update>
-
-
-    <select id="findById" parameterType="int" resultType="code">
-        SELECT  CODE_ID,
-                CODE_GRP_ID,
-                CODE_NM,
-                CODE_VAL,
-                BIGO,
-                ORD,
-                CREATED_AT,
-                UPDATED_AT,
-                UPDATED_ID,
-                USE_YN
-        FROM CODE_TB
-        WHERE CODE_ID = #{code_id}
-    </select>
-
-    <select id="findByCodeGrpVal" parameterType="string" resultType="code">
-        SELECT A.CODE_ID,
-               A.CODE_NM,
-               A.CODE_VAL,
-               A.CODE_GRP_ID
-        FROM CODE_TB A, CODE_GRP_TB B
-        WHERE A.CODE_GRP_ID = B.CODE_GRP_ID
-          AND B.CODE_GRP_VAL = #{code_grp_val}
-          AND A.USE_YN = 'Y'
-        ORDER BY CAST(A.ORD AS INTEGER) ASC
-    </select>
+    </delete>
 
 </mapper>
