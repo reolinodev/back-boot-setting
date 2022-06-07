@@ -32,7 +32,7 @@ public class LoginController {
      * 로그인 화면
      */
     @RequestMapping(value = "/login", method= RequestMethod.GET)
-    public ModelAndView loginView(HttpServletRequest request) {
+    public ModelAndView loginView() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("pages/login");
         return mav;
@@ -75,7 +75,7 @@ public class LoginController {
         setSessionInfo(loginInfo);
 
         //로그인 내역 기록
-        loginEntity.setUser_id(loginInfo.getUser_id());
+        loginEntity.user_id = loginInfo.user_id;
         loginService.inputLoginHistory(loginEntity);
         loginService.updateLastLoginAt(loginEntity);
 

@@ -24,6 +24,9 @@ public class LoginEntity {
     @ApiModelProperty(example = "로그인 아이디")
     public String login_id;
 
+    @ApiModelProperty(example = "이메일")
+    public String email;
+
     @ApiModelProperty(example = "사용자 명")
     public String user_nm;
 

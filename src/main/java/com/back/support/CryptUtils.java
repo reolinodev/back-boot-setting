@@ -23,9 +23,8 @@ public class CryptUtils {
         config.setStringOutputType("base64");
 
         encryptor.setConfig(config);
-        String encryptStr = encryptor.encrypt(str);
 
-        return encryptStr;
+        return encryptor.encrypt(str);
     }
 
     public static String decrypt(String str) throws IOException {
@@ -41,9 +40,8 @@ public class CryptUtils {
         config.setStringOutputType("base64");
 
         encryptor.setConfig(config);
-        String decryptStr = encryptor.decrypt(str);
 
-        return decryptStr;
+        return encryptor.decrypt(str);
     }
 
     public static String encryptSha256(String text) throws NoSuchAlgorithmException {

@@ -27,6 +27,9 @@ public class Menu {
     @ApiModelProperty(example = "url")
     public String menu_url;
 
+    @ApiModelProperty(example = "메뉴 타입")
+    public String menu_type;
+
     @ApiModelProperty(example = "순서")
     public int ord;
 

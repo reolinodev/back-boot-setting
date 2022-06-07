@@ -11,5 +11,6 @@
     <typeAlias type="com.back.api.domain.Code" alias="code"/>
     <typeAlias type="com.back.api.domain.CodeEntity" alias="codeEntity"/>
     <typeAlias type="com.back.api.domain.CodeGrp" alias="codeGrp"/>
+    <typeAlias type="com.back.api.domain.MenuEntity" alias="menuEntity"/>
   </typeAliases>
 </configuration>

@@ -12,9 +12,18 @@ class CryptUtilsTest {
     @Test
     void encrypt() throws IOException {
         //when
-        String str = "test";
+        String str = "a123123!";
         //given
         String ecnryptStr = CryptUtils.encrypt(str);
+        System.out.println("=="+ecnryptStr);
+    }
+
+    @Test
+    void decrypt() throws IOException {
+        //when
+        String str = "ROXTIQXfIW4SCEhSIylNtbgcYnW+6eBZ";
+        //given
+        String ecnryptStr = CryptUtils.decrypt(str);
         System.out.println("=="+ecnryptStr);
     }
 

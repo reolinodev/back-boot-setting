@@ -59,6 +59,7 @@ CREATE TABLE MENU_TB
     menu_lv int,
     parent_id int,
     menu_url varchar(200),
+    menu_type varchar(10) not null,
     ord int,
     created_at timestamp,
     updated_at timestamp,
@@ -73,6 +74,7 @@ COMMENT ON COLUMN public.menu_tb.menu_nm IS '메뉴 명';
 COMMENT ON COLUMN public.menu_tb.menu_lv IS '메뉴 레벨';
 COMMENT ON COLUMN public.menu_tb.parent_id IS '부모 아이디';
 COMMENT ON COLUMN public.menu_tb.menu_url IS 'url';
+COMMENT ON COLUMN public.menu_tb.menu_type IS '메뉴 타입';
 COMMENT ON COLUMN public.menu_tb.ord IS '순서';
 COMMENT ON COLUMN public.menu_tb.created_at IS '생성일';
 COMMENT ON COLUMN public.menu_tb.updated_at IS '수정일';

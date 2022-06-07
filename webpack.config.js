@@ -26,6 +26,7 @@ module.exports = {
         authUserMngWrite: '/src/main/resources/static/js/custom/user/authUserMngWrite.js',
         authUserMngWrite: '/src/main/resources/static/js/custom/user/authUserMngWrite.js',
         codeMngView: '/src/main/resources/static/js/custom/etc/codeMngView.js',
+        menuMngView: '/src/main/resources/static/js/custom/menu/menuMngView.js',
         index: '/src/main/resources/static/js/index/index.js',
     },
     output: {

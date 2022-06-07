@@ -15,9 +15,6 @@ let grid2;
 let pagination;
 let selectedCodeGrpId = 0;
 
-
-let selectedData = [];
-
 $(document).ready(function() {
     setCodeSelBox('useYn','USE_YN','','Y' );
 

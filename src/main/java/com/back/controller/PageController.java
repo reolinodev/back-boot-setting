@@ -114,6 +114,16 @@ public class PageController {
         return mav;
     }
 
+    /**
+     * 메뉴 관리
+     */
+    @RequestMapping(value = "/menu/menuMng", method= RequestMethod.GET)
+    public ModelAndView  menuMngView() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("content/menu/menuMngView");
+        return mav;
+    }
+
 
     /**
      * 코드 관리
