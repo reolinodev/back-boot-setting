@@ -159,8 +159,10 @@ public class UserController {
     public ResponseEntity <Map<String,Object>> getUserInfo(@PathVariable Integer user_id, HttpServletRequest httpServletRequest) {
         Map <String,Object> responseMap = new HashMap<>();
         UserEntity data = userService.getUserInfo(user_id);
+        int count = 0;
+        if (!"".equals(data.login_id)) count= 1;
 
-        String message = "1건이 조회되었습니다.";
+        String message = count+"건이 조회되었습니다.";
         String code = "ok";
         Header header = ResponseUtils.setHeader(message, code, httpServletRequest);
 

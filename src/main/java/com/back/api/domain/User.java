@@ -1,14 +1,11 @@
 package com.back.api.domain;
 
 import com.back.api.domain.common.Param;
-import com.back.api.domain.common.ValidationGroups.CodeGroup1;
-import com.back.api.domain.common.ValidationGroups.CodeGroup2;
 import com.back.api.domain.common.ValidationGroups.UserGroup1;
 import com.back.api.domain.common.ValidationGroups.UserGroup2;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;

@@ -57,6 +57,7 @@
     "no-use-before-define": "off"
   },
   "dependencies": {
+    "highcharts": "^10.1.0",
     "sweetalert2": "^11.4.8",
     "tui-grid": "^4.21.1",
     "tui-pagination": "^3.4.1",
