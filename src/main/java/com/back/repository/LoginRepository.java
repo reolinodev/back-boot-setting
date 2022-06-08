@@ -13,7 +13,7 @@ public interface LoginRepository extends CommonRepository<LoginEntity> {
 
     LoginEntity findByLoginId(LoginEntity loginEntity);
 
-    void saveLoginHistory(LoginEntity loginEntity);
+    int saveLoginHistory(LoginEntity loginEntity);
 
-    void saveLastLoginAt(LoginEntity loginEntity);
+    int saveLastLoginAt(LoginEntity loginEntity);
 }

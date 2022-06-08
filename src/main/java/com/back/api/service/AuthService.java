@@ -45,8 +45,8 @@ public class AuthService {
     /**
      * 권한의 상세 정보릊 조회합니다.
      */
-    public AuthEntity getAuthInfo(int auth_id) {
-        return authRepository.findByAuthId(auth_id);
+    public AuthEntity getAuthInfo(int authId) {
+        return authRepository.findByAuthId(authId);
     }
 
 
