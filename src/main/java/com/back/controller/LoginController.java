@@ -72,6 +72,14 @@ public class LoginController {
 
         //세션저장
         LoginEntity loginInfo = loginService.getLoginId(loginEntity);
+
+        if(loginInfo == null){
+            msg = "Permission does not exist.";
+            mav.addObject("msg", msg);
+            mav.setViewName("pages/login");
+            return mav;
+        }
+
         setSessionInfo(loginInfo);
 
         //로그인 내역 기록
